@@ -1,6 +1,30 @@
 <template>
   <div id="app">
-    <router-view/>
+    <component :is="layout">
+      <router-view/>
+    </component>
   </div>
 </template>
 
+
+<script>
+import 'materialize-css/dist/css/materialize.css'
+import '@/assets/index.css';
+
+import AuthLayout from '@/layouts/AuthLayout';
+import MainLayout from '@/layouts/MainLayout';
+
+
+export default {
+  computed: {
+    layout(){
+      return `${this.$route.meta.layout || 'auth'}-layout`
+    }
+  },
+
+  components: {
+    AuthLayout,
+    MainLayout
+  }
+}
+</script>
