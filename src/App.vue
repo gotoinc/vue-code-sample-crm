@@ -11,6 +11,7 @@
 import 'materialize-css/dist/css/materialize.css'
 import '@/assets/index.css';
 
+
 import AuthLayout from '@/layouts/AuthLayout';
 import MainLayout from '@/layouts/MainLayout';
 
@@ -25,6 +26,6 @@ export default {
   components: {
     AuthLayout,
     MainLayout
-  }
+  },
 }
 </script>
