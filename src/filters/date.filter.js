@@ -1,5 +1,4 @@
 export default (value, format = 'date') => {
-    console.log(format);
     const options = {};
 
     if(format.includes('date')){
