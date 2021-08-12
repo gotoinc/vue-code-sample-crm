@@ -28,7 +28,7 @@
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text" @click.prevent="logout">
+              <a href="#" class="black-text" @click.prevent="logoutUser">
                 <i class="material-icons">assignment_return</i>Выйти
               </a>
             </li>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
   name: "Navbar",
@@ -51,8 +52,10 @@ export default {
   }),
 
   methods:{
-    logout(){
-      console.log('Logout');
+    ...mapActions('auth', ['logout']),
+
+    async logoutUser() {
+      await this.logout();
       this.$router.push('/login?message=logout')
     }
   },

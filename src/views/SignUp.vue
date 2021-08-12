@@ -1,7 +1,7 @@
 <template>
    <form class="card auth-card" @submit.prevent="submitHandler">
       <div class="card-content">
-         <span class="card-title">Домашняя бухгалтерия</span>
+         <span class="card-title">Home bookkeeping</span>
           <div class="input-field">
             <input
                 id="email"
@@ -31,7 +31,7 @@
               :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
 
           >
-          <label for="password">Пароль</label>
+          <label for="password">Password</label>
           <small
               v-if="$v.password.$dirty && !$v.password.required"
               class="helper-text invalid"
@@ -53,7 +53,7 @@
                :class="{invalid: ($v.name.$dirty && !$v.name.required)}"
 
             >
-            <label for="name">Имя</label>
+            <label for="name">Name</label>
             <small
                 v-if="$v.name.$dirty && !$v.name.required"
                 class="helper-text invalid"
@@ -67,7 +67,7 @@
                 v-model="agree"
                 type="checkbox"
             />
-            <span>С правилами согласен</span>
+            <span>I agree to the terms</span>
             </label>
          </p>
       </div>
@@ -77,14 +77,14 @@
                class="btn waves-effect waves-light auth-submit"
                type="submit"
             >
-            Зарегистрироваться
+            Sign up
             <i class="material-icons right">send</i>
             </button>
          </div>
 
          <p class="center">
-            Уже есть аккаунт?
-            <router-link to="/login">Войти!</router-link>
+            Already have an account?
+            <router-link to="/login">Login!</router-link>
          </p>
       </div>
    </form>
@@ -92,6 +92,7 @@
 
 <script>
 import {email, minLength, required} from "vuelidate/lib/validators";
+import { mapActions } from 'vuex';
 
 export default {
    name: 'SignUp',
@@ -126,7 +127,9 @@ export default {
   },
 
   methods: {
-    submitHandler() {
+     ...mapActions('auth', ['signUp']),
+
+    async submitHandler() {
       if(this.$v.$invalid) {
         this.$v.$touch()
         return;
@@ -138,10 +141,12 @@ export default {
         name: this.name
       };
 
-      console.log(formData);
-
-      this.$router.push('/')
-
+      try {
+        await this.signUp(formData);
+        this.$router.push('/');
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
