@@ -22,6 +22,7 @@ const actions = {
     async logout({commit}) {
         try {
             await firebase.auth().signOut();
+            commit('info/CLEAR_INFO', null, {root: true});
             commit('SET_IS_AUTHORIZED', false);
         } catch(e) {
             console.log(e);
@@ -34,7 +35,7 @@ const actions = {
             await firebase.auth().createUserWithEmailAndPassword(email, password);
             const uuid = await dispatch('getUserUuid');
             await firebase.database().ref(`/users/${uuid}/info`).set({
-                bill: 100000,
+                bill: 10000,
                 name,
 
             })

@@ -16,20 +16,20 @@
               data-target="dropdown"
               ref="dropdown"
           >
-            USER NAME
+            {{ info.name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
           <ul id="dropdown" class="dropdown-content">
             <li>
               <router-link to="/profile" class="black-text">
-                <i class="material-icons">account_circle</i>Профиль
+                <i class="material-icons">account_circle</i>Profile
               </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logoutUser">
-                <i class="material-icons">assignment_return</i>Выйти
+                <i class="material-icons">assignment_return</i>Logout
               </a>
             </li>
           </ul>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: "Navbar",
@@ -58,6 +58,10 @@ export default {
       await this.logout();
       this.$router.push('/login?message=logout')
     }
+  },
+
+  computed: {
+    ...mapState('info', ['info'])
   },
 
   mounted() {

@@ -23,8 +23,10 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Common/Navbar";
+import Sidebar from "@/components/Common/Sidebar";
+
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'MainLayout',
@@ -36,6 +38,20 @@ export default {
   components: {
     Navbar,
     Sidebar
+  },
+
+  computed: {
+    ...mapState('info', ['info']),
+  },
+
+  methods: {
+    ...mapActions('info', ['fetchInfo'])
+  },
+
+  async mounted() {
+    if(Object.keys(this.info).length === 0) {
+      await this.fetchInfo()
+    }
   }
 }
 </script>
