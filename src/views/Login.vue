@@ -1,7 +1,7 @@
 <template>
    <form class="card auth-card" @submit.prevent="submitHandler">
       <div class="card-content">
-         <span class="card-title">Домашняя бухгалтерия</span>
+         <span class="card-title">Home bookkeeping</span>
          <div class="input-field">
             <input
                id="email"
@@ -31,7 +31,7 @@
                :class="{invalid: ($v.password.$dirty && !$v.password.required) || ($v.password.$dirty && !$v.password.minLength)}"
 
             >
-            <label for="password">Пароль</label>
+            <label for="password">Password</label>
             <small
                 v-if="$v.password.$dirty && !$v.password.required"
                 class="helper-text invalid"
@@ -52,14 +52,14 @@
                class="btn waves-effect waves-light auth-submit"
                type="submit"
             >
-            Войти
+            Login
             <i class="material-icons right">send</i>
             </button>
          </div>
 
          <p class="center">
-            Нет аккаунта?
-            <router-link to="/signup">Зарегистрироваться</router-link>
+            Don't have an account?
+            <router-link to="/signup">Sign up</router-link>
          </p>
       </div>
 </form>
@@ -111,7 +111,7 @@ export default {
         await this.login(formData);
         this.$router.push('/');
       } catch(e) {
-        this.$error(e.message);
+        console.log(e);
       }
     }
   },
