@@ -4,8 +4,11 @@
       <div class="card-content white-text">
         <span class="card-title">Currency account</span>
 
-        <p class="currency-line">
-          <span>12.0 USD</span>
+        <p v-for="(curr, i) in Object.keys(rates)"
+           :key="i"
+           class="currency-line"
+        >
+          <span> {{ getCurrency(curr) | currencyFilter(curr) }}</span>
         </p>
       </div>
     </div>
@@ -13,8 +16,33 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-  name: "HomeBill.vue"
+  name: "HomeBill.vue",
+
+  props: {
+    rates: {
+      required: true,
+      type: Object
+    }
+  },
+
+  computed: {
+    ...mapState('info', ['info']),
+
+    base() {
+      return this.info.bill / this.rates['EUR']
+    }
+  },
+
+  methods: {
+    getCurrency(curr) {
+      return Math.floor(this.base * this.rates[curr]);
+    }
+  }
+
+
 }
 </script>
 

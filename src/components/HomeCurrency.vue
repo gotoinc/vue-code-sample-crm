@@ -15,10 +15,13 @@
           </thead>
 
           <tbody>
-          <tr>
-            <td>USD</td>
-            <td>12121</td>
-            <td>12.12.12</td>
+          <tr
+              v-for="(curr, i) in Object.keys(rates)"
+              :key="i"
+          >
+            <td>{{curr}}</td>
+            <td>{{rates[curr].toFixed(5)}}</td>
+            <td>{{date | dateFilter('date') }}</td>
           </tr>
           </tbody>
         </table>
@@ -29,7 +32,19 @@
 
 <script>
 export default {
-  name: "HomeCurrency"
+  name: "HomeCurrency",
+
+  props: {
+    rates: {
+      required: true,
+      type: Object
+    },
+
+    date: {
+      required: true,
+      type: String
+    }
+  }
 }
 </script>
 

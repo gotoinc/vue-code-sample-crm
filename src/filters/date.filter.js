@@ -12,6 +12,6 @@ export default (value, format = 'date') => {
         options.second = '2-digit'
     }
 
-    return Intl.DateTimeFormat('ru-RU', options).format(new Date(value));
+    return Intl.DateTimeFormat('en-EN', options).format(new Date(value));
 
 }

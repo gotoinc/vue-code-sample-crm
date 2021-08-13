@@ -3,16 +3,26 @@
     <div class="page-title">
       <h3>Account</h3>
 
-      <button class="btn waves-effect waves-light btn-small">
+      <button
+          @click="refresh"
+          class="btn waves-effect waves-light btn-small"
+      >
         <i class="material-icons">refresh</i>
       </button>
     </div>
 
-    <div class="row">
+    <Loader v-if="loading"/>
 
-      <HomeBill/>
+    <div v-else
+         class="row"
+    >
 
-      <HomeCurrency/>
+      <HomeBill :rates="currency.rates"/>
+
+      <HomeCurrency
+          :rates="currency.rates"
+          :date="currency.date"
+      />
 
     </div>
   </div>
@@ -23,12 +33,36 @@
 import HomeBill from '@/components/HomeBill';
 import HomeCurrency from "@/components/HomeCurrency";
 
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'Home',
+
+  data: () => ({
+    loading: true,
+  }),
 
   components: {
     HomeBill,
     HomeCurrency
+  },
+
+  computed: {
+    ...mapState('info', ['currency'])
+  },
+
+  methods: {
+    ...mapActions('info', ['fetchCurrency']),
+    refresh() {
+      this.loading = true;
+      this.fetchCurrency();
+      this.loading = false;
+    }
+  },
+
+  async mounted() {
+    await this.fetchCurrency();
+    this.loading = false;
   }
 }
 </script>
