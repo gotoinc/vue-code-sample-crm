@@ -1,71 +1,166 @@
 <template>
-   <div>
-      <div class="page-title">
-         <h3>New record</h3>
-      </div>
+  <div>
+     <div class="page-title">
+       <h3>New record</h3>
+     </div>
 
-      <form class="form">
-         <div class="input-field" >
-            <select>
-            <option
-            >name cat</option>
-            </select>
-            <label>Choose a category</label>
-         </div>
+    <Loader v-if="loading"/>
 
-         <p>
-            <label>
-            <input
-                  class="with-gap"
-                  name="type"
-                  type="radio"
-                  value="income"
-            />
-            <span>Income</span>
-            </label>
-         </p>
+    <p
+        v-else-if="!categories.length"
+        class="center"
+    >
+      You don't have any categories yet.
+      <router-link to="/">
+        Add new category
+      </router-link>
+    </p>
 
-         <p>
-            <label>
-            <input
-                  class="with-gap"
-                  name="type"
-                  type="radio"
-                  value="outcome"
-            />
-            <span>Expense</span>
-            </label>
-         </p>
+    <form
+      v-else
+      class="form"
+      @submit.prevent="handleSubmit"
+    >
+       <div class="input-field" >
+          <select
+              ref="select"
+              v-model="category"
+          >
+          <option
+              v-for="c in categories"
+              :key="c.id"
+              :value="c.id"
+          >
+            {{ c.title }}
+          </option>
+          </select>
+          <label>Choose a category</label>
+       </div>
 
-         <div class="input-field">
-            <input
-               id="amount"
-               type="number"
-            >
-            <label for="amount">Sum</label>
-            <span class="helper-text invalid">amount password</span>
-         </div>
+       <p>
+          <label>
+          <input
+                class="with-gap"
+                name="type"
+                type="radio"
+                value="income"
+                v-model="type"
+          />
+          <span>Income</span>
+          </label>
+       </p>
 
-         <div class="input-field">
-            <input
-               id="description"
-               type="text"
-            >
-            <label for="description">Description</label>
-            <span
-                  class="helper-text invalid">description password</span>
-         </div>
+       <p>
+          <label>
+          <input
+                class="with-gap"
+                name="type"
+                type="radio"
+                value="outcome"
+                v-model="type"
+          />
+          <span>Outcome</span>
+          </label>
+       </p>
 
-         <button class="btn waves-effect waves-light" type="submit">
-            Create
-            <i class="material-icons right">send</i>
-         </button>
+       <div class="input-field">
+          <input
+             id="amount"
+             v-model.number="amount"
+             type="number"
+             :class="{invalid: $v.amount.$dirty && !$v.amount.minValue}"
+          >
+          <label for="amount">Sum</label>
+          <span
+              v-if="$v.amount.$dirty && !$v.amount.minValue"
+              class="helper-text invalid"
+          >
+            Minimum value is {{$v.amount.$params.minValue.min}}
+          </span>
+       </div>
+
+       <div class="input-field">
+          <input
+             id="description"
+             type="text"
+             v-model="description"
+             :class="{invalid: $v.description.$dirty && !$v.description.required}"
+
+          >
+          <label for="description">Description</label>
+          <span
+              v-if="$v.description.$dirty && !$v.description.required"
+              class="helper-text invalid"
+          >
+            Description is required
+          </span>
+       </div>
+
+       <button class="btn waves-effect waves-light" type="submit">
+          Create
+          <i class="material-icons right">send</i>
+       </button>
       </form>
    </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import { minValue, required } from "vuelidate/lib/validators";
+
 export default {
-   name: 'Record'
+  name: 'Record',
+
+  data: () => ({
+    loading: true,
+    select: null,
+    categories: [],
+    category: null,
+    type: 'outcome',
+    amount: 1,
+    description: ''
+  }),
+
+  validations: {
+    description: {
+      required
+    },
+    amount: {
+      minValue: minValue(1)
+    }
+  },
+
+  methods: {
+     ...mapActions('category', ['fetchCategories']),
+    handleSubmit() {
+      if(this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
+    }
+  },
+
+  async mounted() {
+     this.categories = await this.fetchCategories();
+     this.loading = false;
+
+     if(this.categories.length) {
+       this.category = this.categories[0].id;
+     }
+
+     setTimeout(() => {
+       // eslint-disable-next-line no-undef
+       this.select = M.FormSelect.init(this.$refs.select);
+       // eslint-disable-next-line no-undef
+       M.updateTextFields();
+     }, 0)
+  },
+
+  destroyed() {
+    if(this.select && this.select.destroy) {
+      this.select.destroy();
+    }
+  }
+
 }
 </script>
