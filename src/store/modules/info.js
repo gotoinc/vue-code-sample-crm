@@ -45,13 +45,14 @@ const actions = {
                         timeStamp: 1628850123
                     });
                     res();
-                }, 3500)
+                }, 1500)
             })
 
         } catch(e) {
             console.log(e)
         }
-    }
+    },
+
 }
 
 export const info = {

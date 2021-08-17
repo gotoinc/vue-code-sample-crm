@@ -27,24 +27,24 @@ export default {
   data: () => ({
     links: [
       {
-        title: 'Счет',
+        title: 'Account',
         url: '/',
         exact: true
       },
       {
-        title: 'История',
+        title: 'Record history',
         url: '/history'
       },
       {
-        title: 'Планирование',
+        title: 'Planning',
         url: '/planning'
       },
       {
-        title: 'Новая запись',
+        title: 'New record',
         url: '/record'
       },
       {
-        title: 'Категории',
+        title: 'Categories',
         url: '/categories'
       }
     ]

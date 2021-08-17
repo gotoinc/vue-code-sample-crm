@@ -1,0 +1,47 @@
+import firebase from 'firebase/app';
+
+const actions = {
+    async fetchCategories({commit, dispatch}) {
+        try {
+            const uid = await dispatch('auth/getUserUuid', null, {root: true});
+            const categories = (await firebase.database().ref(`/users/${uid}/categories`).once('value')).val() || {};
+
+            return Object.keys(categories).map(k => ({ ...categories[k], id: k }));
+
+        } catch(e) {
+            commit('errors/SET_ERROR', e, {root: true})
+            throw e;
+        }
+    },
+
+    async createCategory({commit, dispatch}, {title, limit}) {
+        try {
+            const uid = await dispatch('auth/getUserUuid', null, {root: true});
+            const category = await firebase.database().ref(`/users/${uid}/categories`).push({title, limit});
+            return {
+                title,
+                limit,
+                id: category.key
+            }
+
+        } catch(e) {
+            commit('errors/SET_ERROR', e, {root: true})
+            throw e;
+        }
+    },
+
+    async updateCategory({commit, dispatch}, { id, title, limit }) {
+        try {
+            const uid = await dispatch('auth/getUserUuid', null, {root: true});
+            await firebase.database().ref(`/users/${uid}/categories`).child(id).update({title, limit});
+        } catch(e) {
+            commit('errors/SET_ERROR', e, {root: true})
+            throw e;
+        }
+    }
+}
+
+export const category = {
+    namespaced: true,
+    actions
+}

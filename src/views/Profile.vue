@@ -1,7 +1,7 @@
 <template>
    <div>
       <div class="page-title">
-         <h3>Профиль</h3>
+         <h3>Profile</h3>
       </div>
 
       <form class="form">
@@ -10,13 +10,13 @@
                id="description"
                type="text"
             >
-            <label for="description">Имя</label>
+            <label for="description">Name</label>
             <span
                   class="helper-text invalid">name</span>
          </div>
 
          <button class="btn waves-effect waves-light" type="submit">
-            Обновить
+            Update
             <i class="material-icons right">send</i>
          </button>
       </form>
