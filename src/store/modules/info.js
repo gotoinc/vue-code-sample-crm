@@ -19,7 +19,8 @@ const actions = {
            commit('SET_INFO', info)
 
         } catch(e) {
-            console.log(e)
+            commit('errors/SET_ERROR', e, {root: true});
+            throw e;
         }
     },
 
@@ -49,9 +50,25 @@ const actions = {
             })
 
         } catch(e) {
-            console.log(e)
+            console.log(e);
+            throw e;
         }
     },
+
+    async updateInfo({ commit, dispatch, state }, payload) {
+        try {
+            const uid = await dispatch('auth/getUserUuid', null, {root: true});
+            const updateData = {
+                ...state.info,
+                ...payload
+            }
+            await firebase.database().ref(`/users/${uid}/info`).update(updateData);
+            commit('SET_INFO', updateData);
+        } catch(e) {
+            commit('errors/SET_ERROR', e, {root: true});
+            throw e;
+        }
+    }
 
 }
 

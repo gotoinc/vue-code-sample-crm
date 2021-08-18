@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { minValue, required } from "vuelidate/lib/validators";
 
 export default {
@@ -130,13 +130,62 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('info', ['info']),
+
+    canCreateRecord() {
+      if(this.type === 'income') {
+        return true;
+      }
+      return (this.info.bill >= this.amount);
+    }
+  },
+
   methods: {
-     ...mapActions('category', ['fetchCategories']),
-    handleSubmit() {
+    ...mapActions('category', ['fetchCategories']),
+    ...mapActions('info', ['updateInfo']),
+    ...mapActions('record', ['createRecord']),
+
+    async handleSubmit() {
       if(this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
+
+      if(this.canCreateRecord) {
+        try{
+          await this.createRecord({
+            categoryId: this.category,
+            amount: this.amount,
+            description: this.description,
+            type: this.type,
+            date: new Date().toJSON()
+          });
+
+
+          const bill = this.type === 'income'
+            ? this.info.bill + this.amount
+              :  this.info.bill - this.amount;
+
+
+          await this.updateInfo({bill});
+
+          this.$message('New record is created successfully');
+          this.clear();
+        } catch (e) {
+          console.log(e)
+          throw e;
+        }
+
+      } else {
+        this.$message(`Not enough money in the account (${this.amount - this.info.bill})`);
+      }
+    },
+
+    clear() {
+      this.$v.$reset();
+      this.description = '';
+      this.amount = 1;
     }
   },
 
