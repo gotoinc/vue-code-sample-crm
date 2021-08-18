@@ -36,7 +36,7 @@
 import Navbar from "@/components/Common/Navbar";
 import Sidebar from "@/components/Common/Sidebar";
 
-import { mapState, mapActions } from 'vuex';
+import {mapState, mapActions, mapGetters} from 'vuex';
 
 export default {
   name: 'MainLayout',
@@ -53,10 +53,17 @@ export default {
 
   computed: {
     ...mapState('info', ['info']),
+    ...mapGetters('errors', ['GET_ERROR']),
   },
 
   methods: {
     ...mapActions('info', ['fetchInfo'])
+  },
+
+  watch: {
+    GET_ERROR(fbErr){
+      this.$error(fbErr.message);
+    }
   },
 
   async mounted() {
