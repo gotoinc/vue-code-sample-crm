@@ -9,6 +9,18 @@ const actions = {
             commit('errors/SET_ERROR', e, {root: true})
             throw e;
         }
+    },
+
+    async fetchRecords({commit, dispatch}){
+        try {
+            const uid = await dispatch('auth/getUserUuid', null, {root: true});
+            const records = (await firebase.database().ref(`/users/${uid}/records`).once('value')).val() || {};
+
+            return Object.keys(records).map(k => ({ ...records[k], id: k }));
+        } catch (e) {
+            commit('errors/SET_ERROR', e, {root: true})
+            throw e;
+        }
     }
 }
 

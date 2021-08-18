@@ -2,19 +2,38 @@
    <div>
       <div class="page-title">
          <h3>Планирование</h3>
-         <h4>12 212</h4>
+         <h4>{{info.bill | currencyFilter('EUR')}}</h4>
       </div>
 
-      <section>
-         <div>
+     <Loader v-if="loading"/>
+
+     <p
+         v-else-if="!categories.length"
+         class="center"
+     >
+       You don't have any categories yet.
+       <router-link to="/">
+         Add new category
+       </router-link>
+     </p>
+
+      <section v-else>
+         <div
+             v-for="cat in categories"
+             :key="cat.id"
+         >
             <p>
-            <strong>Девушка:</strong>
-            12 122 из 14 0000
+            <strong>{{cat.title}}</strong>
+            {{cat.spend | currencyFilter}} из {{cat.limit | currencyFilter}}
             </p>
-            <div class="progress" >
             <div
-                  class="determinate green"
-                  style="width:40%"
+                v-tooltip="cat.tooltip"
+                class="progress"
+            >
+            <div
+                  class="determinate"
+                  :class="[cat.progressColor]"
+                  :style="{width: cat.progressPersent + '%'}"
             ></div>
             </div>
          </div>
@@ -23,7 +42,57 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+import currencyFilter from "@/filters/currency.filter";
+
 export default {
-   name: 'Planning'
+  name: 'Planning',
+
+
+  data: () => ({
+    loading: true,
+    categories: []
+  }),
+
+  methods: {
+    ...mapActions('record', ['fetchRecords']),
+    ...mapActions('category', ['fetchCategories'])
+  },
+
+  computed: {
+    ...mapState('info', ['info'])
+  },
+
+  async mounted() {
+    const records = await this.fetchRecords();
+    const categories = await this.fetchCategories();
+
+    this.categories = categories.map(cat => {
+      const spend = records
+          .filter( r => r.categoryId === cat.id)
+          .filter(r => r.type === 'outcome')
+          .reduce((acc, r) => {
+              return acc += +r.amount
+            }, 0)
+
+      const persent = 100 * spend / cat.limit;
+      const progressPersent = persent > 100 ? 100 : persent;
+      const progressColor = persent < 60 ? 'green'
+          : persent < 100 ? 'yellow' : 'red'
+
+      const toolTipValue = cat.limit - spend;
+      const tooltip = `${toolTipValue < 0 ? 'You have exceeded the limit by' : 'Balance'} ${currencyFilter(Math.abs(toolTipValue))}`
+
+      return {
+        ...cat,
+        progressColor,
+        progressPersent,
+        spend,
+        tooltip
+      }
+    })
+
+    this.loading = false;
+  }
 }
 </script>
