@@ -8,42 +8,60 @@
          <canvas></canvas>
       </div>
 
-      <section>
-         <table>
-            <thead>
-            <tr>
-            <th>#</th>
-            <th>Sum</th>
-            <th>Date</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th>Open</th>
-            </tr>
-            </thead>
+     <Loader v-if="loading"/>
 
-            <tbody>
-            <tr>
-            <td>1</td>
-            <td>1212</td>
-            <td>12.12.32</td>
-            <td>name</td>
-            <td>
-               <span class="white-text badge red">Expense</span>
-            </td>
-            <td>
-               <button class="btn-small btn">
-                  <i class="material-icons">open_in_new</i>
-               </button>
-            </td>
-            </tr>
-            </tbody>
-         </table>
+     <p class="center" v-else-if="!records.length">
+       No records yet.
+       <router-link to="/records">
+         Add new record.
+       </router-link>
+     </p>
+
+      <section v-else>
+        <HistoryTable
+            :records="records"
+        />
       </section>
    </div>
 </template>
 
 <script>
+import HistoryTable from "@/components/HistoryTable";
+import { mapActions } from 'vuex';
+
 export default {
-   name: 'History'
+  name: 'History',
+  components: {
+    HistoryTable
+  },
+
+  data: () => ({
+    loading: true,
+    records: [],
+    categories: []
+  }),
+
+  methods: {
+    ...mapActions('record', ['fetchRecords']),
+    ...mapActions('category', ['fetchCategories'])
+  },
+
+  async mounted(){
+    // this.records = await this.fetchRecords();
+    const records = await this.fetchRecords();
+    this.categories = await this.fetchCategories();
+    this.records = records.map(record => {
+      return {
+        ...record,
+        categoryName: this.categories.find(c => c.id === record.categoryId).title,
+        typeClass: record.type === 'income' ? 'green' : 'red',
+        typeText: record.type === 'income' ? 'Income' : 'Outcome'
+      }
+    })
+
+    this.loading = false;
+  }
+
+
 }
 </script>

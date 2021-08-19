@@ -40,7 +40,7 @@ Vue.use(VueRouter)
       component: () => import('@/views/Categories.vue')
     },
     {
-      path: '/detailrecord',
+      path: '/detail/:id',
       name: 'DetailRecord',
       meta: {
         layout: 'main',
