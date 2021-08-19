@@ -21,6 +21,18 @@ const actions = {
             commit('errors/SET_ERROR', e, {root: true})
             throw e;
         }
+    },
+
+    async fetchRecord({commit, dispatch}, id){
+        try {
+            const uid = await dispatch('auth/getUserUuid', null, {root: true});
+            const record = (await firebase.database().ref(`/users/${uid}/records/`).child(id).once('value')).val() || {};
+
+            return {...record, id}
+        } catch (e) {
+            commit('errors/SET_ERROR', e, {root: true})
+            throw e;
+        }
     }
 }
 

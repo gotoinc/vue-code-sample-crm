@@ -14,6 +14,19 @@ const actions = {
         }
     },
 
+    async fetchCategory({commit, dispatch}, id) {
+        try {
+            const uid = await dispatch('auth/getUserUuid', null, {root: true});
+            const category = (await firebase.database().ref(`/users/${uid}/categories`).child(id).once('value')).val() || {};
+
+            return {...category, id}
+
+        } catch(e) {
+            commit('errors/SET_ERROR', e, {root: true})
+            throw e;
+        }
+    },
+
     async createCategory({commit, dispatch}, {title, limit}) {
         try {
             const uid = await dispatch('auth/getUserUuid', null, {root: true});
