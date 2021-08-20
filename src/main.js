@@ -1,21 +1,22 @@
-import Vue from 'vue'
-import Vuelidate from 'vuelidate'
-import App from './App.vue'
-import './registerServiceWorker'
-import router from './router'
-import store from './store'
-import dateFilter from '@/filters/date.filter'
+import Vue from 'vue';
+import Vuelidate from 'vuelidate';
+import App from './App.vue';
+import './registerServiceWorker';
+import router from './router';
+import store from './store';
+import dateFilter from '@/filters/date.filter';
 import currencyFilter from "@/filters/currency.filter";
 import tooltipDirective from '@/directives/tooltip.directive';
 import Loader from '@/components/Common/Loader'
 
-import 'materialize-css/dist/js/materialize.min.js'
-import messagePlagin from '@/utils/message.plagin'
+import 'materialize-css/dist/js/materialize.min.js';
+import messagePlagin from '@/utils/message.plagin';
+import Paginate from 'vuejs-paginate';
 
 
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/database'
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 Vue.config.productionTip = false;
 
@@ -25,6 +26,7 @@ Vue.filter('currencyFilter', currencyFilter);
 Vue.directive('tooltip', tooltipDirective);
 Vue.use(messagePlagin);
 Vue.component('Loader', Loader);
+Vue.component('Paginate', Paginate);
 
 
 firebase.initializeApp({
