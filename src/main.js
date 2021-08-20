@@ -9,6 +9,7 @@ import currencyFilter from "@/filters/currency.filter";
 import tooltipDirective from '@/directives/tooltip.directive';
 import Loader from '@/components/Common/Loader'
 
+
 import 'materialize-css/dist/js/materialize.min.js';
 import messagePlagin from '@/utils/message.plagin';
 import Paginate from 'vuejs-paginate';
