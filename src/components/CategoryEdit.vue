@@ -132,9 +132,7 @@ export default {
   },
 
   mounted() {
-    // eslint-disable-next-line no-undef
     this.select = M.FormSelect.init(this.$refs.select);
-    // eslint-disable-next-line no-undef
     M.updateTextFields();
   },
 

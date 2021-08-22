@@ -1,3 +1,5 @@
+import store from '../store'
+
 export default (value, format = 'date') => {
     const options = {};
 
@@ -12,6 +14,7 @@ export default (value, format = 'date') => {
         options.second = '2-digit'
     }
 
-    return Intl.DateTimeFormat('en-EN', options).format(new Date(value));
+    const locale = store.state.info.info.locale || 'en-EN'
+    return Intl.DateTimeFormat(locale, options).format(new Date(value));
 
 }

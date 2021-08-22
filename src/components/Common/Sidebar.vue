@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import localizeFilter from "@/filters/localize.filter";
+
 export default {
   name: "Sidebar",
 
@@ -27,24 +29,24 @@ export default {
   data: () => ({
     links: [
       {
-        title: 'Account',
+        title: localizeFilter('Menu_Account'),
         url: '/',
         exact: true
       },
       {
-        title: 'Record history',
+        title: localizeFilter('Menu_History'),
         url: '/history'
       },
       {
-        title: 'Planning',
+        title: localizeFilter('Menu_Planning'),
         url: '/planning'
       },
       {
-        title: 'New record',
+        title: localizeFilter('Menu_New_Record'),
         url: '/record'
       },
       {
-        title: 'Categories',
+        title: localizeFilter('Menu_Categories'),
         url: '/categories'
       }
     ]

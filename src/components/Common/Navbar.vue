@@ -68,7 +68,6 @@ export default {
     this.interval = setInterval(() => {
       this.date = new Date();
     }, 1000)
-    // eslint-disable-next-line no-undef
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
       constrainWidth: true
     })

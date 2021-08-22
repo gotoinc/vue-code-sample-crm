@@ -198,9 +198,7 @@ export default {
      }
 
      setTimeout(() => {
-       // eslint-disable-next-line no-undef
        this.select = M.FormSelect.init(this.$refs.select);
-       // eslint-disable-next-line no-undef
        M.updateTextFields();
      }, 0)
   },

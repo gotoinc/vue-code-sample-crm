@@ -8,7 +8,10 @@
 
       <Navbar @click="isNavbarOpened = !isNavbarOpened"/>
 
-      <Sidebar v-model="isNavbarOpened"/>
+      <Sidebar
+          v-model="isNavbarOpened"
+          :key="locale"
+      />
 
       <main
           class="app-content"
@@ -54,6 +57,10 @@ export default {
   computed: {
     ...mapState('info', ['info']),
     ...mapGetters('errors', ['GET_ERROR']),
+
+    locale() {
+      return this.info.locale;
+    }
   },
 
   methods: {
@@ -61,6 +68,7 @@ export default {
   },
 
   watch: {
+
     GET_ERROR(fbErr){
       this.$error(fbErr.message);
     }
