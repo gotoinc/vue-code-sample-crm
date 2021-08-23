@@ -41,6 +41,12 @@ import { mapActions } from 'vuex';
 export default {
   name: 'Categories',
 
+  metaInfo(){
+    return {
+      title: this.$title("Menu_Categories")
+    }
+  },
+
   data: () => ({
     categories: [],
     loading: true,

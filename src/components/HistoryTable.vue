@@ -30,7 +30,7 @@
       </td>
       <td>
         <button
-            v-tooltip="'Show details'"
+            v-tooltip="'Show_details'"
             class="btn-small btn"
             @click="$router.push(`/detail/${record.id}`)"
         >

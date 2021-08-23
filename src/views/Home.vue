@@ -38,6 +38,12 @@ import { mapActions, mapState } from 'vuex';
 export default {
   name: 'Home',
 
+  metaInfo(){
+    return {
+      title: this.$title("Account")
+    }
+  },
+
   data: () => ({
     loading: true,
   }),

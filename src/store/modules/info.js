@@ -26,28 +26,13 @@ const actions = {
 
     async fetchCurrency({commit}) {
         try {
-            // let key = process.env.VUE_APP_FIXER_API_KEY;
-            // const response = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,JPY`);
-            // const currency = await response.json()
-            // commit('SET_CURRENCY', currency.rates)
-
-            // !Test variant -> because of limited api calls
-            return await new Promise((res) => {
-                setTimeout(() => {
-                    commit('SET_CURRENCY', {
-                        base: "EUR",
-                        date: "2021-08-13",
-                        rates: {
-                            EUR: 1,
-                            JPY: 129.551235,
-                            USD: 1.17495
-                        },
-                        success: true,
-                        timeStamp: 1628850123
-                    });
-                    res();
-                }, 1500)
-            })
+            let key = process.env.VUE_APP_FIXER_API_KEY;
+            await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,JPY`)
+                .then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    commit('SET_CURRENCY', data)
+                });
 
         } catch(e) {
             console.log(e);

@@ -73,6 +73,12 @@ import { mapActions } from 'vuex';
 export default {
   name: 'Login',
 
+  metaInfo(){
+    return {
+      title: this.$title('Login')
+    }
+  },
+
   data: () => ({
     email: '',
     password: ''

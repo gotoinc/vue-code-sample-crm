@@ -25,8 +25,8 @@
             v-model="page"
             :pageCount="pageCount"
             :clickHandler="pageChangeHandle"
-            :prevText="'Prev'"
-            :nextText="'Next'"
+            :prevText="'Prev' | localizeFilter"
+            :nextText="'Next' | localizeFilter"
             :containerClass="'pagination center'"
             :page-class="'waves-effect'"
         />
@@ -46,6 +46,12 @@ export default {
   mixins: [paginationMixin, Pie],
   components: {
     HistoryTable,
+  },
+
+  metaInfo(){
+    return {
+      title: this.$title("Record_history")
+    }
   },
 
   data: () => ({

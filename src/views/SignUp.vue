@@ -97,6 +97,12 @@ import { mapActions } from 'vuex';
 export default {
    name: 'SignUp',
 
+  metaInfo(){
+    return {
+      title: this.$title('SignupTitle')
+    }
+  },
+
   data: () => ({
     email: '',
     password: '',

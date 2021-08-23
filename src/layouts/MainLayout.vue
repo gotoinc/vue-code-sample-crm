@@ -24,7 +24,7 @@
 
       <div class="fixed-action-btn">
         <router-link
-            v-tooltip="'Create new record'"
+            v-tooltip="'Create_new_record_tooltip'"
             class="btn-floating btn-large blue"
             to="/record"
         >

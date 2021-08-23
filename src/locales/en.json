@@ -36,6 +36,16 @@
   "Category_title" : "Title",
   "Enter_title_message" : "Enter title",
   "Limit" : "Limit",
-  "LogoutTitle" : "Logout"
-
+  "LogoutTitle" : "Logout",
+  "Prev" : "Prev",
+  "Next" : "Next",
+  "Login": "Login",
+  "Details" : "Details",
+  "SignupTitle" : "Signup",
+  "FirstLogin" : "You should login first",
+  "SystemLogout" : "You logged out from the system",
+  "Show_details" : "Show details",
+  "Create_new_record_tooltip" : "Create new record",
+  "MoreThan" : "You have exceeded the limit by",
+  "Balance" : "Balance"
  }

@@ -40,6 +40,12 @@
 import { mapActions } from 'vuex';
 export default {
   name: 'DetailRecord',
+
+  metaInfo(){
+    return {
+      title: this.$title('Details')
+    }
+  },
   
   data: () => ({
     record: null,

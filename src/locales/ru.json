@@ -36,6 +36,16 @@
   "Category_title" : "Название",
   "Enter_title_message" : "Введите название",
   "Limit" : "Лимит",
-  "LogoutTitle" : "Выйти"
-
+  "LogoutTitle" : "Выйти",
+  "Prev" : "Предыдущая",
+  "Next" : "Следующая",
+  "Login" : "Логин",
+  "Details" : "Детали",
+  "SignupTitle" : "Регистрация",
+  "FirstLogin" : "Сперва Вам следует залогиниться",
+  "SystemLogout" : "Вы вышли из системы",
+  "Show_details" : "Перейти к деталям",
+  "Create_new_record_tooltip" : "Создать новую запись",
+  "MoreThan" : "Вы превысили лимит на",
+  "Balance" : "Баланс"
 }

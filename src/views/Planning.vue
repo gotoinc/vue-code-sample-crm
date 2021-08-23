@@ -27,7 +27,7 @@
             {{cat.spend | currencyFilter}} из {{cat.limit | currencyFilter}}
             </p>
             <div
-                v-tooltip="cat.tooltip"
+                v-tooltip.noloc="cat.tooltip"
                 class="progress"
             >
             <div
@@ -44,9 +44,16 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import currencyFilter from "@/filters/currency.filter";
+import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: 'Planning',
+
+  metaInfo(){
+    return {
+      title: this.$title('Planning')
+    }
+  },
 
 
   data: () => ({
@@ -81,7 +88,7 @@ export default {
           : persent < 100 ? 'yellow' : 'red'
 
       const toolTipValue = cat.limit - spend;
-      const tooltip = `${toolTipValue < 0 ? 'You have exceeded the limit by' : 'Balance'} ${currencyFilter(Math.abs(toolTipValue))}`
+      const tooltip = `${toolTipValue < 0 ? localizeFilter("MoreThan") : localizeFilter("Balance")} ${currencyFilter(Math.abs(toolTipValue))}`
 
       return {
         ...cat,
