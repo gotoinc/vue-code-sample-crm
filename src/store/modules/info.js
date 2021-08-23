@@ -26,8 +26,9 @@ const actions = {
 
     async fetchCurrency({commit}) {
         try {
-            let key = process.env.VUE_APP_FIXER_API_KEY;
-            await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,JPY`)
+            // let key = process.env.VUE_APP_FIXER_API_KEY;
+            // await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,JPY`)
+            await fetch(` https://api.exchangerate-api.com/v4/latest/EUR`)
                 .then(function(response) {
                     return response.json();
                 }).then(function(data) {
