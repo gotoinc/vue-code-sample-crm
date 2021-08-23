@@ -8,7 +8,10 @@ const state = {
 const mutations = {
     SET_INFO: (state, info) => state.info = info,
     CLEAR_INFO: (state) => state.info = {},
-    SET_CURRENCY: (state, currency) => state.currency = currency
+    SET_CURRENCY: (state, currency) => {
+        const { EUR, USD, JPY } = currency.rates;
+
+        state.currency = { ...currency, rates: {EUR, USD, JPY }}}
 }
 
 const actions = {
@@ -26,8 +29,6 @@ const actions = {
 
     async fetchCurrency({commit}) {
         try {
-            // let key = process.env.VUE_APP_FIXER_API_KEY;
-            // await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,JPY`)
             await fetch(` https://api.exchangerate-api.com/v4/latest/EUR`)
                 .then(function(response) {
                     return response.json();
