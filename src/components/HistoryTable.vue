@@ -3,11 +3,11 @@
     <thead>
     <tr>
       <th>#</th>
-      <th>Sum</th>
-      <th>Date</th>
-      <th>Category</th>
-      <th>Type</th>
-      <th>Open</th>
+      <th>{{ "Sum" | localizeFilter }}</th>
+      <th>{{ "Date" | localizeFilter }}</th>
+      <th>{{ "Category" | localizeFilter }}</th>
+      <th>{{ "Type" | localizeFilter }}</th>
+      <th>{{ "Open" | localizeFilter }}</th>
     </tr>
     </thead>
 
@@ -25,7 +25,7 @@
             class="white-text badge"
             :class="record.typeClass"
         >
-          {{ record.typeText }}
+          {{ record.typeText | localizeFilter }}
         </span>
       </td>
       <td>

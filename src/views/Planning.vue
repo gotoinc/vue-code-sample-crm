@@ -1,7 +1,7 @@
 <template>
    <div>
       <div class="page-title">
-         <h3>Планирование</h3>
+         <h3>{{ "Planning" | localizeFilter }}</h3>
          <h4>{{info.bill | currencyFilter('EUR')}}</h4>
       </div>
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Account</h3>
+      <h3>{{ "Account" | localizeFilter }}</h3>
 
       <button
           @click="refresh"

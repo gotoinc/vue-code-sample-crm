@@ -1,7 +1,7 @@
 <template>
    <div>
       <div class="page-title">
-         <h3>Record history</h3>
+         <h3>{{ "Record_history" | localizeFilter }}</h3>
       </div>
 
       <div class="history-chart">
@@ -12,9 +12,9 @@
      <Loader v-if="loading"/>
 
      <p class="center" v-else-if="!records.length">
-       No records yet.
+       {{ "Message_no_records" | localizeFilter }}
        <router-link to="/records">
-         Add new record.
+         {{ "Add_record_message" | localizeFilter }}
        </router-link>
      </p>
 

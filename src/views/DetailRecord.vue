@@ -4,8 +4,8 @@
 
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
-        <router-link to="/history" class="breadcrumb">History</router-link>
-        <a @click.prevent class="breadcrumb"> {{ record.type === 'income' ? 'Income' : 'Outcome' }} </a>
+        <router-link to="/history" class="breadcrumb">{{ "History" | localizeFilter }}</router-link>
+        <a @click.prevent class="breadcrumb"> {{ (record.type === 'income' ? "Income" : "Outcome") | localizeFilter }} </a>
       </div>
       <div class="row">
         <div class="col s12 m6">
@@ -17,9 +17,9 @@
               class="card"
           >
             <div class="card-content white-text">
-              <p>Description: {{ record.description }}</p>
-              <p>Sum: {{ record.amount | currencyFilter }}</p>
-              <p>Category: {{ record.categoryName }}</p>
+              <p>{{ "Description" | localizeFilter }}: {{ record.description }}</p>
+              <p>{{ "Sum" | localizeFilter }}: {{ record.amount | currencyFilter }}</p>
+              <p>{{ "Category" | localizeFilter }}: {{ record.categoryName }}</p>
 
               <small>{{ record.date | dateFilter('datetime') }}</small>
             </div>

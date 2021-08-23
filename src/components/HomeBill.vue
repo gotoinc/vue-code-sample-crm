@@ -2,7 +2,7 @@
   <div class="col s12 m6 l4">
     <div class="card light-blue bill-card">
       <div class="card-content white-text">
-        <span class="card-title">Currency account</span>
+        <span class="card-title">{{ "Currency_account" | localizeFilter }}</span>
 
         <p v-for="(curr, i) in Object.keys(rates)"
            :key="i"

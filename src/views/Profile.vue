@@ -23,10 +23,10 @@
 
         <div class="switch">
           <label>
-            Russian
-            <input type="checkbox" v-model="isEnLocale">
-            <span class="lever"></span>
             English
+            <input type="checkbox" v-model="isRuLocale">
+            <span class="lever"></span>
+            Russian
           </label>
         </div>
 
@@ -46,7 +46,7 @@ export default {
 
   data: () => ({
     name: '',
-    isEnLocale: true
+    isRuLocale: true
   }),
 
   computed: {
@@ -71,7 +71,7 @@ export default {
       try {
         await this.updateInfo({
           name: this.name,
-          locale: this.isEnLocale ? 'en-EN' : 'ru-RU'
+          locale: this.isRuLocale ? 'ru-RU' : 'en-EN'
         })
       } catch(e) {
         console.log(e);
@@ -81,7 +81,7 @@ export default {
 
   mounted() {
     this.name = this.info.name;
-    this.isEnLocale = this.info.locale === 'en-EN'
+    this.isRuLocale = this.info.locale === 'ru-RU'
 
     setTimeout(() => {
       M.updateTextFields();

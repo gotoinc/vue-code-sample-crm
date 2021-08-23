@@ -1,7 +1,7 @@
 <template>
   <div>
      <div class="page-title">
-       <h3>New record</h3>
+       <h3>{{ "New_record" | localizeFilter }}</h3>
      </div>
 
     <Loader v-if="loading"/>
@@ -10,9 +10,9 @@
         v-else-if="!categories.length"
         class="center"
     >
-      You don't have any categories yet.
+      {{ "Message_no_categories" | localizeFilter }}
       <router-link to="/">
-        Add new category
+       {{ "Add_record_message" | localizeFilter }}
       </router-link>
     </p>
 
@@ -34,7 +34,7 @@
             {{ c.title }}
           </option>
           </select>
-          <label>Choose a category</label>
+          <label>{{ "Choose_category_label" | localizeFilter }}</label>
        </div>
 
        <p>
@@ -46,7 +46,7 @@
                 value="income"
                 v-model="type"
           />
-          <span>Income</span>
+          <span>{{ "Income" | localizeFilter }}</span>
           </label>
        </p>
 
@@ -59,7 +59,7 @@
                 value="outcome"
                 v-model="type"
           />
-          <span>Outcome</span>
+          <span>{{ "Outcome" | localizeFilter }}</span>
           </label>
        </p>
 
@@ -70,12 +70,12 @@
              type="number"
              :class="{invalid: $v.amount.$dirty && !$v.amount.minValue}"
           >
-          <label for="amount">Sum</label>
+          <label for="amount">{{ "Sum" | localizeFilter }}</label>
           <span
               v-if="$v.amount.$dirty && !$v.amount.minValue"
               class="helper-text invalid"
           >
-            Minimum value is {{$v.amount.$params.minValue.min}}
+            {{ "Min_value_message" | localizeFilter }} {{$v.amount.$params.minValue.min}}
           </span>
        </div>
 
@@ -87,17 +87,17 @@
              :class="{invalid: $v.description.$dirty && !$v.description.required}"
 
           >
-          <label for="description">Description</label>
+          <label for="description">{{ "Description" | localizeFilter }}</label>
           <span
               v-if="$v.description.$dirty && !$v.description.required"
               class="helper-text invalid"
           >
-            Description is required
+            {{ "Description_required_message" | localizeFilter }}
           </span>
        </div>
 
        <button class="btn waves-effect waves-light" type="submit">
-          Create
+         {{ "Create" | localizeFilter }}
           <i class="material-icons right">send</i>
        </button>
       </form>
