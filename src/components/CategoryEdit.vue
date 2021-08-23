@@ -110,7 +110,7 @@ export default {
       }
 
       await this.updateCategory(categoryData).then(() => {
-        this.$message('Category was successfully edited');
+        this.$message(localizeFilter('Category_updated'));
         this.$emit('updated', categoryData);
       });
     }

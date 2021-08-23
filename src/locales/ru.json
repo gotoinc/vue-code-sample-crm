@@ -47,5 +47,9 @@
   "Show_details" : "Перейти к деталям",
   "Create_new_record_tooltip" : "Создать новую запись",
   "MoreThan" : "Вы превысили лимит на",
-  "Balance" : "Баланс"
+  "Balance" : "Баланс",
+  "Created_category" : "Категория создана",
+  "Category_updated" : "Категория успешно обновлена",
+  "Record_created" : "Новая запись успешно создана",
+  "No_money" : "Недостаточно денег на счету "
 }

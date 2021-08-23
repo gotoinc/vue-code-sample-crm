@@ -51,6 +51,7 @@
 <script>
 import { required, minValue }  from 'vuelidate/lib/validators';
 import { mapActions } from 'vuex';
+import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: "CategoryCreate",
@@ -92,7 +93,7 @@ export default {
       this.title = '';
       this.limit = 100;
       this.$v.$reset();
-      this.$message('Category is created')
+      this.$message(localizeFilter('Category_created'))
     }
   },
 

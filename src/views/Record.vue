@@ -107,6 +107,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import { minValue, required } from "vuelidate/lib/validators";
+import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: 'Record',
@@ -176,7 +177,7 @@ export default {
 
           await this.updateInfo({bill});
 
-          this.$message('New record is created successfully');
+          this.$message(localizeFilter('Record_created'));
           this.clear();
         } catch (e) {
           console.log(e)
@@ -184,7 +185,7 @@ export default {
         }
 
       } else {
-        this.$message(`Not enough money in the account (${this.amount - this.info.bill})`);
+        this.$message(`${localizeFilter('No_money')} (${this.amount - this.info.bill})`);
       }
     },
 

@@ -47,5 +47,9 @@
   "Show_details" : "Show details",
   "Create_new_record_tooltip" : "Create new record",
   "MoreThan" : "You have exceeded the limit by",
-  "Balance" : "Balance"
+  "Balance" : "Balance",
+  "Created_category" : "Category is created",
+  "Category_updated" : "Category was successfully edited",
+  "Record_created" : "New record is created successfully",
+  "No_money" : "Not enough money in the account"
  }
