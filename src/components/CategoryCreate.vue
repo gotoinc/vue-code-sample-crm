@@ -93,7 +93,7 @@ export default {
       this.title = '';
       this.limit = 100;
       this.$v.$reset();
-      this.$message(localizeFilter('Category_created'))
+      this.$message(localizeFilter('Created_category'))
     }
   },
 
