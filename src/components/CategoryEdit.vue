@@ -66,6 +66,7 @@
 
 <script>
 import { minValue, required } from "vuelidate/lib/validators";
+import localizeFilter from "@/filters/localize.filter";
 import { mapActions } from 'vuex';
 
 export default {
