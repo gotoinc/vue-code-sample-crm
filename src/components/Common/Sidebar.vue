@@ -7,12 +7,21 @@
     <router-link
         v-for="(link, i) in links"
         :key="i"
-        tag="li"
+        custom
+        v-slot="{ navigate }"
         active-class="active"
         :to="link.url"
         :exact="link.exact"
     >
-      <a href="#" class="waves-effect waves-orange pointer">{{ link.title }}</a>
+      <li>
+        <a
+            class="waves-effect waves-orange pointer"
+            @click="navigate"
+            @keypress.enter="navigate"
+        >
+          {{ link.title }}
+        </a>
+      </li>
     </router-link>
 
   </ul>
