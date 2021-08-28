@@ -5,7 +5,11 @@
       </div>
 
       <div class="history-chart">
-         <canvas ref="canvas" />
+        <ChartPie
+            v-if="!loading"
+            :data="chartData"
+            :options="chartOptions"
+        />
       </div>
 
      <Loader v-if="loading"/>
@@ -37,6 +41,7 @@
 </template>
 
 <script>
+import ChartPie from '@/components/Charts/ChartPie';
 import HistoryTable from "@/components/HistoryTable";
 import paginationMixin from '@/mixins/pagination.mixin';
 
@@ -46,6 +51,7 @@ export default {
   name: 'History',
   mixins: [paginationMixin],
   components: {
+    ChartPie,
     HistoryTable,
   },
 
@@ -57,7 +63,10 @@ export default {
 
   data: () => ({
     loading: true,
+    categories: [],
     records: [],
+    chartData: null,
+    chartOptions: null,
   }),
 
   methods: {
@@ -73,14 +82,46 @@ export default {
           typeText: record.type === 'income' ? 'Income' : 'Outcome'
         }
       }));
+
+      this.chartData = {
+        labels: this.categories.map(c => c.title),
+        datasets: [{
+          label: 'Outcome by category',
+          data: this.categories.map(c => {
+            return this.records.reduce((acc, r) => {
+              if(r.categoryId === c.id && r.type === 'outcome') {
+                acc += +r.amount
+              }
+              return acc;
+            },0)
+          }),
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(152, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(152, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+          ],
+          borderWidth: 1
+        }]
+      };
     },
   },
 
   async mounted(){
     this.records = await this.fetchRecords();
+    this.categories = await this.fetchCategories();
 
-    const categories = await this.fetchCategories();
-    this.setup(categories);
+    this.setup(this.categories);
 
     this.loading = false;
   },
