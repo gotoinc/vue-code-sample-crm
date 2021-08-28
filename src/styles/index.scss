@@ -43,7 +43,7 @@
   bottom: 0 !important;
   height: auto !important;
 
-  .open {
+  &.open {
     -webkit-transform: translateX(0);
     transform: translateX(0)
   }
@@ -85,7 +85,7 @@
   transition: padding-left .3s;
   position: relative;
 
-  .full {
+  &.full {
     padding-left: 0;
   }
 }
