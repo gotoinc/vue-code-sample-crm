@@ -5,15 +5,17 @@
       </div>
 
       <div class="history-chart">
-         <canvas ref="canvas">
-         </canvas>
+         <canvas ref="canvas" />
       </div>
 
      <Loader v-if="loading"/>
 
-     <p class="center" v-else-if="!records.length">
+     <p
+         v-else-if="!records.length"
+         class="center"
+     >
        {{ "Message_no_records" | localizeFilter }}
-       <router-link to="/records">
+       <router-link to="/record">
          {{ "Add_record_message" | localizeFilter }}
        </router-link>
      </p>
@@ -37,13 +39,12 @@
 <script>
 import HistoryTable from "@/components/HistoryTable";
 import paginationMixin from '@/mixins/pagination.mixin';
-import { Pie } from 'vue-chartjs'
 
 import { mapActions } from 'vuex';
 
 export default {
   name: 'History',
-  mixins: [paginationMixin, Pie],
+  mixins: [paginationMixin],
   components: {
     HistoryTable,
   },
@@ -71,53 +72,18 @@ export default {
           typeClass: record.type === 'income' ? 'green' : 'red',
           typeText: record.type === 'income' ? 'Income' : 'Outcome'
         }
-      }))
-
-      this.renderChart({
-        labels: categories.map(c => c.title),
-        datasets: [{
-          label: 'Outcome by category',
-          data: categories.map(c => {
-            return this.records.reduce((acc, r) => {
-              if(r.categoryId === c.id && r.type === 'outcome') {
-                acc += +r.amount
-              }
-              return acc;
-            },0)
-          }),
-          backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(152, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(152, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-          ],
-          borderWidth: 1
-        }]
-      })
-    }
+      }));
+    },
   },
 
   async mounted(){
     this.records = await this.fetchRecords();
-    const categories = await this.fetchCategories();
 
+    const categories = await this.fetchCategories();
     this.setup(categories);
 
-
-
     this.loading = false;
-  }
-
+  },
 
 }
 </script>
