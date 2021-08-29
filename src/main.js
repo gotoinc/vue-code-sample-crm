@@ -13,8 +13,8 @@ import Loader from '@/components/Common/Loader'
 
 
 import 'materialize-css/dist/js/materialize.min.js';
-import messagePlagin from '@/utils/message.plagin';
-import titlePlagin from '@/utils/title.plagin';
+import messagePlugin from '@/utils/message.plugin';
+import titlePlugin from '@/utils/title.plugin';
 import Paginate from 'vuejs-paginate';
 
 
@@ -26,8 +26,8 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(VueMeta);
-Vue.use(messagePlagin);
-Vue.use(titlePlagin);
+Vue.use(messagePlugin);
+Vue.use(titlePlugin);
 Vue.filter('dateFilter', dateFilter);
 Vue.filter('currencyFilter', currencyFilter);
 Vue.filter('localizeFilter', localizeFilter);
