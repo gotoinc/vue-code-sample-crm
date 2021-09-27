@@ -4,13 +4,11 @@
          <h3>{{ "Record_history" | localizeFilter }}</h3>
       </div>
 
-      <div class="history-chart">
-        <ChartPie
-            v-if="!loading"
-            :data="chartData"
-            :options="chartOptions"
-        />
-      </div>
+     <ChartPie
+          v-if="!loading"
+          :data="chartData"
+          :options="chartOptions"
+     />
 
      <Loader v-if="loading"/>
 
@@ -66,8 +64,21 @@ export default {
     categories: [],
     records: [],
     chartData: null,
-    chartOptions: null,
+    chartOptions: null
   }),
+
+  computed: {
+    getColors() {
+      return this.categories.map(() => {
+        const letters = '0123456789ABCDEF';
+        let color ='#';
+        while(color.length < 7){
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      })
+    }
+  },
 
   methods: {
     ...mapActions('record', ['fetchRecords']),
@@ -95,22 +106,7 @@ export default {
               return acc;
             },0)
           }),
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(152, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(152, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
+          backgroundColor: this.getColors,
           borderWidth: 1
         }]
       };
