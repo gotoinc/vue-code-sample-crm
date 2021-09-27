@@ -6,7 +6,10 @@
         class="app-main-layout"
     >
 
-      <Navbar @click="isNavbarOpened = !isNavbarOpened"/>
+      <Navbar
+          @click="isNavbarOpened = !isNavbarOpened"
+          :isNavbarOpened="isNavbarOpened"
+      />
 
       <Sidebar
           v-model="isNavbarOpened"
@@ -45,7 +48,7 @@ export default {
   name: 'MainLayout',
 
   data: () => ({
-    isNavbarOpened: true,
+    isNavbarOpened: false,
     loading: true
   }),
 

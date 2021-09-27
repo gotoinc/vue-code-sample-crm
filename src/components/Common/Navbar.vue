@@ -3,7 +3,15 @@
     <div class="nav-wrapper">
       <div class="navbar-left">
         <a href="#" @click.prevent="$emit('click')">
-          <i class="material-icons black-text">dehaze</i>
+<!--          <i class="material-icons black-text">dehaze</i>-->
+          <div
+              class="sidebar-btn"
+              :class="{'active': isNavbarOpened}"
+          >
+            <span class="top"></span>
+            <span class="mid"></span>
+            <span class="bottom"></span>
+          </div>
         </a>
         <span class="black-text">{{ date | dateFilter('datetime') }}</span>
       </div>
@@ -45,6 +53,13 @@ import { mapActions, mapState } from 'vuex';
 export default {
   name: "Navbar",
 
+  props: {
+    isNavbarOpened: {
+      required: true,
+      type: Boolean
+    }
+  },
+
   data: () =>({
     date: new Date(),
     interval: null,
@@ -84,9 +99,51 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 .dropdown-content {
   min-width: 160px;
 }
 
+.sidebar-btn {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  z-index: 100;
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    margin: auto;
+    background: black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all .4s ease;
+
+    &.top {
+      transform: translateY(-8px);
+    }
+
+    &.bottom {
+      transform: translateY(8px);
+    }
+  }
+
+  &.active{
+    .top {
+      transform: rotate(-45deg);
+    }
+    .mid{
+      opacity: 0;
+    }
+    .bottom {
+      transform: rotate(45deg);
+    }
+  }
+}
 </style>
