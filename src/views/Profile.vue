@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style lang="scss">
-.switch {
-  margin-bottom: 2rem;
-}
+  .switch {
+    margin-bottom: 2rem;
+  }
 </style>

@@ -41,11 +41,5 @@ export default {
       return Math.floor(this.base * this.rates[curr]);
     }
   }
-
-
 }
 </script>
-
-<style scoped>
-
-</style>

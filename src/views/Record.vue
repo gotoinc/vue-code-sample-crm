@@ -52,14 +52,14 @@
 
        <p>
           <label>
-          <input
-                class="with-gap"
-                name="type"
-                type="radio"
-                value="outcome"
-                v-model="type"
-          />
-          <span>{{ "Outcome" | localizeFilter }}</span>
+            <input
+                  class="with-gap"
+                  name="type"
+                  type="radio"
+                  value="outcome"
+                  v-model="type"
+            />
+            <span>{{ "Outcome" | localizeFilter }}</span>
           </label>
        </p>
 
