@@ -50,7 +50,12 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-vars": "error",
+      "no-console": "warn",
+      "default-case" : "warn",
+      "no-undef": "warn"
+    }
   },
   "browserslist": [
     "> 1%",
