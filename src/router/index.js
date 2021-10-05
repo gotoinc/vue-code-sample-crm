@@ -1,106 +1,106 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import firebase from 'firebase/app'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import firebase from "firebase/app";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
-    {
-      path: '/',
-      name: 'Home',
-      meta: {
-        layout: 'main',
-        auth: true
-      },
-      component: () => import('@/views/Home')
+const routes = [
+  {
+    path: "/",
+    name: "Home",
+    meta: {
+      layout: "main",
+      auth: true,
     },
-    {
-      path: '/login',
-      name: 'Login',
-      meta: {
-        layout: 'auth'
-      },
-      component: () => import('@/views/Login.vue')
+    component: () => import("@/views/Home.vue"),
+  },
+  {
+    path: "/login",
+    name: "Login",
+    meta: {
+      layout: "auth",
     },
-    {
-      path: '/signup',
-      name: 'SignUp',
-      meta: {
-        layout: 'auth'
-      },
-      component: () => import('@/views/SignUp.vue')
+    component: () => import("@/views/Login.vue"),
+  },
+  {
+    path: "/signup",
+    name: "SignUp",
+    meta: {
+      layout: "auth",
     },
-    {
-      path: '/categories',
-      name: 'Categories',
-      meta: {
-        layout: 'main',
-        auth: true
-      },
-      component: () => import('@/views/Categories.vue')
+    component: () => import("@/views/SignUp.vue"),
+  },
+  {
+    path: "/categories",
+    name: "Categories",
+    meta: {
+      layout: "main",
+      auth: true,
     },
-    {
-      path: '/detail/:id',
-      name: 'DetailRecord',
-      meta: {
-        layout: 'main',
-        auth: true
-      },
-      component: () => import('@/views/DetailRecord.vue')
+    component: () => import("@/views/Categories.vue"),
+  },
+  {
+    path: "/detail/:id",
+    name: "DetailRecord",
+    meta: {
+      layout: "main",
+      auth: true,
     },
-    {
-      path: '/history',
-      name: 'History',
-      meta: {
-        layout: 'main',
-        auth: true
-      },
-      component: () => import('@/views/History.vue')
+    component: () => import("@/views/DetailRecord.vue"),
+  },
+  {
+    path: "/history",
+    name: "History",
+    meta: {
+      layout: "main",
+      auth: true,
     },
-    {
-      path: '/planning',
-      name: 'Planning',
-      meta: {
-        layout: 'main',
-        auth: true
-      },
-      component: () => import('@/views/Planning.vue')
+    component: () => import("@/views/History.vue"),
+  },
+  {
+    path: "/planning",
+    name: "Planning",
+    meta: {
+      layout: "main",
+      auth: true,
     },
-    {
-      path: '/profile',
-      name: 'Profile',
-      meta: {
-        layout: 'main',
-        auth: true
-      },
-      component: () => import('@/views/Profile.vue')
+    component: () => import("@/views/Planning.vue"),
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    meta: {
+      layout: "main",
+      auth: true,
     },
-    {
-      path: '/record',
-      name: 'Record',
-      meta: {
-        layout: 'main',
-        auth: true
-      },
-      component: () => import('@/views/Record.vue')
+    component: () => import("@/views/Profile.vue"),
+  },
+  {
+    path: "/record",
+    name: "Record",
+    meta: {
+      layout: "main",
+      auth: true,
     },
-  ]
+    component: () => import("@/views/Record.vue"),
+  },
+];
 
-  const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes
-  })
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
+});
 
-  router.beforeEach((to, from, next) => {
-    const currentUser = firebase.auth().currentUser;
-    const requireAuth = to.matched.some(record => record.meta.auth)
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requireAuth = to.matched.some((record) => record.meta.auth);
 
-    if(requireAuth && !currentUser) {
-      next('/login?message=login')
-    } else {
-      next();
-    }
-  })
+  if (requireAuth && !currentUser) {
+    next("/login?message=login");
+  } else {
+    next();
+  }
+});
 
-export default router
+export default router;

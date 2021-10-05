@@ -1,12 +1,11 @@
 export default {
-    install(Vue) {
-        Vue.prototype.$message = (html) => {
-            M.toast({html})
-        };
+  install(Vue) {
+    Vue.prototype.$message = html => {
+      M.toast({ html });
+    };
 
-        Vue.prototype.$error = (html) => {
-            M.toast({html: `[ERROR]: ${html}`})
-        }
-
-    }
-}
+    Vue.prototype.$error = html => {
+      M.toast({ html: `[ERROR]: ${html}` });
+    };
+  },
+};

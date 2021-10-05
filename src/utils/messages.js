@@ -1,4 +1,4 @@
 export default {
-    "logout" : "SystemLogout",
-    "login" : 'FirstLogin'
-}
+  logout: "SystemLogout",
+  login: "FirstLogin",
+};

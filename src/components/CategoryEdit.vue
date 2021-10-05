@@ -6,16 +6,9 @@
       </div>
 
       <form @submit.prevent="submitHandler">
-        <div class="input-field" >
-          <select
-              ref="select"
-              v-model="current"
-          >
-            <option
-                v-for="c in categories"
-                :key="c.id"
-                :value="c.id"
-            >
+        <div class="input-field">
+          <select ref="select" v-model="current">
+            <option v-for="c in categories" :key="c.id" :value="c.id">
               {{ c.title }}
             </option>
           </select>
@@ -24,34 +17,34 @@
 
         <div class="input-field">
           <input
-              id="name"
-              type="text"
-              v-model="title"
-              :class="{invalid: $v.title.$dirty && !$v.title.required}"
-          >
+            id="name"
+            type="text"
+            v-model="title"
+            :class="{ invalid: $v.title.$dirty && !$v.title.required }"
+          />
           <label for="name">{{ "Category_title" | localizeFilter }}</label>
           <span
-              v-if="$v.title.$dirty && !$v.title.required"
-              class="helper-text invalid"
+            v-if="$v.title.$dirty && !$v.title.required"
+            class="helper-text invalid"
           >
             {{ "Enter_title_message" | localizeFilter }}
           </span>
-
         </div>
 
         <div class="input-field">
           <input
-              id="limit"
-              type="number"
-              v-model.number="limit"
-              :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
-          >
+            id="limit"
+            type="number"
+            v-model.number="limit"
+            :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
+          />
           <label for="limit">{{ "Limit" | localizeFilter }}</label>
           <span
-              v-if="$v.limit.$dirty && !$v.limit.minValue"
-              class="helper-text invalid"
+            v-if="$v.limit.$dirty && !$v.limit.minValue"
+            class="helper-text invalid"
           >
-            {{ "Min_value_message" | localizeFilter }} {{$v.limit.$params.minValue.min}}
+            {{ "Min_value_message" | localizeFilter }}
+            {{ $v.limit.$params.minValue.min }}
           </span>
         </div>
 
@@ -67,7 +60,7 @@
 <script>
 import { minValue, required } from "vuelidate/lib/validators";
 import localizeFilter from "@/filters/localize.filter";
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   name: "CategoryEdit",
@@ -75,31 +68,31 @@ export default {
   props: {
     categories: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data: () => ({
     select: null,
-    title: '',
+    title: "",
     limit: 100,
-    current: null
+    current: null,
   }),
 
   validations: {
     title: {
-      required
+      required,
     },
     limit: {
-      minValue: minValue(100)
-    }
+      minValue: minValue(100),
+    },
   },
 
   methods: {
-    ...mapActions('category', ['updateCategory']),
+    ...mapActions("category", ["updateCategory"]),
 
     async submitHandler() {
-      if(this.$v.$invalid) {
+      if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
@@ -107,22 +100,22 @@ export default {
       const categoryData = {
         id: this.current,
         title: this.title,
-        limit: this.limit
-      }
+        limit: this.limit,
+      };
 
       await this.updateCategory(categoryData).then(() => {
-        this.$message(localizeFilter('Category_updated'));
-        this.$emit('updated', categoryData);
+        this.$message(localizeFilter("Category_updated"));
+        this.$emit("updated", categoryData);
       });
-    }
+    },
   },
 
   watch: {
-    current: function(catId) {
+    current: function (catId) {
       const { title, limit } = this.categories.find(c => c.id === catId);
       this.title = title;
       this.limit = limit;
-    }
+    },
   },
 
   created() {
@@ -138,9 +131,9 @@ export default {
   },
 
   destroyed() {
-    if(this.select && this.select.destroy) {
+    if (this.select && this.select.destroy) {
       this.select.destroy();
     }
-  }
-}
+  },
+};
 </script>

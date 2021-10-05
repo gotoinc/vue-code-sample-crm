@@ -1,29 +1,24 @@
 <template>
-  <ul
-      class="sidenav app-sidenav"
-      :class="{ 'open': value }"
-  >
-
+  <ul class="sidenav app-sidenav" :class="{ open: value }">
     <router-link
-        v-for="(link, i) in links"
-        :key="i"
-        custom
-        v-slot="{ navigate }"
-        active-class="active"
-        :to="link.url"
-        :exact="link.exact"
+      v-for="(link, i) in links"
+      :key="i"
+      custom
+      v-slot="{ navigate }"
+      active-class="active"
+      :to="link.url"
+      :exact="link.exact"
     >
       <li>
         <a
-            class="waves-effect waves-orange pointer"
-            @click="navigate"
-            @keypress.enter="navigate"
+          class="waves-effect waves-orange pointer"
+          @click="navigate"
+          @keypress.enter="navigate"
         >
           {{ link.title }}
         </a>
       </li>
     </router-link>
-
   </ul>
 </template>
 
@@ -33,37 +28,34 @@ import localizeFilter from "@/filters/localize.filter";
 export default {
   name: "Sidebar",
 
-  props: ['value'],
+  props: ["value"],
 
   data: () => ({
     links: [
       {
-        title: localizeFilter('Menu_Account'),
-        url: '/',
-        exact: true
+        title: localizeFilter("Menu_Account"),
+        url: "/",
+        exact: true,
       },
       {
-        title: localizeFilter('Menu_History'),
-        url: '/history'
+        title: localizeFilter("Menu_History"),
+        url: "/history",
       },
       {
-        title: localizeFilter('Menu_Planning'),
-        url: '/planning'
+        title: localizeFilter("Menu_Planning"),
+        url: "/planning",
       },
       {
-        title: localizeFilter('Menu_New_Record'),
-        url: '/record'
+        title: localizeFilter("Menu_New_Record"),
+        url: "/record",
       },
       {
-        title: localizeFilter('Menu_Categories'),
-        url: '/categories'
-      }
-    ]
-  })
-
-}
+        title: localizeFilter("Menu_Categories"),
+        url: "/categories",
+      },
+    ],
+  }),
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

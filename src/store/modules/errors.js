@@ -1,21 +1,19 @@
-
 const state = {
-    error: null
-}
+  error: null,
+};
 
 const mutations = {
-    SET_ERROR: (state, error) => state.error = error,
-    CLEAR_ERROR: (state) => state.error = null
-}
+  SET_ERROR: (state, error) => (state.error = error),
+  CLEAR_ERROR: state => (state.error = null),
+};
 
 const getters = {
-    GET_ERROR: state => state.error
-}
+  GET_ERROR: state => state.error,
+};
 
 export const errors = {
-    namespaced: true,
-    state,
-    mutations,
-    getters
-}
-
+  namespaced: true,
+  state,
+  mutations,
+  getters,
+};

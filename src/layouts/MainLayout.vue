@@ -1,35 +1,26 @@
 <template>
   <div>
-    <Loader v-if="loading"/>
-    <div
-        v-else
-        class="app-main-layout"
-    >
+    <Loader v-if="loading" />
 
+    <div v-else class="app-main-layout">
       <Navbar
-          @click="isNavbarOpened = !isNavbarOpened"
-          :isNavbarOpened="isNavbarOpened"
+        :is-navbar-opened="isNavbarOpened"
+        @click="isNavbarOpened = !isNavbarOpened"
       />
 
-      <Sidebar
-          v-model="isNavbarOpened"
-          :key="locale"
-      />
+      <Sidebar :key="locale" v-model="isNavbarOpened" />
 
-      <main
-          class="app-content"
-          :class="{'full': !isNavbarOpened}"
-      >
+      <main class="app-content" :class="{ full: !isNavbarOpened }">
         <div class="app-page">
-          <router-view/>
+          <router-view />
         </div>
       </main>
 
       <div class="fixed-action-btn">
         <router-link
-            v-tooltip="'Create_new_record_tooltip'"
-            class="btn-floating btn-large blue"
-            to="/record"
+          v-tooltip="'Create_new_record_tooltip'"
+          class="btn-floating btn-large blue"
+          to="/record"
         >
           <i class="large material-icons">add</i>
         </router-link>
@@ -42,47 +33,46 @@
 import Navbar from "@/components/Common/Navbar";
 import Sidebar from "@/components/Common/Sidebar";
 
-import {mapState, mapActions, mapGetters} from 'vuex';
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
-  name: 'MainLayout',
-
-  data: () => ({
-    isNavbarOpened: false,
-    loading: true
-  }),
+  name: "MainLayout",
 
   components: {
     Navbar,
-    Sidebar
+    Sidebar,
   },
 
+  data: () => ({
+    isNavbarOpened: false,
+    loading: true,
+  }),
+
   computed: {
-    ...mapState('info', ['info']),
-    ...mapGetters('errors', ['GET_ERROR']),
+    ...mapState("info", ["info"]),
+    ...mapGetters("errors", ["GET_ERROR"]),
 
     locale() {
       return this.info.locale;
-    }
+    },
   },
 
   methods: {
-    ...mapActions('info', ['fetchInfo'])
+    ...mapActions("info", ["fetchInfo"]),
   },
 
   watch: {
-
-    GET_ERROR(fbErr){
+    GET_ERROR(fbErr) {
       this.$error(fbErr.message);
-    }
+    },
   },
 
   async mounted() {
-    if(Object.keys(this.info).length === 0) {
-      await this.fetchInfo()
+    if (Object.keys(this.info).length === 0) {
+      await this.fetchInfo();
     }
 
     this.loading = false;
-  }
-}
+  },
+};
 </script>

@@ -1,121 +1,109 @@
 <template>
   <div>
-     <div class="page-title">
-       <h3>{{ "New_record" | localizeFilter }}</h3>
-     </div>
+    <div class="page-title">
+      <h3>{{ "New_record" | localizeFilter }}</h3>
+    </div>
 
-    <Loader v-if="loading"/>
+    <Loader v-if="loading" />
 
-    <p
-        v-else-if="!categories.length"
-        class="center"
-    >
+    <p v-else-if="!categories.length" class="center">
       {{ "Message_no_categories" | localizeFilter }}
       <router-link to="/">
-       {{ "Add_record_message" | localizeFilter }}
+        {{ "Add_record_message" | localizeFilter }}
       </router-link>
     </p>
 
-    <form
-      v-else
-      class="form"
-      @submit.prevent="handleSubmit"
-    >
-       <div class="input-field" >
-          <select
-              ref="select"
-              v-model="category"
-          >
-          <option
-              v-for="c in categories"
-              :key="c.id"
-              :value="c.id"
-          >
+    <form v-else class="form" @submit.prevent="handleSubmit">
+      <div class="input-field">
+        <select ref="select" v-model="category">
+          <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.title }}
           </option>
-          </select>
-          <label>{{ "Choose_category_label" | localizeFilter }}</label>
-       </div>
+        </select>
+        <label>{{ "Choose_category_label" | localizeFilter }}</label>
+      </div>
 
-       <p>
-          <label>
+      <p>
+        <label>
           <input
-                class="with-gap"
-                name="type"
-                type="radio"
-                value="income"
-                v-model="type"
+            v-model="type"
+            class="with-gap"
+            name="type"
+            type="radio"
+            value="income"
           />
           <span>{{ "Income" | localizeFilter }}</span>
-          </label>
-       </p>
+        </label>
+      </p>
 
-       <p>
-          <label>
-            <input
-                  class="with-gap"
-                  name="type"
-                  type="radio"
-                  value="outcome"
-                  v-model="type"
-            />
-            <span>{{ "Outcome" | localizeFilter }}</span>
-          </label>
-       </p>
-
-       <div class="input-field">
+      <p>
+        <label>
           <input
-             id="amount"
-             v-model.number="amount"
-             type="number"
-             :class="{invalid: $v.amount.$dirty && !$v.amount.minValue}"
-          >
-          <label for="amount">{{ "Sum" | localizeFilter }}</label>
-          <span
-              v-if="$v.amount.$dirty && !$v.amount.minValue"
-              class="helper-text invalid"
-          >
-            {{ "Min_value_message" | localizeFilter }} {{$v.amount.$params.minValue.min}}
-          </span>
-       </div>
+            v-model="type"
+            class="with-gap"
+            name="type"
+            type="radio"
+            value="outcome"
+          />
+          <span>{{ "Outcome" | localizeFilter }}</span>
+        </label>
+      </p>
 
-       <div class="input-field">
-          <input
-             id="description"
-             type="text"
-             v-model="description"
-             :class="{invalid: $v.description.$dirty && !$v.description.required}"
+      <div class="input-field">
+        <input
+          id="amount"
+          v-model.number="amount"
+          type="number"
+          :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
+        />
+        <label for="amount">{{ "Sum" | localizeFilter }}</label>
+        <span
+          v-if="$v.amount.$dirty && !$v.amount.minValue"
+          class="helper-text invalid"
+        >
+          {{ "Min_value_message" | localizeFilter }}
+          {{ $v.amount.$params.minValue.min }}
+        </span>
+      </div>
 
-          >
-          <label for="description">{{ "Description" | localizeFilter }}</label>
-          <span
-              v-if="$v.description.$dirty && !$v.description.required"
-              class="helper-text invalid"
-          >
-            {{ "Description_required_message" | localizeFilter }}
-          </span>
-       </div>
+      <div class="input-field">
+        <input
+          id="description"
+          v-model="description"
+          type="text"
+          :class="{
+            invalid: $v.description.$dirty && !$v.description.required,
+          }"
+        />
+        <label for="description">{{ "Description" | localizeFilter }}</label>
+        <span
+          v-if="$v.description.$dirty && !$v.description.required"
+          class="helper-text invalid"
+        >
+          {{ "Description_required_message" | localizeFilter }}
+        </span>
+      </div>
 
-       <button class="btn waves-effect waves-light" type="submit">
-         {{ "Create" | localizeFilter }}
-          <i class="material-icons right">send</i>
-       </button>
-      </form>
-   </div>
+      <button class="btn waves-effect waves-light" type="submit">
+        {{ "Create" | localizeFilter }}
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from "vuex";
 import { minValue, required } from "vuelidate/lib/validators";
 import localizeFilter from "@/filters/localize.filter";
 
 export default {
-  name: 'Record',
+  name: "Record",
 
-  metaInfo(){
+  metaInfo() {
     return {
-      title: this.$title("New_record")
-    }
+      title: this.$title("New_record"),
+    };
   },
 
   data: () => ({
@@ -123,98 +111,97 @@ export default {
     select: null,
     categories: [],
     category: null,
-    type: 'outcome',
+    type: "outcome",
     amount: 1,
-    description: ''
+    description: "",
   }),
 
   validations: {
     description: {
-      required
+      required,
     },
     amount: {
-      minValue: minValue(1)
-    }
+      minValue: minValue(1),
+    },
   },
 
   computed: {
-    ...mapState('info', ['info']),
+    ...mapState("info", ["info"]),
 
     canCreateRecord() {
-      if(this.type === 'income') {
+      if (this.type === "income") {
         return true;
       }
-      return (this.info.bill >= this.amount);
-    }
+      return this.info.bill >= this.amount;
+    },
   },
 
   methods: {
-    ...mapActions('category', ['fetchCategories']),
-    ...mapActions('info', ['updateInfo']),
-    ...mapActions('record', ['createRecord']),
+    ...mapActions("category", ["fetchCategories"]),
+    ...mapActions("info", ["updateInfo"]),
+    ...mapActions("record", ["createRecord"]),
 
     async handleSubmit() {
-      if(this.$v.$invalid) {
+      if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
 
-      if(this.canCreateRecord) {
-        try{
+      if (this.canCreateRecord) {
+        try {
           await this.createRecord({
             categoryId: this.category,
             amount: this.amount,
             description: this.description,
             type: this.type,
-            date: new Date().toJSON()
+            date: new Date().toJSON(),
           });
 
+          const bill =
+            this.type === "income"
+              ? this.info.bill + this.amount
+              : this.info.bill - this.amount;
 
-          const bill = this.type === 'income'
-            ? this.info.bill + this.amount
-              :  this.info.bill - this.amount;
+          await this.updateInfo({ bill });
 
-
-          await this.updateInfo({bill});
-
-          this.$message(localizeFilter('Record_created'));
+          this.$message(localizeFilter("Record_created"));
           this.clear();
         } catch (e) {
-          console.log(e)
+          console.log(e);
           throw e;
         }
-
       } else {
-        this.$message(`${localizeFilter('No_money')} (${this.amount - this.info.bill})`);
+        this.$message(
+          `${localizeFilter("No_money")} (${this.amount - this.info.bill})`
+        );
       }
     },
 
     clear() {
       this.$v.$reset();
-      this.description = '';
+      this.description = "";
       this.amount = 1;
-    }
+    },
   },
 
   async mounted() {
-     this.categories = await this.fetchCategories();
-     this.loading = false;
+    this.categories = await this.fetchCategories();
+    this.loading = false;
 
-     if(this.categories.length) {
-       this.category = this.categories[0].id;
-     }
+    if (this.categories.length) {
+      this.category = this.categories[0].id;
+    }
 
-     setTimeout(() => {
-       this.select = M.FormSelect.init(this.$refs.select);
-       M.updateTextFields();
-     }, 0)
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.select);
+      M.updateTextFields();
+    }, 0);
   },
 
   destroyed() {
-    if(this.select && this.select.destroy) {
+    if (this.select && this.select.destroy) {
       this.select.destroy();
     }
-  }
-
-}
+  },
+};
 </script>

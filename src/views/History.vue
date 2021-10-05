@@ -1,62 +1,55 @@
 <template>
-   <div>
-      <div class="page-title">
-         <h3>{{ "Record_history" | localizeFilter }}</h3>
-      </div>
+  <div>
+    <div class="page-title">
+      <h3>{{ "Record_history" | localizeFilter }}</h3>
+    </div>
 
-     <ChartPie
-          v-if="!loading"
-          :data="chartData"
-          :options="chartOptions"
-     />
+    <ChartPie v-if="!loading" :data="chartData" :options="chartOptions" />
 
-     <Loader v-if="loading"/>
+    <Loader v-if="loading" />
 
-     <p
-         v-else-if="!records.length"
-         class="center"
-     >
-       {{ "Message_no_records" | localizeFilter }}
-       <router-link to="/record">
-         {{ "Add_record_message" | localizeFilter }}
-       </router-link>
-     </p>
+    <p v-else-if="!records.length" class="center">
+      {{ "Message_no_records" | localizeFilter }}
+      <router-link to="/record">
+        {{ "Add_record_message" | localizeFilter }}
+      </router-link>
+    </p>
 
-      <section v-else>
-        <HistoryTable :records="items" />
+    <section v-else>
+      <HistoryTable :records="items" />
 
-        <Paginate
-            v-model="page"
-            :pageCount="pageCount"
-            :clickHandler="pageChangeHandle"
-            :prevText="'Prev' | localizeFilter"
-            :nextText="'Next' | localizeFilter"
-            :containerClass="'pagination center'"
-            :page-class="'waves-effect'"
-        />
-      </section>
-   </div>
+      <Paginate
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="pageChangeHandle"
+        :prev-text="'Prev' | localizeFilter"
+        :next-text="'Next' | localizeFilter"
+        :container-class="'pagination center'"
+        :page-class="'waves-effect'"
+      />
+    </section>
+  </div>
 </template>
 
 <script>
-import ChartPie from '@/components/Charts/ChartPie';
+import ChartPie from "@/components/Charts/ChartPie";
 import HistoryTable from "@/components/HistoryTable";
-import paginationMixin from '@/mixins/pagination.mixin';
+import paginationMixin from "@/mixins/pagination.mixin";
 
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
-  name: 'History',
-  mixins: [paginationMixin],
+  name: "History",
   components: {
     ChartPie,
     HistoryTable,
   },
+  mixins: [paginationMixin],
 
-  metaInfo(){
+  metaInfo() {
     return {
-      title: this.$title("Record_history")
-    }
+      title: this.$title("Record_history"),
+    };
   },
 
   data: () => ({
@@ -64,56 +57,61 @@ export default {
     categories: [],
     records: [],
     chartData: null,
-    chartOptions: null
+    chartOptions: null,
   }),
 
   computed: {
     getColors() {
       return this.categories.map(() => {
-        const letters = '0123456789ABCDEF';
-        let color ='#';
-        while(color.length < 7){
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        while (color.length < 7) {
           color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
-      })
-    }
+      });
+    },
   },
 
   methods: {
-    ...mapActions('record', ['fetchRecords']),
-    ...mapActions('category', ['fetchCategories']),
+    ...mapActions("record", ["fetchRecords"]),
+    ...mapActions("category", ["fetchCategories"]),
 
     setup(categories) {
-      this.setupPagination(this.records.map(record => {
-        return {
-          ...record,
-          categoryName: categories.find(c => c.id === record.categoryId).title,
-          typeClass: record.type === 'income' ? 'green' : 'red',
-          typeText: record.type === 'income' ? 'Income' : 'Outcome'
-        }
-      }));
+      this.setupPagination(
+        this.records.map(record => {
+          return {
+            ...record,
+            categoryName: categories.find(c => c.id === record.categoryId)
+              .title,
+            typeClass: record.type === "income" ? "green" : "red",
+            typeText: record.type === "income" ? "Income" : "Outcome",
+          };
+        })
+      );
 
       this.chartData = {
         labels: this.categories.map(c => c.title),
-        datasets: [{
-          label: 'Outcome by category',
-          data: this.categories.map(c => {
-            return this.records.reduce((acc, r) => {
-              if(r.categoryId === c.id && r.type === 'outcome') {
-                acc += +r.amount
-              }
-              return acc;
-            },0)
-          }),
-          backgroundColor: this.getColors,
-          borderWidth: 1
-        }]
+        datasets: [
+          {
+            label: "Outcome by category",
+            data: this.categories.map(c => {
+              return this.records.reduce((acc, r) => {
+                if (r.categoryId === c.id && r.type === "outcome") {
+                  acc += +r.amount;
+                }
+                return acc;
+              }, 0);
+            }),
+            backgroundColor: this.getColors,
+            borderWidth: 1,
+          },
+        ],
       };
     },
   },
 
-  async mounted(){
+  async mounted() {
     this.records = await this.fetchRecords();
     this.categories = await this.fetchCategories();
 
@@ -121,6 +119,5 @@ export default {
 
     this.loading = false;
   },
-
-}
+};
 </script>
