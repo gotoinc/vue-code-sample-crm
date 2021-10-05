@@ -2,11 +2,14 @@
   <div class="col s12 m6 l4">
     <div class="card light-blue bill-card">
       <div class="card-content white-text">
-        <span class="card-title">{{ "Currency_account" | localizeFilter }}</span>
+        <span class="card-title">
+          {{ "Currency_account" | localizeFilter }}
+        </span>
 
-        <p v-for="(curr, i) in Object.keys(rates)"
-           :key="i"
-           class="currency-line"
+        <p
+          v-for="(curr, i) in Object.keys(rates)"
+          :key="i"
+          class="currency-line"
         >
           <span> {{ getCurrency(curr) | currencyFilter(curr) }}</span>
         </p>
@@ -16,30 +19,30 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
-  name: "HomeBill.vue",
+  name: "HomeBillVue",
 
   props: {
     rates: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   computed: {
-    ...mapState('info', ['info']),
+    ...mapState("info", ["info"]),
 
     base() {
-      return this.info.bill / this.rates['EUR']
-    }
+      return this.info.bill / this.rates["EUR"];
+    },
   },
 
   methods: {
     getCurrency(curr) {
       return Math.floor(this.base * this.rates[curr]);
-    }
-  }
-}
+    },
+  },
+};
 </script>

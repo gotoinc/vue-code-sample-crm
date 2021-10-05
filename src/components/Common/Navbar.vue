@@ -3,26 +3,22 @@
     <div class="nav-wrapper">
       <div class="navbar-left">
         <a href="#" @click.prevent="$emit('click')">
-<!--          <i class="material-icons black-text">dehaze</i>-->
-          <div
-              class="sidebar-btn"
-              :class="{'active': isNavbarOpened}"
-          >
+          <div class="sidebar-btn" :class="{ active: isNavbarOpened }">
             <span class="top"></span>
             <span class="mid"></span>
             <span class="bottom"></span>
           </div>
         </a>
-        <span class="black-text">{{ date | dateFilter('datetime') }}</span>
+        <span class="black-text">{{ date | dateFilter("datetime") }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
           <a
-              class="dropdown-trigger black-text"
-              href="#"
-              data-target="dropdown"
-              ref="dropdown"
+            class="dropdown-trigger black-text"
+            href="#"
+            data-target="dropdown"
+            ref="dropdown"
           >
             {{ info.name }}
             <i class="material-icons right">arrow_drop_down</i>
@@ -31,13 +27,15 @@
           <ul id="dropdown" class="dropdown-content">
             <li>
               <router-link to="/profile" class="black-text">
-                <i class="material-icons">account_circle</i>{{ "ProfileTitle" | localizeFilter }}
+                <i class="material-icons">account_circle</i
+                >{{ "ProfileTitle" | localizeFilter }}
               </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logoutUser">
-                <i class="material-icons">assignment_return</i>{{ "LogoutTitle" | localizeFilter }}
+                <i class="material-icons">assignment_return</i
+                >{{ "LogoutTitle" | localizeFilter }}
               </a>
             </li>
           </ul>
@@ -48,7 +46,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Navbar",
@@ -56,51 +54,49 @@ export default {
   props: {
     isNavbarOpened: {
       required: true,
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
 
-  data: () =>({
+  data: () => ({
     date: new Date(),
     interval: null,
-    dropdown: null
+    dropdown: null,
   }),
 
-  methods:{
-    ...mapActions('auth', ['logout']),
+  methods: {
+    ...mapActions("auth", ["logout"]),
 
     async logoutUser() {
       await this.logout();
-      this.$router.push('/login?message=logout')
-    }
+      this.$router.push("/login?message=logout");
+    },
   },
 
   computed: {
-    ...mapState('info', ['info'])
+    ...mapState("info", ["info"]),
   },
 
   mounted() {
     this.interval = setInterval(() => {
       this.date = new Date();
-    }, 1000)
+    }, 1000);
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
-      constrainWidth: true
-    })
+      constrainWidth: true,
+    });
   },
 
   beforeDestroy() {
     clearInterval(this.interval);
-    if(this.dropdown && this.dropdown.destroy) {
+    if (this.dropdown && this.dropdown.destroy) {
       this.dropdown.destroy();
     }
     this.date = null;
-
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
 .dropdown-content {
   min-width: 160px;
 }
@@ -123,7 +119,7 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
-    transition: all .4s ease;
+    transition: all 0.4s ease;
 
     &.top {
       transform: translateY(-8px);
@@ -134,11 +130,11 @@ export default {
     }
   }
 
-  &.active{
+  &.active {
     .top {
       transform: rotate(-45deg);
     }
-    .mid{
+    .mid {
       opacity: 0;
     }
     .bottom {

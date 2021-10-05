@@ -3,46 +3,34 @@
     <div class="page-title">
       <h3>{{ "Account" | localizeFilter }}</h3>
 
-      <button
-          @click="refresh"
-          class="btn waves-effect waves-light btn-small"
-      >
+      <button @click="refresh" class="btn waves-effect waves-light btn-small">
         <i class="material-icons">refresh</i>
       </button>
     </div>
 
-    <Loader v-if="loading"/>
+    <Loader v-if="loading" />
 
-    <div
-        v-else
-        class="row"
-    >
+    <div v-else class="row">
+      <HomeBill :rates="currency.rates" />
 
-      <HomeBill :rates="currency.rates"/>
-
-      <HomeCurrency
-          :rates="currency.rates"
-          :date="currency.date"
-      />
-
+      <HomeCurrency :rates="currency.rates" :date="currency.date" />
     </div>
   </div>
 </template>
 
 <script>
-
-import HomeBill from '@/components/HomeBill';
+import HomeBill from "@/components/HomeBill";
 import HomeCurrency from "@/components/HomeCurrency";
 
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState } from "vuex";
 
 export default {
-  name: 'Home',
+  name: "Home",
 
-  metaInfo(){
+  metaInfo() {
     return {
-      title: this.$title("Account")
-    }
+      title: this.$title("Account"),
+    };
   },
 
   data: () => ({
@@ -51,25 +39,25 @@ export default {
 
   components: {
     HomeBill,
-    HomeCurrency
+    HomeCurrency,
   },
 
   computed: {
-    ...mapState('info', ['currency'])
+    ...mapState("info", ["currency"]),
   },
 
   methods: {
-    ...mapActions('info', ['fetchCurrency']),
+    ...mapActions("info", ["fetchCurrency"]),
     async refresh() {
       this.loading = true;
       await this.fetchCurrency();
       this.loading = false;
-    }
+    },
   },
 
   async mounted() {
     await this.fetchCurrency();
     this.loading = false;
-  }
-}
+  },
+};
 </script>
