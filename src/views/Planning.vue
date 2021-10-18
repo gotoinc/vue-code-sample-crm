@@ -19,7 +19,8 @@
             <strong>{{ cat.title }}</strong>
           </p>
           <p>
-            {{ cat.spend | currencyFilter }} из {{ cat.limit | currencyFilter }}
+            {{ cat.spend | currencyFilter }} {{ "Out_of" | localizeFilter }}
+            {{ cat.limit | currencyFilter }}
           </p>
         </div>
         <div v-tooltip.noloc="cat.tooltip" class="progress">
@@ -66,10 +67,10 @@ export default {
     const records = await this.fetchRecords();
     const categories = await this.fetchCategories();
 
-    this.categories = categories.map(cat => {
+    this.categories = categories.map((cat) => {
       const spend = records
-        .filter(r => r.categoryId === cat.id)
-        .filter(r => r.type === "outcome")
+        .filter((r) => r.categoryId === cat.id)
+        .filter((r) => r.type === "outcome")
         .reduce((acc, r) => {
           return (acc += +r.amount);
         }, 0);
