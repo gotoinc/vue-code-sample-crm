@@ -3,18 +3,12 @@
     <router-link
       v-for="(link, i) in links"
       :key="i"
+      v-slot="{ href, navigate, isExactActive }"
       custom
-      v-slot="{ navigate }"
-      active-class="active"
       :to="link.url"
-      :exact="link.exact"
     >
-      <li>
-        <a
-          
-          @click="navigate"
-          @keypress.enter="navigate"
-        >
+      <li :class="[isExactActive && 'router-link-exact-active active']">
+        <a :href="href" @click="navigate" @keypress.enter="navigate">
           {{ link.title }}
         </a>
       </li>
@@ -57,5 +51,3 @@ export default {
   }),
 };
 </script>
-
-<style scoped></style>
