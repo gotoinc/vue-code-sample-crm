@@ -67,18 +67,19 @@ export default {
     const records = await this.fetchRecords();
     const categories = await this.fetchCategories();
 
-    this.categories = categories.map((cat) => {
+    this.categories = categories.map(cat => {
       const spend = records
-        .filter((r) => r.categoryId === cat.id)
-        .filter((r) => r.type === "outcome")
+        .filter(r => r.categoryId === cat.id)
+        .filter(r => r.type === "outcome")
         .reduce((acc, r) => {
           return (acc += +r.amount);
         }, 0);
 
       const persent = (100 * spend) / cat.limit;
       const progressPercent = persent > 100 ? 100 : persent;
-      const progressColor =
-        persent < 60 ? "green" : persent < 100 ? "yellow" : "red";
+      let progressColor = "progress";
+      progressColor +=
+        persent < 60 ? "-green" : persent < 100 ? "-yellow" : "-red";
 
       const toolTipValue = cat.limit - spend;
       const tooltip = `${
@@ -100,3 +101,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.progress {
+  &-green {
+    background: #9fdfa2;
+  }
+  &-yellow {
+    background: #ffe788;
+  }
+  &-red {
+    background: #ff847b;
+  }
+}
+</style>
