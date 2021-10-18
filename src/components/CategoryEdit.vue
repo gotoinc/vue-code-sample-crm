@@ -48,9 +48,9 @@
           </span>
         </div>
 
-        <button class="btn waves-effect waves-light" type="submit">
+        <button class="btn waves-effect waves-light create" type="submit">
           {{ "Update" | localizeFilter }}
-          <i class="material-icons right">send</i>
+          
         </button>
       </form>
     </div>
