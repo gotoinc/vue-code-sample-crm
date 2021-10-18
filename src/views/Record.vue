@@ -21,12 +21,13 @@
           <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.title }}
           </option>
+        
         </select>
         
       </div>
 
       <p>
-        <label>
+        <label class="income">
           <input
             v-model="type"
             class="with-gap"
@@ -34,7 +35,7 @@
             type="radio"
             value="income"
           />
-          <span>{{ "Income" | localizeFilter }}</span>
+          <span class="income-outcome">{{ "Income" | localizeFilter }}</span>
         </label>
       </p>
 
@@ -47,7 +48,7 @@
             type="radio"
             value="outcome"
           />
-          <span>{{ "Outcome" | localizeFilter }}</span>
+          <span class="income-outcome">{{ "Outcome" | localizeFilter }}</span>
         </label>
       </p>
      <label for="amount">{{ "Sum" | localizeFilter }}</label>
@@ -72,7 +73,7 @@
         <label for="description">{{ "Description" | localizeFilter }}</label>
 
       <div class="input-field">
-        <textarea
+        <textarea rows="8" 
           id="description"
           v-model="description"
           type="text"

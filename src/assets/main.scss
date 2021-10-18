@@ -363,7 +363,12 @@ table {
   border-radius: 14px;
   padding: 13px 16px;
   width: calc(100% - 32px);
+
+  &:focus  {
+   border-bottom: none;
+  }
 }
+
 
 .create {
   background-color: #FFD842;
@@ -394,6 +399,10 @@ table {
   border: none;
   padding: 13px 16px;
   width: 40%;
+
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 
@@ -401,7 +410,6 @@ table {
   background-color: #ECEEF0;
   border-radius: 14px;
   border: none;
-  height: 110px;
   padding: 13px 16px;
   resize: none;
 
@@ -409,4 +417,28 @@ table {
     outline: none;
     border: none;
   }
+}
+
+textarea {
+  height: auto;
+}
+
+.income-outcome {
+  color: #151515;
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+[type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:before, [type="radio"].with-gap:checked + span:after {
+  border: #FFD842 2px solid;
+  background-color: #FFD842;
+}
+
+[type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:after {
+  background-color: white;
+}
+
+[type="radio"]:not(:checked) + span:before, [type="radio"]:not(:checked) + span:after {
+  border: 1px solid #151515;
 }
