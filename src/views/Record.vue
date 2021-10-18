@@ -50,7 +50,7 @@
           <span>{{ "Outcome" | localizeFilter }}</span>
         </label>
       </p>
-
+     <label for="amount">{{ "Sum" | localizeFilter }}</label>
       <div class="input-field">
         <input
           id="amount"
@@ -58,7 +58,7 @@
           type="number"
           :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
         />
-        <label for="amount">{{ "Sum" | localizeFilter }}</label>
+       
         <span
           v-if="$v.amount.$dirty && !$v.amount.minValue"
           class="helper-text invalid"
