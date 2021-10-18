@@ -14,13 +14,15 @@
     </p>
 
     <form v-else class="form" @submit.prevent="handleSubmit">
+      
+      <label>{{ "Choose_category_label" | localizeFilter }}</label>
       <div class="input-field">
         <select ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.title }}
           </option>
         </select>
-        <label>{{ "Choose_category_label" | localizeFilter }}</label>
+        
       </div>
 
       <p>
@@ -66,8 +68,11 @@
         </span>
       </div>
 
+
+        <label for="description">{{ "Description" | localizeFilter }}</label>
+
       <div class="input-field">
-        <input
+        <textarea
           id="description"
           v-model="description"
           type="text"
@@ -75,18 +80,17 @@
             invalid: $v.description.$dirty && !$v.description.required,
           }"
         />
-        <label for="description">{{ "Description" | localizeFilter }}</label>
-        <span
+        <label
           v-if="$v.description.$dirty && !$v.description.required"
           class="helper-text invalid"
         >
           {{ "Description_required_message" | localizeFilter }}
-        </span>
+        </label>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
         {{ "Create" | localizeFilter }}
-        <i class="material-icons right">send</i>
+       
       </button>
     </form>
   </div>

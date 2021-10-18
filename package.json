@@ -55,7 +55,7 @@
     "rules": {
       "no-unused-vars": "error",
       "no-console": "warn",
-      "default-case" : "warn",
+      "default-case": "warn",
       "no-undef": "warn"
     }
   },

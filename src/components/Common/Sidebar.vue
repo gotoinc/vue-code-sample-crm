@@ -11,7 +11,7 @@
     >
       <li>
         <a
-          class="waves-effect waves-orange pointer"
+          
           @click="navigate"
           @keypress.enter="navigate"
         >

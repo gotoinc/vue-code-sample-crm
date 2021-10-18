@@ -14,10 +14,14 @@
 
     <section v-else>
       <div v-for="cat in categories" :key="cat.id">
-        <p>
-          <strong>{{ cat.title }}</strong>
-          {{ cat.spend | currencyFilter }} из {{ cat.limit | currencyFilter }}
-        </p>
+        <div class="categories-name">
+          <p>
+            <strong>{{ cat.title }}</strong>
+          </p>
+          <p>
+            {{ cat.spend | currencyFilter }} из {{ cat.limit | currencyFilter }}
+          </p>
+        </div>
         <div v-tooltip.noloc="cat.tooltip" class="progress">
           <div
             class="determinate"
