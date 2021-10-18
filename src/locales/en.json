@@ -51,5 +51,6 @@
   "Created_category" : "Category is created",
   "Category_updated" : "Category was successfully edited",
   "Record_created" : "New record is created successfully",
-  "No_money" : "Not enough money in the account"
+  "No_money" : "Not enough money in the account",
+  "Out_of" : "out of"
  }

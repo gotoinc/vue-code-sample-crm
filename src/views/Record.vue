@@ -14,7 +14,6 @@
     </p>
 
     <form v-else class="form" @submit.prevent="handleSubmit">
-      
       <label>{{ "Choose_category_label" | localizeFilter }}</label>
       <div class="input-field">
         <select ref="select" v-model="category">
@@ -22,11 +21,10 @@
             {{ c.title }}
           </option>
         </select>
-        
       </div>
 
       <p>
-        <label>
+        <label class="income">
           <input
             v-model="type"
             class="with-gap"
@@ -34,7 +32,7 @@
             type="radio"
             value="income"
           />
-          <span>{{ "Income" | localizeFilter }}</span>
+          <span class="income-outcome">{{ "Income" | localizeFilter }}</span>
         </label>
       </p>
 
@@ -47,10 +45,10 @@
             type="radio"
             value="outcome"
           />
-          <span>{{ "Outcome" | localizeFilter }}</span>
+          <span class="income-outcome">{{ "Outcome" | localizeFilter }}</span>
         </label>
       </p>
-     <label for="amount">{{ "Sum" | localizeFilter }}</label>
+      <label for="amount">{{ "Sum" | localizeFilter }}</label>
       <div class="input-field">
         <input
           id="amount"
@@ -58,7 +56,7 @@
           type="number"
           :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
         />
-       
+
         <span
           v-if="$v.amount.$dirty && !$v.amount.minValue"
           class="helper-text invalid"
@@ -68,13 +66,13 @@
         </span>
       </div>
 
-
-        <label for="description">{{ "Description" | localizeFilter }}</label>
+      <label for="description">{{ "Description" | localizeFilter }}</label>
 
       <div class="input-field">
         <textarea
           id="description"
           v-model="description"
+          rows="8"
           type="text"
           :class="{
             invalid: $v.description.$dirty && !$v.description.required,
@@ -90,7 +88,6 @@
 
       <button class="btn waves-effect waves-light create" type="submit">
         {{ "Create" | localizeFilter }}
-       
       </button>
     </form>
   </div>

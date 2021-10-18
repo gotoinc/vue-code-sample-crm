@@ -19,7 +19,8 @@
             <strong>{{ cat.title }}</strong>
           </p>
           <p>
-            {{ cat.spend | currencyFilter }} из {{ cat.limit | currencyFilter }}
+            {{ cat.spend | currencyFilter }} {{ "Out_of" | localizeFilter }}
+            {{ cat.limit | currencyFilter }}
           </p>
         </div>
         <div v-tooltip.noloc="cat.tooltip" class="progress">
@@ -76,8 +77,9 @@ export default {
 
       const persent = (100 * spend) / cat.limit;
       const progressPercent = persent > 100 ? 100 : persent;
-      const progressColor =
-        persent < 60 ? "green" : persent < 100 ? "yellow" : "red";
+      let progressColor = "progress";
+      progressColor +=
+        persent < 60 ? "-green" : persent < 100 ? "-yellow" : "-red";
 
       const toolTipValue = cat.limit - spend;
       const tooltip = `${
@@ -99,3 +101,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.progress {
+  &-green {
+    background: #9fdfa2;
+  }
+  &-yellow {
+    background: #ffe788;
+  }
+  &-red {
+    background: #ff847b;
+  }
+}
+</style>
