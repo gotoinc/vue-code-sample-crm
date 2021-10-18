@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar orange lighten-1">
+  <nav class="navbar">
     <div class="nav-wrapper">
       <div class="navbar-left">
         <a href="#" @click.prevent="$emit('click')">
@@ -9,33 +9,32 @@
             <span class="bottom"></span>
           </div>
         </a>
-        <span class="black-text">{{ date | dateFilter("datetime") }}</span>
+        <span class="nav-date">{{ date | dateFilter("datetime") }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
           <a
-            class="dropdown-trigger black-text"
+            class="dropdown-trigger white-text"
             href="#"
             data-target="dropdown"
             ref="dropdown"
           >
             {{ info.name }}
-            <i class="material-icons right">arrow_drop_down</i>
+           
+            <i class="material-icons right">expand_more</i>
           </a>
 
           <ul id="dropdown" class="dropdown-content">
             <li>
               <router-link to="/profile" class="black-text">
-                <i class="material-icons">account_circle</i
-                >{{ "ProfileTitle" | localizeFilter }}
+                {{ "ProfileTitle" | localizeFilter }}
               </router-link>
             </li>
-            <li class="divider" tabindex="-1"></li>
+           
             <li>
               <a href="#" class="black-text" @click.prevent="logoutUser">
-                <i class="material-icons">assignment_return</i
-                >{{ "LogoutTitle" | localizeFilter }}
+               {{ "LogoutTitle" | localizeFilter }}
               </a>
             </li>
           </ul>
@@ -98,7 +97,8 @@ export default {
 
 <style lang="scss" scoped>
 .dropdown-content {
-  min-width: 160px;
+  top: -50px;
+  min-width: 179px;
 }
 
 .sidebar-btn {
@@ -110,10 +110,11 @@ export default {
 
   span {
     display: block;
-    width: 20px;
+    width: 18px;
     height: 2px;
+    border-radius: 30px;
     margin: auto;
-    background: black;
+    background: white;
     position: absolute;
     top: 0;
     bottom: 0;
