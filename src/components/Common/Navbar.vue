@@ -15,14 +15,17 @@
       <ul class="right hide-on-small-and-down">
         <li>
           <a
+            ref="dropdown"
             class="dropdown-trigger white-text"
             href="#"
             data-target="dropdown"
-            ref="dropdown"
           >
             {{ info.name }}
-           
-            <i class="material-icons right">expand_more</i>
+
+            <i v-if="isDropdownOpened" class="material-icons right">
+              expand_less
+            </i>
+            <i v-else class="material-icons right">expand_more</i>
           </a>
 
           <ul id="dropdown" class="dropdown-content">
@@ -31,10 +34,10 @@
                 {{ "ProfileTitle" | localizeFilter }}
               </router-link>
             </li>
-           
+
             <li>
               <a href="#" class="black-text" @click.prevent="logoutUser">
-               {{ "LogoutTitle" | localizeFilter }}
+                {{ "LogoutTitle" | localizeFilter }}
               </a>
             </li>
           </ul>
@@ -61,6 +64,7 @@ export default {
     date: new Date(),
     interval: null,
     dropdown: null,
+    isDropdownOpened: false,
   }),
 
   methods: {
@@ -74,6 +78,16 @@ export default {
 
   computed: {
     ...mapState("info", ["info"]),
+  },
+  watch: {
+    dropdown: {
+      deep: true,
+      handler: function (newValue) {
+        if (newValue) {
+          this.isDropdownOpened = newValue.isOpen;
+        }
+      },
+    },
   },
 
   mounted() {
