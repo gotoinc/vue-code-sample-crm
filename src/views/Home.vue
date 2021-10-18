@@ -3,7 +3,7 @@
     <div class="page-title">
       <h3>{{ "Account" | localizeFilter }}</h3>
 
-      <button @click="refresh" class="btn waves-effect waves-light btn-small">
+      <button @click="refresh" class="btn waves-effect waves-light btn-small reload">
         <i class="material-icons">refresh</i>
       </button>
     </div>
