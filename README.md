@@ -31,12 +31,12 @@ npm run build
 firabse deploy
 ```
 
-##Usage
+## Usage
 A simple bookkeeping system, that allows user to track personal money income and expenses.
 In addition, user can simply plan budget, distribute finances and
 keep records of financial transactions.
 
-##Project structure
+## Project structure
 
 
 
@@ -182,7 +182,7 @@ In the /src folder there are:
   * /components;
   * /views;
 
-##Firebase description
+## Firebase description
 
 This project is created with firebase platform.
 User can authenticate through [Firebase Authentication](https://firebase.google.com/docs/auth), using email and password.
