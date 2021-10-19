@@ -4,30 +4,32 @@
       <h3>{{ "Record_history" | localizeFilter }}</h3>
     </div>
 
-    <ChartPie v-if="!loading" :data="chartData" :options="chartOptions" />
+    <div class="history-wrapper">
+      <Loader v-if="loading" />
 
-    <Loader v-if="loading" />
+      <p v-else-if="!records.length" class="center">
+        {{ "Message_no_records" | localizeFilter }}
+        <router-link to="/record">
+          {{ "Add_record_message" | localizeFilter }}
+        </router-link>
+      </p>
 
-    <p v-else-if="!records.length" class="center">
-      {{ "Message_no_records" | localizeFilter }}
-      <router-link to="/record">
-        {{ "Add_record_message" | localizeFilter }}
-      </router-link>
-    </p>
+      <section v-else class="history-table">
+        <HistoryTable :records="items" />
 
-    <section v-else>
-      <HistoryTable :records="items" />
+        <Paginate
+          v-model="page"
+          :page-count="pageCount"
+          :click-handler="pageChangeHandle"
+          :prev-text="'Prev' | localizeFilter"
+          :next-text="'Next' | localizeFilter"
+          :container-class="'pagination center'"
+          :page-class="'waves-effect'"
+        />
+      </section>
 
-      <Paginate
-        v-model="page"
-        :page-count="pageCount"
-        :click-handler="pageChangeHandle"
-        :prev-text="'Prev' | localizeFilter"
-        :next-text="'Next' | localizeFilter"
-        :container-class="'pagination center'"
-        :page-class="'waves-effect'"
-      />
-    </section>
+      <ChartPie v-if="!loading" :data="chartData" :options="chartOptions" />
+    </div>
   </div>
 </template>
 
@@ -121,3 +123,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.history-wrapper {
+  display: flex;
+
+  .history-table {
+    flex-grow: 1;
+  }
+}
+</style>

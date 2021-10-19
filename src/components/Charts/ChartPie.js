@@ -14,10 +14,9 @@ export default {
     styles: {
       type: Object,
       default: () => ({
-        maxHeight: "400px",
-        maxWidth: "400px",
-        margin: "0 auto",
-        display: "flex"
+        maxHeight: "422px",
+        maxWidth: "380px",
+        display: "flex",
       }),
     },
   },
