@@ -18,21 +18,25 @@
               red: record.type === 'outcome',
               green: record.type === 'income',
             }"
-            class="card"
+            class="card card-outcome"
           >
-            <div class="card-content white-text">
-              <p>
-                {{ "Description" | localizeFilter }}: {{ record.description }}
-              </p>
-              <p>
-                {{ "Sum" | localizeFilter }}:
-                {{ record.amount | currencyFilter }}
-              </p>
-              <p>
-                {{ "Category" | localizeFilter }}: {{ record.categoryName }}
-              </p>
+            <div class="card-content">
+              <div class="outcome-row">
+                <p class="name"> {{ "Description" | localizeFilter }} </p>
+                <p class="outcome-value"> {{ record.description }} </p>
+              </div>
 
-              <small>{{ record.date | dateFilter("datetime") }}</small>
+              <div class="outcome-row">
+                <p class="name"> {{ "Sum" | localizeFilter }} </p>
+                <p class="outcome-value"> {{ record.amount | currencyFilter }} </p>
+              </div>
+
+              <div class="outcome-row">
+                <p class="name"> {{ "Category" | localizeFilter }} </p>
+                <p class="outcome-value"> {{ record.categoryName }} </p>
+              </div>
+
+              <small class="data-outcome">{{ record.date | dateFilter("datetime") }}</small>
             </div>
           </div>
         </div>

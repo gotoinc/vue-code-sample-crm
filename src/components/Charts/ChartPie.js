@@ -17,6 +17,7 @@ export default {
         maxHeight: "400px",
         maxWidth: "400px",
         margin: "0 auto",
+        display: "flex"
       }),
     },
   },

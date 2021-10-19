@@ -5,15 +5,16 @@
         <h4>{{ "Create" | localizeFilter }}</h4>
       </div>
 
-      <form @submit.prevent="submitHandler">
-        <div class="input-field">
-          <input
-            id="name"
+      <form @submit.prevent="submitHandler"> 
+        <label class="create-label" for="name">{{ "Category_title" | localizeFilter }}</label>
+        <div class="input-field create-title">
+          <input 
+            id="name-inp"
             v-model="title"
             type="text"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-          <label for="name">{{ "Category_title" | localizeFilter }}</label>
+         
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -21,15 +22,15 @@
             {{ "Enter_title_message" | localizeFilter }}
           </span>
         </div>
-
-        <div class="input-field">
+      <label class="edit-label" for="limit">{{ "Limit" | localizeFilter }}</label>
+        <div class="input-field create-title">
           <input
             id="limit"
             v-model.number="limit"
             type="number"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-          <label for="limit">{{ "Limit" | localizeFilter }}</label>
+         
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"

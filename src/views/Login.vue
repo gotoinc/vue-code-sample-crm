@@ -2,7 +2,7 @@
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
       <span class="card-title">Home bookkeeping</span>
-
+    <label class="edit-label" for="email">Email</label>
       <div class="input-field">
         <input
           id="email"
@@ -14,8 +14,7 @@
               ($v.email.$dirty && !$v.email.email),
           }"
         />
-        <label for="email">Email</label>
-
+        
         <small
           v-if="$v.email.$dirty && !$v.email.required"
           class="helper-text invalid"
@@ -30,6 +29,7 @@
           Email should be valid
         </small>
       </div>
+      <label class="edit-label" for="password">Password</label>
       <div class="input-field">
         <input
           id="password"
@@ -41,7 +41,7 @@
               ($v.password.$dirty && !$v.password.minLength),
           }"
         />
-        <label for="password">Password</label>
+        
 
         <small
           v-if="$v.password.$dirty && !$v.password.required"
@@ -62,15 +62,15 @@
     </div>
     <div class="card-action">
       <div>
-        <button class="btn waves-effect waves-light auth-submit" type="submit">
+        <button class="btn waves-effect waves-light auth-submit create login-btn" type="submit">
           Login
-          <i class="material-icons right">send</i>
+          
         </button>
       </div>
 
       <p class="center">
         Don't have an account?
-        <router-link to="/signup">Sign up</router-link>
+        <router-link class="sign-up-link" to="/signup">Sign up</router-link>
       </p>
     </div>
   </form>

@@ -6,23 +6,24 @@
       </div>
 
       <form @submit.prevent="submitHandler">
+        <label class="edit-label">{{ "Choose_category_label" | localizeFilter }}</label>
         <div class="input-field">
           <select ref="select" v-model="current">
             <option v-for="c in categories" :key="c.id" :value="c.id">
               {{ c.title }}
             </option>
           </select>
-          <label>{{ "Choose_category_label" | localizeFilter }}</label>
+         
         </div>
-
-        <div class="input-field">
-          <input
-            id="name"
+ <label  class="edit-label" for="name">{{ "Category_title" | localizeFilter }}</label>
+        <div class="input-field create-title">
+          <input class=" create-title"
+            id="name-inp"
             type="text"
             v-model="title"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-          <label for="name">{{ "Category_title" | localizeFilter }}</label>
+         
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -30,15 +31,15 @@
             {{ "Enter_title_message" | localizeFilter }}
           </span>
         </div>
-
-        <div class="input-field">
+ <label class="edit-label" for="limit">{{ "Limit" | localizeFilter }}</label>
+        <div class="input-field create-title">
           <input
             id="limit"
             type="number"
             v-model.number="limit"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-          <label for="limit">{{ "Limit" | localizeFilter }}</label>
+         
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
