@@ -15,6 +15,7 @@
       </p>
 
       <section v-else class="history-table">
+        <h5 class="exchange-title">Exchange rates</h5>
         <HistoryTable :records="items" />
 
         <Paginate

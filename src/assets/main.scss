@@ -415,7 +415,7 @@ table {
   background-color: #ECEEF0;
   border-radius: 14px;
   border: none;
-  padding: 4px 16px;
+  padding: 2px 16px;
   width: 40%;
   font-size: 13px;
   line-height: 24px;
@@ -484,6 +484,9 @@ textarea {
   background-color: #ECEEF0;
 }
 
+.select-dropdown.dropdown-trigger {
+padding: 2px 16px !important;
+}
 @media only screen and (min-width: 601px) {
   .categories-row.row .col.m6 {
     max-width: 330px;
@@ -657,4 +660,61 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   padding-bottom: 6px;
   margin-bottom: 20px;
   border-bottom: 0.7px dashed #B6C4CF;
+}
+
+.exchange-title {
+  font-weight: 500;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+.history-table {
+  border-radius: 30px;
+  background-color: white;
+  -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+  box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+  padding: 30px;
+}
+
+.table-type {
+  font-size: 12px !important;
+  line-height: 24px !important;
+  padding: 2px 12px !important;
+  background-color: #FFA68A !important;
+  border-radius: 30px;
+  height: 28px !important;
+}
+
+.open-btn-text {
+  text-decoration: underline;
+}
+.open-btn {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: #151515;
+  text-transform: none;
+  box-shadow: none;
+  
+  &:focus, &:active, &:hover {
+    background-color: white;
+    box-shadow: none;
+  }
+}
+
+.pagination li.active {
+  background-color: #428EFF !important;
+}
+
+.pagination {
+  margin-top: 30px;
+
+  li {
+    a {
+      font-size: 13px;
+      font-weight: 400;
+      color: #151515;
+    }
+  }
 }
