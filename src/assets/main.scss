@@ -137,10 +137,19 @@ body {
   }
 }
 
+.page-title h3 {
+  padding-bottom: 10px !important;
+  margin-bottom: 30px;
+  line-height: 30px !important;
+  font-weight: 500;
+}
+
+.planning {
+  padding-bottom: 0px !important;
+}
 .page-title {
   @include align-center-flex-elements;
   @include justify-space-between-flex-items;
-  padding-bottom: 16px;
   border-bottom: solid 1px rgba(51, 51, 51, .12);
 
   a {
@@ -158,6 +167,7 @@ body {
 .page-title h3 {
   font-size: 30px;
   font-weight: 500;
+  line-height: 30px;
   margin: 0;
 }
 
@@ -167,7 +177,7 @@ body {
   font-weight: 500;
 }
 
-.page-subtitle h4, .page-title h4 {
+.page-subtitle h4 {
   font-size: 18px;
   line-height: 32px;
   font-weight: 500;
@@ -343,7 +353,7 @@ table {
 }
 
 .app-page {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   line-height: 24px;
 }
@@ -497,7 +507,7 @@ input#limit, input#name {
   font-size: 13px;
   line-height: 24px;
   margin: 0;
-  padding: 4px 16px;
+  padding: 4px 0px;
   font-weight: 400;
   width: calc(100% - 32px);
 
@@ -553,6 +563,7 @@ input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before, input[type=
 
 .profile-user {
   height: auto !important;
+  padding: 6px 8px !important;
 }
 
 input#email, input#password, input#name {
@@ -566,6 +577,7 @@ input#name {
 
 #name-inp, #-limit-inp {
   height: auto;
+  padding: 4px 0;
 }
 
 .login-btn { 

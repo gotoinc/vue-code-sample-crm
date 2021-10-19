@@ -17,7 +17,7 @@
         </div>
  <label  class="edit-label" for="name">{{ "Category_title" | localizeFilter }}</label>
         <div class="input-field create-title">
-          <input class=" create-title"
+          <input 
             id="name-inp"
             type="text"
             v-model="title"
