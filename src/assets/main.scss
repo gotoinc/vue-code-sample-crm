@@ -804,7 +804,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   font-size: 18px;
 }
 
-.history-table {
+.history-table, .chart-section {
   border-radius: 30px;
   background-color: $white;
   -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
@@ -867,10 +867,11 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   }
 }
 
-.history-table {
+.history-table, .chart-section {
   
   @media (max-width: 1300px) {
     width: 100%;
+    margin-right: 0px !important;
   }
 
   @media (max-width: 900px) {
@@ -894,7 +895,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 
     td {
       @media (max-width: 900px) {
-        padding-left: 5x;
+        padding-left: 5px;
         padding-right: 15px;
       }
     }

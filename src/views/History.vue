@@ -29,7 +29,9 @@
         />
       </section>
 
-      <ChartPie v-if="!loading" :data="chartData" :options="chartOptions" />
+      <section v-if="!loading" class="chart-section">
+        <ChartPie :data="chartData" :options="chartOptions" />
+      </section>
     </div>
   </div>
 </template>
@@ -132,6 +134,7 @@ export default {
 
   .history-table {
     flex-grow: 1;
+    margin-right: 24px;
   }
 }
 </style>
