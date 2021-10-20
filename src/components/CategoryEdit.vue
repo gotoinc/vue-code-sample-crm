@@ -6,24 +6,30 @@
       </div>
 
       <form @submit.prevent="submitHandler">
-        <label class="edit-label">{{ "Choose_category_label" | localizeFilter }}</label>
-        <div class="input-field">
+        <label class="edit-label">
+          {{ "Choose_category_label" | localizeFilter }}
+        </label>
+        <div
+          class="input-field"
+          :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
+        >
           <select ref="select" v-model="current">
             <option v-for="c in categories" :key="c.id" :value="c.id">
               {{ c.title }}
             </option>
           </select>
-         
         </div>
- <label  class="edit-label" for="name">{{ "Category_title" | localizeFilter }}</label>
+        <label class="edit-label" for="name">
+          {{ "Category_title" | localizeFilter }}
+        </label>
         <div class="input-field create-title">
-          <input 
+          <input
             id="name-inp"
-            type="text"
             v-model="title"
+            type="text"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-         
+
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -31,15 +37,17 @@
             {{ "Enter_title_message" | localizeFilter }}
           </span>
         </div>
- <label class="edit-label" for="limit">{{ "Limit" | localizeFilter }}</label>
+        <label class="edit-label" for="limit">{{
+          "Limit" | localizeFilter
+        }}</label>
         <div class="input-field create-title">
           <input
             id="limit"
-            type="number"
             v-model.number="limit"
+            type="number"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-         
+
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
@@ -51,7 +59,6 @@
 
         <button class="btn waves-effect waves-light create" type="submit">
           {{ "Update" | localizeFilter }}
-          
         </button>
       </form>
     </div>
@@ -78,6 +85,7 @@ export default {
     title: "",
     limit: 100,
     current: null,
+    isDropdownOpened: false,
   }),
 
   validations: {
@@ -117,6 +125,14 @@ export default {
       this.title = title;
       this.limit = limit;
     },
+    select: {
+      deep: true,
+      handler: function (newVal) {
+        if (newVal && newVal.dropdown) {
+          this.isDropdownOpened = newVal.dropdown.isOpen;
+        }
+      },
+    },
   },
 
   created() {
@@ -138,3 +154,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/main";
+</style>
