@@ -7,7 +7,7 @@
             {{ "Exchange_rates" | localizeFilter }}
           </span>
         </div>
-        <table>
+        <table class="exchange-table">
           <thead>
             <tr>
               <th>{{ "Currency" | localizeFilter }}</th>

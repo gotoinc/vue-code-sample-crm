@@ -9,3 +9,15 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+
+@mixin select-icon-arrow-reset {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 14px;
+  height: 7px;
+  margin-top: -4px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

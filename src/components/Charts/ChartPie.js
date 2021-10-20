@@ -14,8 +14,8 @@ export default {
     styles: {
       type: Object,
       default: () => ({
-        maxHeight: "422px",
-        maxWidth: "380px",
+        height: "422px",
+        width: "380px",
         display: "flex",
       }),
     },

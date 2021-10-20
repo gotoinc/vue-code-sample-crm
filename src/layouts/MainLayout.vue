@@ -8,7 +8,7 @@
         @click="isNavbarOpened = !isNavbarOpened"
       />
 
-      <Sidebar :key="locale" v-model="isNavbarOpened" />
+      <Sidebar :key="locale" v-model="isNavbarOpened" @click="closeSideBar" />
 
       <main class="app-content" :class="{ full: !isNavbarOpened }">
         <div class="app-page">
@@ -46,6 +46,7 @@ export default {
   data: () => ({
     isNavbarOpened: false,
     loading: true,
+    windowWidth: window.innerWidth,
   }),
 
   computed: {
@@ -59,6 +60,13 @@ export default {
 
   methods: {
     ...mapActions("info", ["fetchInfo"]),
+
+    closeSideBar() {
+      if (this.windowWidth <= 800) this.isNavbarOpened = false;
+    },
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
   },
 
   watch: {
@@ -73,6 +81,14 @@ export default {
     }
 
     this.loading = false;
+
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
 };
 </script>

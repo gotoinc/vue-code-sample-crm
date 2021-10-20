@@ -1,50 +1,52 @@
 <template>
-  <nav class="navbar">
-    <div class="nav-wrapper">
-      <div class="navbar-left">
-        <a href="#" @click.prevent="$emit('click')">
-          <div class="sidebar-btn" :class="{ active: isNavbarOpened }">
-            <span class="top"></span>
-            <span class="mid"></span>
-            <span class="bottom"></span>
-          </div>
-        </a>
-        <span class="nav-date">{{ date | dateFilter("datetime") }}</span>
-      </div>
-
-      <ul class="right hide-on-small-and-down">
-        <li>
-          <a
-            ref="dropdown"
-            class="dropdown-trigger white-text"
-            href="#"
-            data-target="dropdown"
-          >
-            {{ info.name }}
-
-            <i v-if="isDropdownOpened" class="material-icons right">
-              expand_less
-            </i>
-            <i v-else class="material-icons right">expand_more</i>
+  <div class="navbar-fixed">
+    <nav class="navbar">
+      <div class="nav-wrapper">
+        <div class="navbar-left">
+          <a href="#" @click.prevent="$emit('click')">
+            <div class="sidebar-btn" :class="{ active: isNavbarOpened }">
+              <span class="top"></span>
+              <span class="mid"></span>
+              <span class="bottom"></span>
+            </div>
           </a>
+          <span class="nav-date">{{ date | dateFilter("datetime") }}</span>
+        </div>
 
-          <ul id="dropdown" class="dropdown-content">
-            <li>
-              <router-link to="/profile" class="black-text">
-                {{ "ProfileTitle" | localizeFilter }}
-              </router-link>
-            </li>
+        <ul class="right">
+          <li>
+            <a
+              ref="dropdown"
+              class="dropdown-trigger white-text"
+              href="#"
+              data-target="dropdown"
+            >
+              {{ info.name }}
 
-            <li>
-              <a href="#" class="black-text" @click.prevent="logoutUser">
-                {{ "LogoutTitle" | localizeFilter }}
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
+              <i v-if="isDropdownOpened" class="material-icons right">
+                expand_less
+              </i>
+              <i v-else class="material-icons right">expand_more</i>
+            </a>
+
+            <ul id="dropdown" class="dropdown-content">
+              <li>
+                <router-link to="/profile" class="black-text">
+                  {{ "ProfileTitle" | localizeFilter }}
+                </router-link>
+              </li>
+
+              <li>
+                <a href="#" class="black-text" @click.prevent="logoutUser">
+                  {{ "LogoutTitle" | localizeFilter }}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
