@@ -128,13 +128,64 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/main";
+
 .history-wrapper {
   display: flex;
-  align-items: center;
+  align-items: stretch;
 
   .history-table {
     flex-grow: 1;
     margin-right: 24px;
+
+    table {
+      margin: 0 auto;
+      @media (max-width: 900px) {
+        height: max-content;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0;
+      }
+
+      th {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      td {
+        @media (max-width: 900px) {
+          padding-left: 5px;
+          padding-right: 15px;
+        }
+      }
+    }
+  }
+  .chart-section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .history-table,
+  .chart-section {
+    border-radius: 30px;
+    background-color: $white;
+    -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    padding: 30px;
+
+    @media (max-width: 1300px) {
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    flex-direction: column-reverse;
   }
 }
 </style>
