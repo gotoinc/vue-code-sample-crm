@@ -72,7 +72,6 @@ body {
     height: 100vh;
   }
   
-
   &.open {
     -webkit-transform: translateX(0);
     transform: translateX(0);
@@ -101,7 +100,8 @@ body {
         font-size: 46px;
         color: $black;
         font-weight: 700;
-        margin-bottom: 40px;
+        margin-top: 20px;
+        margin-bottom: 20px;
         padding: 0;
        
       }
@@ -109,7 +109,8 @@ body {
       @media (max-width: $small-mobile) {
         font-size: 36px;
         color: $black;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        margin-top: 10px;
       }
     }
 
@@ -205,6 +206,10 @@ body {
   padding-left: 250px;
   transition: padding-left .3s;
   position: relative;
+  
+  @media (max-width: $large-mobile) {
+    padding-left: 0;
+  }
 
   &.full {
     padding-left: 0;
@@ -704,7 +709,7 @@ input#name {
 }
 
 .login-btn { 
-margin-top:0;
+  margin-top:0;
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
@@ -831,6 +836,8 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   font-size: 13px;
   font-weight: 400;
   line-height: 24px;
+  padding-left: 0;
+  padding-right: 0;
   
   &:focus, &:active, &:hover {
     background-color: $white;
@@ -879,6 +886,11 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
       overflow-x: auto;
       white-space: nowrap;
       padding: 0;
+    }
+
+    th {
+      padding-left: 0;
+      padding-right: 0;
     }
 
     td {
