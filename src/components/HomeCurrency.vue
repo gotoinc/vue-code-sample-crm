@@ -1,5 +1,5 @@
 <template>
-  <div class="col s12 m6 l8">
+  <div class="col s12 m12 l8">
     <div class="card white bill-card">
       <div class="card-content">
         <div class="card-header">
