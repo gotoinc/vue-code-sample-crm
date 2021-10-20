@@ -77,10 +77,17 @@ body {
   &.open {
     -webkit-transform: translateX(0);
     transform: translateX(0);
+    position: fixed;
   }
   
  li {
    cursor: pointer;
+
+    @media (max-width: $small-tablet) {
+      padding-bottom: 5px;
+      padding-top: 5px;
+
+    }
     a {
       font-size: 13px;
       color: $black;
@@ -94,17 +101,17 @@ body {
 
       @media (max-width: $small-tablet) {
         font-size: 46px;
-        line-height: 56px;
         color: $black;
         font-weight: 700;
-        margin-top: 20px;
+        margin-bottom: 40px;
+        padding: 0;
+       
       }
 
       @media (max-width: $small-mobile) {
         font-size: 36px;
-        line-height: 46px;
         color: $black;
-        margin-top: 20px;
+        margin-bottom: 20px;
       }
     }
 
@@ -114,6 +121,12 @@ body {
     }
   }
  }
+}
+
+.sidenav li > a:hover {
+  @media (max-width: $small-tablet) {
+    background-color: transparent;
+  }
 }
 
 .navbar {
