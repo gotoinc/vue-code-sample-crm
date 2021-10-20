@@ -67,7 +67,7 @@ body {
   bottom: 0 !important;
   height: auto !important;
 
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     width: 100%;
     text-align: center;
     height: 100vh;
@@ -408,6 +408,7 @@ table {
   background-color: $light-blue !important;
   box-shadow: none;
   margin-right: 30px;
+  margin-bottom: 30px;
   
   @media (max-width: $large-mobile) {
     margin-right: 0;
@@ -841,15 +842,39 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 
 .history-wrapper {
   
-  @media (max-width: $large-tablet) {
+  @media (max-width: 1300px) {
     flex-direction: column-reverse;
   }
 }
 
 .history-table {
   
-  @media (max-width: $large-tablet) {
+  @media (max-width: 1300px) {
     width: 100%;
+  }
+
+  table {
+    margin: 0 auto;
+    @media (max-width: 700px) {
+      height: max-content;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    td {
+      @media (max-width: 700px) {
+        padding-left: 5x;
+        padding-right: 15px;
+      }
+    }
   }
    
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
