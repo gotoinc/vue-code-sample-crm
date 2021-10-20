@@ -8,7 +8,11 @@
       :to="link.url"
     >
       <li :class="[isExactActive && 'router-link-exact-active active']">
-        <a :href="href" @click="navigate" @keypress.enter="navigate">
+        <a
+          :href="href"
+          @click="handler(navigate, $event)"
+          @keypress.enter="navigate"
+        >
           {{ link.title }}
         </a>
       </li>
@@ -49,5 +53,11 @@ export default {
       },
     ],
   }),
+  methods: {
+    handler: function (navigate, e) {
+      navigate(e);
+      this.$emit("click");
+    },
+  },
 };
 </script>
