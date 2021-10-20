@@ -29,7 +29,14 @@
         />
       </section>
 
-      <ChartPie v-if="!loading" :data="chartData" :options="chartOptions" />
+      <section v-if="!loading" class="chart-section">
+        <div class="legend-con" v-html="message" />
+        <ChartPie
+          :data="chartData"
+          :options="chartOptions"
+          @generated="setLegend"
+        />
+      </section>
     </div>
   </div>
 </template>
@@ -60,7 +67,19 @@ export default {
     categories: [],
     records: [],
     chartData: null,
-    chartOptions: null,
+    message: "test",
+    chartOptions: {
+      // legend: {
+      //   position: "bottom",
+      //   align: "start",
+      //   labels: {
+      //     usePointStyle: true,
+      //     boxWidth: 20,
+      //     padding: 20,
+      //   },
+      // },
+      legend: false,
+    },
   }),
 
   computed: {
@@ -79,6 +98,10 @@ export default {
   methods: {
     ...mapActions("record", ["fetchRecords"]),
     ...mapActions("category", ["fetchCategories"]),
+
+    setLegend(html) {
+      this.message = html;
+    },
 
     setup(categories) {
       this.setupPagination(
@@ -106,7 +129,7 @@ export default {
                 return acc;
               }, 0);
             }),
-            backgroundColor: this.getColors,
+            backgroundColor: ["#CCFFCC", "#001933", "#FF0000", "#FFCCE5"],
             borderWidth: 1,
           },
         ],
@@ -132,6 +155,32 @@ export default {
 
   .history-table {
     flex-grow: 1;
+    margin-right: 24px;
+  }
+}
+
+.legend-con {
+  font-family: Roboto;
+  display: inline-block;
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+
+    span {
+      display: inline-block;
+    }
+
+    span.chart-legend {
+      width: 25px;
+      height: 25px;
+      margin-right: 10px;
+    }
   }
 }
 </style>
