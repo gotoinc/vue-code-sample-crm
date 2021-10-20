@@ -58,6 +58,8 @@ body {
   bottom: 0 !important;
   height: auto !important;
 
+  
+
   &.open {
     -webkit-transform: translateX(0);
     transform: translateX(0);
@@ -67,7 +69,7 @@ body {
    cursor: pointer;
     a {
       font-size: 13px;
-      color: #151515;
+      color: $black;
       font-weight: 400;
     }
 
@@ -87,7 +89,7 @@ body {
   height: 64px !important;
   padding: 0 $default-indentation;
   z-index: 1000;
-  background-color: #428EFF;
+  background-color: $blue;
   box-shadow: none
 }
 
@@ -108,7 +110,7 @@ body {
 }
 
 .black-text.router-link-exact-active.router-link-active {
-  background-color: #ECEEF0;
+  background-color: $light-gray;
 }
 
 .nav-date {
@@ -154,8 +156,7 @@ body {
   border-bottom: solid 1px rgba(51, 51, 51, .12);
 
   a {
-    color: #000;
-    opacity: 0.8
+    color: $black;
   }
 }
 
@@ -173,7 +174,7 @@ body {
 }
 
 .card .card-content .card-title {
-  color: #151515;
+  color: $black;
   font-size: 18px;
   font-weight: 500;
 }
@@ -207,7 +208,7 @@ body {
 
 .currency-line {
   @include align-center-flex-elements;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid $white;
   padding-bottom: 6px;
   padding-top: 20px;
 
@@ -246,7 +247,7 @@ body {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  color: rgba(0, 0, 0, .7) !important
+  color: $black !important
 }
 
 #toast-container {
@@ -274,11 +275,11 @@ body {
   -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
   box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
   border-radius: 30px;
-  background-color: white;
+  background-color: $white;
 }
 
 .currency-line {
-  border-bottom: 0.7px dashed #B6C4CF;
+  border-bottom: 0.7px dashed $dark-gray;
 }
 
 table {
@@ -302,17 +303,17 @@ table {
   }
 
   tr {
-    border-bottom: 0.7px dashed #B6C4CF;
+    border-bottom: 0.7px dashed $dark-gray;
   }
 }
 
 .btn-small i {
-  color: #151515;
+  color: $black;
   
 }
 
 .reload {
-  background-color: #FFD842;
+  background-color: $yellow;
   border-radius: 10px;
   width: 38px;
   height: 38px;
@@ -323,28 +324,28 @@ table {
   margin-right: 30px;
 
   &:hover{
-    background-color: #ECEEF0;
+    background-color: $light-gray;
   }
 
   &:active {
-    background-color: gray;
+    background-color: $gray;
   }
 }
 
 .btn-floating.btn-large.blue {
   border-radius: 14px;
-  background-color: #C5EAFF !important;
+  background-color: $light-blue !important;
   box-shadow: none;
   margin-bottom: 65px;
   margin-right: 30px;
 }
 
 .btn-floating i {
-  color: #151515;
+  color: $black;
 }
 
 .progress {
-  background: rgba(236, 238, 240, 0.6);
+  background: $light-gray;
   height: 6px;
   border-radius: 71.5px;
 
@@ -367,13 +368,13 @@ table {
 .input-field > label {
   font-size: 12px;
   line-height: 18px;
-  color: #8B949D;
+  color: $gray;
   font-weight: 400;
   margin-bottom: 4px;
 }
 
 .select-wrapper input.select-dropdown {
-  background-color: #ECEEF0;
+  background-color: $light-gray;
   border: none;
   border-radius: 14px;
   padding: 2px 16px;
@@ -381,7 +382,7 @@ table {
   z-index: 0;
   font-size: 13px;
   line-height: 24px;
-  color: #151515;
+  color: $black;
   font-weight: 400;
 
   &:focus  {
@@ -390,12 +391,12 @@ table {
 }
 
 .create {
-  background-color: #FFD842;
+  background-color: $yellow;
   height: auto;
   padding: 13px 76px;
   border-radius: 14px;
   box-shadow: none;
-  color: #151515;
+  color: $black;
   font-size: 13px;
   line-height: 26px;
   font-weight: 700;
@@ -405,22 +406,22 @@ table {
 
 .btn {
   &:hover {
-    background-color: gray;
+    background-color: $gray;
   }
   &:focus  {
-    background-color: #FFD842;
+    background-color: $yellow;
   }
 }
 
 #amount {
-  background-color: #ECEEF0;
+  background-color: $light-gray;
   border-radius: 14px;
   border: none;
   padding: 2px 16px;
   width: 40%;
   font-size: 13px;
   line-height: 24px;
-  color: #151515;
+  color: $black;
   font-weight: 400;
 
   &:focus {
@@ -429,7 +430,7 @@ table {
 }
 
 #description {
-  background-color: #ECEEF0;
+  background-color: $light-gray;
   border-radius: 14px;
   border: none;
   padding: 13px 16px;
@@ -446,23 +447,23 @@ textarea {
 }
 
 .income-outcome {
-  color: #151515;
+  color: $black;
   line-height: 24px;
   font-weight: 400;
   font-size: 13px;
 }
 
 [type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:before, [type="radio"].with-gap:checked + span:after {
-  border: #FFD842 2px solid;
-  background-color: #FFD842;
+  border: $yellow 2px solid;
+  background-color: $yellow;
 }
 
 [type="radio"]:checked + span:after, [type="radio"].with-gap:checked + span:after {
-  background-color: white;
+  background-color: $white;
 }
 
 [type="radio"]:not(:checked) + span:before, [type="radio"]:not(:checked) + span:after {
-  border: 1px solid #151515;
+  border: 1px solid $black;
 }
 
 .input-field {
@@ -475,14 +476,14 @@ textarea {
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
-  color: #151515;
+  color: $black;
   font-size: 13px;
   line-height: 24px;
   font-weight: 500;
 }
 
 .select-dropdown.dropdown-content li.selected {
-  background-color: #ECEEF0;
+  background-color: $light-gray;
 }
 
 .select-dropdown.dropdown-trigger {
@@ -497,7 +498,7 @@ padding: 2px 16px !important;
 }
 
 .create-title {
-  background-color: #ECEEF0;
+  background-color: $light-gray;
   border-radius: 14px;
   border: none;
   padding: 9px 16px;
@@ -524,15 +525,15 @@ input#limit, input#name {
   font-size: 12px;
   line-height: 18px;
   font-weight: 400;
-  color: #8B949D;
+  color: $gray;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:active,
 input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 1000px #ECEEF0 inset !important;
-    box-shadow: 0 0 0 1000px #ECEEF0  inset !important;
+    -webkit-box-shadow: 0 0 0 1000px $light-gray inset !important;
+    box-shadow: 0 0 0 1000px $light-gray  inset !important;
 }
 input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
  border-bottom: none;
@@ -553,11 +554,11 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 }
 
 .switch label input[type=checkbox]:checked + .lever {
-  background-color: #428EFF;
+  background-color: $blue;
 }
 
 .switch label input[type=checkbox]:checked + .lever:after {
-    background-color: #428EFF;
+    background-color: $blue;
 }
 
 input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before, input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
@@ -572,7 +573,7 @@ input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before, input[type=
 
 input#email, input#password, input#name {
   border-radius: 14px;
-  background-color: #ECEEF0;
+  background-color: $light-gray;
 }
 
 input#name {
@@ -589,7 +590,7 @@ margin-top:0;
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-  color: #428EFF;
+  color: $blue;
   margin-right: 0px;
   font-weight: 700;
 }
@@ -601,18 +602,18 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 }
 
 [type="checkbox"] + span:not(.lever):before, [type="checkbox"]:not(.filled-in) + span:not(.lever):after {
-  border: 2px solid #428EFF;
+  border: 2px solid $blue;
 }
 
 [type="checkbox"]:checked + span:not(.lever):before {
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
-  border-right: 2px solid #428EFF;
-  border-bottom: 2px solid #428EFF;
+  border-right: 2px solid $blue;
+  border-bottom: 2px solid $blue;
 }
 
 .card-outcome {
-  background-color: #ffffff !important;
+  background-color: $white !important;
   margin-top: 30px;
   -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
@@ -623,14 +624,14 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 
 .card .card-content {
   .name {
-    color: #151515;
+    color: $black;
     font-size: 13px;
     line-height: 24px;
     font-weight: 500;
   }
 
   .outcome-value {
-    color: #151515;
+    color: $black;
     font-size: 13px;
     line-height: 24px;
     font-weight: 400;
@@ -640,19 +641,19 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 .data-outcome {
   font-size: 12px;
   line-height: 18px;
-  color: #8B949D;
+  color: $gray;
   font-weight: 400;
 }
 
 .breadcrumb-wrap a, .breadcrumb-wrap a:before {
   font-weight: 500;
   font-size: 30px;
-  color: #151515 !important;
+  color: $black !important;
 }
 
 .breadcrumb-wrap {
   padding-bottom: 16px;
-  border-bottom: 1px solid #ECEEF0;
+  border-bottom: 1px solid $light-gray;
 }
 
 .outcome-row {
@@ -660,7 +661,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   justify-content: space-between;
   padding-bottom: 6px;
   margin-bottom: 20px;
-  border-bottom: 0.7px dashed #B6C4CF;
+  border-bottom: 0.7px dashed $dark-gray;
 }
 
 .exchange-title {
@@ -671,7 +672,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 
 .history-table {
   border-radius: 30px;
-  background-color: white;
+  background-color: $white;
   -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
   box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
@@ -682,7 +683,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   font-size: 12px !important;
   line-height: 24px !important;
   padding: 2px 12px !important;
-  background-color: #FFA68A !important;
+  background-color: $pink !important;
   border-radius: 30px;
   height: 28px !important;
 }
@@ -693,8 +694,8 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 .open-btn {
   display: flex;
   align-items: center;
-  background-color: white;
-  color: #151515;
+  background-color: $white;
+  color: $black;
   text-transform: none;
   box-shadow: none;
   font-size: 13px;
@@ -702,13 +703,13 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   line-height: 24px;
   
   &:focus, &:active, &:hover {
-    background-color: white;
+    background-color: $white;
     box-shadow: none;
   }
 }
 
 .pagination li.active {
-  background-color: #428EFF !important;
+  background-color: $blue !important;
 }
 
 .pagination {
@@ -718,7 +719,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
     a {
       font-size: 13px;
       font-weight: 400;
-      color: #151515;
+      color: $black;
     }
   }
 }
