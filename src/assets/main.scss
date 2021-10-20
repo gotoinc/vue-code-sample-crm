@@ -58,7 +58,6 @@ body {
 
 .app-sidenav {
   box-shadow: 10px 20px 64px rgba(30, 70, 129, 0.1);
-  position: absolute;
   padding-top: 28px;
   top: 64px;
   width: 250px;
@@ -213,6 +212,10 @@ body {
   }
 
   &.full {
+    padding-left: 0;
+  }
+
+  @media (max-width: $small-tablet) {
     padding-left: 0;
   }
 }
