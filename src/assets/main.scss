@@ -20,6 +20,9 @@ body {
 
 .auth-card {
   width: 400px;
+  @media (max-width: $large-mobile) {
+    width: 90%;
+  }
 }
 
 .auth-submit {
@@ -558,7 +561,7 @@ padding: 2px 16px !important;
   margin-top: 5px;
 }
 
-input#limit, input#name {
+input#limit {
   border-bottom: none;
   height: auto;
   font-size: 13px;
@@ -572,6 +575,10 @@ input#limit, input#name {
     box-shadow: none;
   }
 }
+
+
+
+
 
 .edit-label, .create-label {
   font-size: 12px;
