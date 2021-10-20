@@ -34,12 +34,17 @@ body {
 }
 
 .app-page {
-  padding: $default-indentation;    
+  padding: $default-indentation; 
+
+  @media (max-width: $large-mobile) {
+    padding: 20px;
+  }   
 }
 
 .page-title {
   display: flex !important;
   align-items: baseline;
+  margin-bottom: 30px;
 }
 
 .app-main-layout {
@@ -65,6 +70,7 @@ body {
   @media (max-width: $large-mobile) {
     width: 100%;
     text-align: center;
+    height: 100vh;
   }
   
 
@@ -99,7 +105,7 @@ body {
         line-height: 46px;
         color: $black;
         font-weight: 700;
-        margin-top: 40px;
+        margin-top: 20px;
       }
     }
 
@@ -241,9 +247,15 @@ body {
   margin-bottom: 24px;
 }
 
-.page-title {
-  margin-bottom: $default-indentation;
+.plannind-sum {
+
+  @media (max-width: $large-mobile) {
+    font-size: 20px !important;
+    font-weight: 500;
+    padding-bottom: 10px;
+  }
 }
+
 
 .app-loader,
 .currency-line,
@@ -338,7 +350,6 @@ body {
 }
 
 table {
-  margin-left: 30px;
   padding: 30px;
   border-radius: 30px;
   width: 95%;
@@ -378,6 +389,11 @@ table {
   align-items: center;
   margin-right: 30px;
 
+  @media (max-width: $large-mobile) {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+
   &:hover{
     background-color: $light-gray;
   }
@@ -391,8 +407,11 @@ table {
   border-radius: 14px;
   background-color: $light-blue !important;
   box-shadow: none;
-  margin-bottom: 65px;
   margin-right: 30px;
+  
+  @media (max-width: $large-mobile) {
+    margin-right: 0;
+  }
 }
 
 .btn-floating i {
@@ -526,7 +545,7 @@ textarea {
 }
 
 .dropdown-content.select-dropdown {
-  top: 60px !important;
+  top: 55px !important;
   height: 380px !important;
 }
 
@@ -577,6 +596,11 @@ input#limit {
 }
 
 
+.create-col {
+  @media (max-width: 1250px) {
+    margin-bottom: 30px;
+  }
+}
 
 
 
@@ -697,6 +721,18 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   }
 }
 
+.card-content {
+  @media (max-width: $large-mobile) {
+    padding: 12px !important;
+  }
+}
+
+.row .col {
+  @media (max-width: $large-mobile) {
+    padding: 0;
+  }
+}
+
 .data-outcome {
   font-size: 12px;
   line-height: 18px;
@@ -781,4 +817,19 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
       color: $black;
     }
   }
+}
+
+.history-wrapper {
+  
+  @media (max-width: $large-tablet) {
+    flex-direction: column-reverse;
+  }
+}
+
+.history-table {
+  
+  @media (max-width: $large-tablet) {
+    width: 100%;
+  }
+   
 }
