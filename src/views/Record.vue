@@ -15,7 +15,10 @@
 
     <form v-else class="form" @submit.prevent="handleSubmit">
       <label>{{ "Choose_category_label" | localizeFilter }}</label>
-      <div class="input-field">
+      <div
+        class="input-field"
+        :class="isDroprownOpened ? 'arrow-up' : 'arrow-down'"
+      >
         <select ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.title }}
@@ -115,6 +118,7 @@ export default {
     type: "outcome",
     amount: 1,
     description: "",
+    isDroprownOpened: false,
   }),
 
   validations: {
@@ -185,6 +189,17 @@ export default {
     },
   },
 
+  watch: {
+    select: {
+      deep: true,
+      handler: function (newValue) {
+        if (newValue && newValue.dropdown) {
+          this.isDroprownOpened = newValue.dropdown.isOpen;
+        }
+      },
+    },
+  },
+
   async mounted() {
     this.categories = await this.fetchCategories();
     this.loading = false;
@@ -206,3 +221,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/main";
+</style>
