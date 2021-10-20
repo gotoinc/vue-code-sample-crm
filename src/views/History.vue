@@ -128,6 +128,7 @@ export default {
 <style lang="scss" scoped>
 .history-wrapper {
   display: flex;
+  align-items: center;
 
   .history-table {
     flex-grow: 1;

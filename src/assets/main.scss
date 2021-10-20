@@ -5,6 +5,7 @@
 body {
   font-family: 'Roboto'
 }
+
 .empty-layout {
   @include align-center-flex-elements;
   display: -webkit-flex;
@@ -347,9 +348,9 @@ table {
   height: 6px;
   border-radius: 71.5px;
 
-    .determinate {
-      border-radius: 71.5px;
-    }
+  .determinate {
+    border-radius: 71.5px;
+  }
 }
 
 .app-page {
@@ -407,7 +408,7 @@ table {
     background-color: gray;
   }
   &:focus  {
-    background-color: gray;
+    background-color: #FFD842;
   }
 }
 
@@ -696,6 +697,9 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   color: #151515;
   text-transform: none;
   box-shadow: none;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 24px;
   
   &:focus, &:active, &:hover {
     background-color: white;
