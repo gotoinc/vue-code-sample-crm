@@ -10,7 +10,6 @@
         <th>{{ "Open" | localizeFilter }}</th>
       </tr>
     </thead>
-
     <tbody>
       <tr v-for="(record, idx) in records" :key="record.id">
         <td>{{ idx + 1 }}</td>

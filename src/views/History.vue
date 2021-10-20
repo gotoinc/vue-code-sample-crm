@@ -126,12 +126,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.history-wrapper {
-  display: flex;
-  align-items: center;
+  .history-wrapper {
+    display: flex;
+    align-items: center;
+
+    .history-table {
+      flex-grow: 1;
+    }
+  }
+
+  .history-wrapper {
+    
+    @media (max-width: 1300px) {
+      flex-direction: column-reverse;
+    }
+  }
 
   .history-table {
-    flex-grow: 1;
+    
+    @media (max-width: 1300px) {
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      padding: 0;
+    }
+
+    table {
+      margin: 0 auto;
+      @media (max-width: 900px) {
+        height: max-content;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0;
+      }
+
+      th {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      td {
+        @media (max-width: 900px) {
+          padding-left: 5x;
+          padding-right: 15px;
+        }
+      }
+    }  
   }
-}
+
 </style>
