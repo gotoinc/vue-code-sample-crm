@@ -18,17 +18,17 @@
         <td>{{ record.date | dateFilter("datetime") }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
-          <span class="white-text badge" :class="record.typeClass">
+          <span class="white-text badge table-type" :class="record.typeClass">
             {{ record.typeText | localizeFilter }}
           </span>
         </td>
         <td>
           <button
             v-tooltip="'Show_details'"
-            class="btn-small btn"
+            class="btn-small btn open-btn"
             @click="$router.push(`/detail/${record.id}`)"
-          >
-            <i class="material-icons">open_in_new</i>
+          > <p class="open-btn-text">Open</p> 
+            <i class="material-icons">chevron_right</i>
           </button>
         </td>
       </tr>
