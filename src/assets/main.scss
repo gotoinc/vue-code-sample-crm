@@ -20,7 +20,7 @@ body {
 
 .auth-card {
   width: 400px;
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     width: 90%;
   }
 }
@@ -36,7 +36,7 @@ body {
 .app-page {
   padding: $default-indentation; 
 
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     padding: 20px;
   }   
 }
@@ -140,7 +140,7 @@ body {
   background-color: $blue;
   box-shadow: none;
 
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     background-color: $white;
   }
 }
@@ -151,7 +151,7 @@ body {
 
 .dropdown-trigger.white-text {
 
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     color: $black !important;
 
     &:hover {
@@ -180,14 +180,14 @@ body {
   line-height: 24px;
   font-weight: 500;
 
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     display: none;
   }
 }
 
 
 .sidebar-btn span {
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     background: $black !important;
   }
 }
@@ -208,7 +208,7 @@ body {
   transition: padding-left .3s;
   position: relative;
   
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     padding-left: 0;
   }
 
@@ -265,7 +265,7 @@ body {
 
 .plannind-sum {
 
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     font-size: 20px !important;
     font-weight: 500;
     padding-bottom: 10px;
@@ -405,7 +405,7 @@ table {
   align-items: center;
   margin-right: 30px;
 
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     margin-right: 0;
     margin-bottom: 16px;
   }
@@ -426,7 +426,7 @@ table {
   margin-right: 30px;
   margin-bottom: 30px;
   
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     margin-right: 0;
   }
 }
@@ -759,13 +759,13 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 }
 
 .card-content {
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     padding: 12px !important;
   }
 }
 
 .row .col {
-  @media (max-width: $large-mobile) {
+  @media (max-width: $small-tablet) {
     padding: 0;
   }
 }
