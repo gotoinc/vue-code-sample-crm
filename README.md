@@ -28,13 +28,12 @@ npm run serve
  ```
 npm run build
 
-firabse deploy
+firebase deploy
 ```
 
 ## Usage
-A simple bookkeeping system, that allows user to track personal money income and expenses.
-In addition, user can simply plan budget, distribute finances and
-keep records of financial transactions.
+Simple accounting system to track users’s personal income and expenses. 
+The app helps user to plan a budget, distribute finances and keep records of financial transactions.
 
 ## Project structure
 
@@ -162,30 +161,32 @@ vue-code-sample-crm
 |   package.json
 |   README.md
 ```
-In the /src folder there are:
+/src folder contains:
 * /assets - project styles (SCSS variables, mixins, stylesheets);
-* /component - Vue-components used in the project, it also contains:
+* /components - Vue-components used in the project, it also contains:
   * /Charts - folder for chart-component, created with [vue-chartjs](https://vue-chartjs.org/);
-  * /Common - contains components that can be used for all layouts;
+  * /Common - folder for components that can be used for all layouts;
 * /directives - contains directive for tooltip;
 * /filters - folder for several filters used in the project (date filter, currency filter and localize filter);
-* /fonts - contains fonts used in the project;
-* /layouts - contains main layouts for authorized and non-authorized users;
-* /locales - support-files for English-Russian locales;
-* /mixins - there is mixin for pagination;
+* /fonts - folder for fonts used in the project;
+* /layouts - folder for main layouts for authorized and non-authorized users;
+* /locales - contains support-files for English-Russian locales;
+* /mixins - contains mixin for pagination;
 * /router - folder that contains [Vue-router](https://router.vuejs.org/) export;
 * /store - assemble modules and contains the [Vuex](https://vuex.vuejs.org/) export, there is:
   * /modules - store divided into modules (auth, category, errors, info, record);
-* /utils - helpers, code that reused many times;
-* /views - components of main pages;
-* /tests - unit-tests, contains tests for:
-  * /components;
-  * /views;
+* /utils - folder for helpers, code that reused many times;
+* /views - folder for components of main pages;
+
+In the /tests folder there are unit-tests for:
+* /components;
+* /views;
 
 ## Firebase description
 
 This project is created with firebase platform.
 User can authenticate through [Firebase Authentication](https://firebase.google.com/docs/auth), using email and password.
+
 All data is stored in [Firebase Realtime Database](https://firebase.google.com/docs/database).
 Project is deployed with [Firebase Hosting](https://firebase.google.com/docs/hosting).
 
