@@ -87,24 +87,23 @@ body {
       font-weight: 400;
 
       &:hover {
-        @media (max-width: $large-mobile) {
+        @media (max-width: $small-tablet) {
           text-decoration: underline;
         }
       }
 
-      @media (max-width: $large-mobile) {
+      @media (max-width: $small-tablet) {
         font-size: 46px;
         line-height: 56px;
         color: $black;
         font-weight: 700;
-        margin-top: 40px;
+        margin-top: 20px;
       }
 
       @media (max-width: $small-mobile) {
         font-size: 36px;
         line-height: 46px;
         color: $black;
-        font-weight: 700;
         margin-top: 20px;
       }
     }
@@ -853,17 +852,22 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
     width: 100%;
   }
 
+  @media (max-width: 900px) {
+    padding: 0;
+  }
+
   table {
     margin: 0 auto;
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
       height: max-content;
       display: block;
       overflow-x: auto;
       white-space: nowrap;
+      padding: 0;
     }
 
     td {
-      @media (max-width: 700px) {
+      @media (max-width: 900px) {
         padding-left: 5x;
         padding-right: 15px;
       }
@@ -878,3 +882,9 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+canvas#pie-chart {
+  @media (max-width: $small-mobile) {
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
