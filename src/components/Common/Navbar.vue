@@ -12,7 +12,7 @@
         <span class="nav-date">{{ date | dateFilter("datetime") }}</span>
       </div>
 
-      <ul class="right hide-on-small-and-down">
+      <ul class="right">
         <li>
           <a
             ref="dropdown"
