@@ -247,26 +247,6 @@ input::-webkit-inner-spin-button {
   max-width: 330px;
 }
 
-.breadcrumb-wrap,
-.breadcrumb-wrap a,
-.breadcrumb-wrap a:before {
-  @include align-center-flex-elements;
-}
-
-.breadcrumb-wrap {
-  position: relative;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.breadcrumb-wrap a,
-.breadcrumb-wrap a:before {
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  color: $black !important;
-}
 
 #toast-container {
   top: auto !important;
@@ -311,7 +291,7 @@ table {
 
   td {
     font-weight: 400;
-    padding: 20px 0 6px;
+    padding: 20px 10px 6px;
     font-size: 13px;
     line-height: 24px;
     &:first-child {
@@ -675,6 +655,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
   border-radius: 30px;
   padding: 30px;
+  min-width: 280px;
 }
 
 .card .card-content {
@@ -712,17 +693,6 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
   font-weight: 400;
 }
 
-.breadcrumb-wrap a, .breadcrumb-wrap a:before {
-  font-weight: 500;
-  font-size: 30px;
-  color: $black !important;
-}
-
-.breadcrumb-wrap {
-  padding-bottom: 16px;
-  border-bottom: 1px solid $light-gray;
-}
-
 .outcome-row {
   display: flex;
   justify-content: space-between;
@@ -749,6 +719,7 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
 .open-btn-text {
   text-decoration: underline;
 }
+
 .open-btn {
   display: flex;
   align-items: center;
@@ -781,22 +752,5 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
       font-weight: 400;
       color: $black;
     }
-  }
-}
-
-
-
-
-canvas#pie-chart {
-  @media (max-width: $small-mobile) {
-    max-width: 300px;
-    max-height: 300px;
-  }
-}
-
-.exchange-table {
-  th {
-    padding-left: 0;
-    padding-right: 0;
   }
 }
