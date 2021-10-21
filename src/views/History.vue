@@ -170,6 +170,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1;
 
     @media (max-width: 900px) {
       overflow-x: scroll;
@@ -212,11 +213,12 @@ export default {
     padding: 30px;
 
     @media (max-width: 1300px) {
+      margin-top: 40px;
       width: 100%;
     }
 
     @media (max-width: 900px) {
-      padding: 0;
+      padding: 15px;
     }
   }
 
