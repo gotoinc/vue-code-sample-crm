@@ -89,3 +89,49 @@ export default {
   },
 };
 </script>
+
+
+
+<style lang="scss" scoped>
+  @import "../assets/_vars.scss";
+  @import "../assets/main.scss";
+
+
+.breadcrumb-wrap a, .breadcrumb-wrap a:before {
+  font-weight: 500;
+  font-size: 30px;
+  color: $black !important;
+
+  @media (max-width: $small-tablet) {
+    font-size: 20px;
+  }
+}
+
+.breadcrumb-wrap {
+  padding-bottom: 16px;
+  border-bottom: 1px solid $light-gray;
+}
+
+
+.breadcrumb-wrap,
+.breadcrumb-wrap a,
+.breadcrumb-wrap a:before {
+  @include align-center-flex-elements;
+}
+
+.breadcrumb-wrap {
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.breadcrumb-wrap a,
+.breadcrumb-wrap a:before {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: $black !important;
+}
+
+</style>

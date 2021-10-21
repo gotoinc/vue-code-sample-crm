@@ -29,13 +29,9 @@
         />
       </section>
 
-      <section v-if="!loading" class="chart-section">
+      <section v-if="!loading && categories.length" class="chart-section">
+        <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
         <div class="legend-con" v-html="message" />
-        <ChartPie
-          :data="chartData"
-          :options="chartOptions"
-          @generated="setLegend"
-        />
       </section>
     </div>
   </div>
@@ -68,29 +64,41 @@ export default {
     records: [],
     chartData: null,
     message: "test",
-    chartOptions: {
-      // legend: {
-      //   position: "bottom",
-      //   align: "start",
-      //   labels: {
-      //     usePointStyle: true,
-      //     boxWidth: 20,
-      //     padding: 20,
-      //   },
-      // },
-      legend: false,
-    },
+    // chartOptions: null,
+    // {
+    // legend: {
+    //   position: "bottom",
+    //   align: "start",
+    //   labels: {
+    //     usePointStyle: true,
+    //     boxWidth: 20,
+    //     padding: 20,
+    //   },
+    // },
+    //   legend: false,
+    // },
   }),
 
   computed: {
     getColors() {
+      const initialColors = [
+        "#428EFF",
+        "#ACB9FF",
+        "#9FDFA2",
+        "#B6C4CF",
+        "#E8B6FF",
+        "#C5EAFF",
+        "#FFE890",
+        "#FFA68A",
+      ];
+      let i = 0;
       return this.categories.map(() => {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        while (color.length < 7) {
-          color += letters[Math.floor(Math.random() * 16)];
+        if (typeof initialColors[i] === "undefined") {
+          i = 0;
         }
-        return color;
+        const result = initialColors[i];
+        i++;
+        return result;
       });
     },
   },
@@ -101,6 +109,10 @@ export default {
 
     setLegend(html) {
       this.message = html;
+    },
+
+    updateDataset(el, idx) {
+      this.$refs.chartPie.updateChartDataset(el, idx);
     },
 
     setup(categories) {
@@ -129,7 +141,7 @@ export default {
                 return acc;
               }, 0);
             }),
-            backgroundColor: ["#CCFFCC", "#001933", "#FF0000", "#FFCCE5"],
+            backgroundColor: this.getColors,
             borderWidth: 1,
           },
         ],
@@ -144,43 +156,87 @@ export default {
     this.setup(this.categories);
 
     this.loading = false;
+
+    this.$nextTick(() =>
+      this.$el.querySelectorAll(".custom-legend-item").forEach((item, i) => {
+        item.addEventListener("click", () => {
+          this.updateDataset(item, i);
+        });
+      })
+    );
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/main";
+
 .history-wrapper {
   display: flex;
-  align-items: center;
+  align-items: stretch;
 
   .history-table {
     flex-grow: 1;
     margin-right: 24px;
+    @media (max-width: 900px) {
+      overflow-x: scroll;
+    }
+
+    table {
+      margin: 0 auto;
+      @media (max-width: 900px) {
+        height: max-content;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0;
+      }
+
+      th {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      td {
+        @media (max-width: 900px) {
+          padding-left: 5px;
+          padding-right: 15px;
+        }
+      }
+    }
+  }
+  .chart-section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .history-table,
+  .chart-section {
+    border-radius: 30px;
+    background-color: $white;
+    -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    padding: 30px;
+
+    @media (max-width: 1300px) {
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    flex-direction: column-reverse;
   }
 }
 
-.legend-con {
-  font-family: Roboto;
-  display: inline-block;
-
-  ul {
-    list-style: none;
-  }
-
-  li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-
-    span {
-      display: inline-block;
-    }
-
-    span.chart-legend {
-      width: 25px;
-      height: 25px;
-      margin-right: 10px;
-    }
+canvas#pie-chart {
+  @media (max-width: $small-mobile) {
+    max-width: 300px;
+    max-height: 300px;
   }
 }
 </style>
