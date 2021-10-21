@@ -19,7 +19,7 @@ export default {
     styles: {
       type: Object,
       default: () => ({
-        maxWidth: "360px",
+        maxWidth: "300px",
         display: "flex",
         margin: "auto",
         padding: "0px 30px 40px",

@@ -167,6 +167,10 @@ export default {
   .history-table {
     flex-grow: 1;
     margin-right: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     @media (max-width: 900px) {
       overflow-x: scroll;
     }
@@ -193,15 +197,9 @@ export default {
       }
     }
   }
-  .chart-section {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-    .pie-wrapper canvas {
-      position: relative;
-      width: fit-content;
-    }
+  .pie-wrapper canvas {
+    position: relative;
+    width: fit-content;
   }
 
   .history-table,
