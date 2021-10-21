@@ -188,4 +188,12 @@ export default {
     flex-direction: column-reverse;
   }
 }
+
+canvas#pie-chart {
+  @media (max-width: $small-mobile) {
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+
 </style>

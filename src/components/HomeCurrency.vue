@@ -46,3 +46,22 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/main";
+@import "../assets/_vars";
+
+.exchange-table {
+  th {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  td {
+    @media (max-width: $small-mobile) {
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+  }
+}
+</style>
