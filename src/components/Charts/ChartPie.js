@@ -13,14 +13,16 @@ export default {
         legend: {
           display: false,
         },
+        responsive: true,
       }),
     },
     styles: {
       type: Object,
       default: () => ({
-        maxWidth: "380px",
-        paddingBottom: "40px",
-        alignSelf: "center",
+        maxWidth: "360px",
+        display: "flex",
+        margin: "auto",
+        padding: "0px 30px 40px",
       }),
     },
   },

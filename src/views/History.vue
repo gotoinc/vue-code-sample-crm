@@ -30,7 +30,9 @@
       </section>
 
       <section v-if="!loading && categories.length" class="chart-section">
-        <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
+        <div class="pie-wrapper">
+          <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
+        </div>
         <div class="legend-con" v-html="message" />
       </section>
     </div>
@@ -64,19 +66,6 @@ export default {
     records: [],
     chartData: null,
     message: "test",
-    // chartOptions: null,
-    // {
-    // legend: {
-    //   position: "bottom",
-    //   align: "start",
-    //   labels: {
-    //     usePointStyle: true,
-    //     boxWidth: 20,
-    //     padding: 20,
-    //   },
-    // },
-    //   legend: false,
-    // },
   }),
 
   computed: {
@@ -208,6 +197,11 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+
+    .pie-wrapper canvas {
+      position: relative;
+      width: fit-content;
+    }
   }
 
   .history-table,
@@ -230,13 +224,6 @@ export default {
 
   @media (max-width: 1300px) {
     flex-direction: column-reverse;
-  }
-}
-
-canvas#pie-chart {
-  @media (max-width: $small-mobile) {
-    max-width: 300px;
-    max-height: 300px;
   }
 }
 </style>
