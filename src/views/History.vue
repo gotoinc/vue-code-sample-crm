@@ -137,12 +137,14 @@ export default {
   .history-table {
     flex-grow: 1;
     margin-right: 24px;
+    @media (max-width: 900px) {
+      overflow-x: scroll;
+    }
 
     table {
       margin: 0 auto;
       @media (max-width: 900px) {
         height: max-content;
-        display: block;
         overflow-x: auto;
         white-space: nowrap;
         padding: 0;
@@ -195,5 +197,4 @@ canvas#pie-chart {
     max-height: 300px;
   }
 }
-
 </style>
