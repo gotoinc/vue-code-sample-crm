@@ -24,6 +24,43 @@ input::-webkit-inner-spin-button {
   height: $full-height;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .auth-card {
   width: 400px;
   @media (max-width: $small-tablet) {
@@ -81,6 +118,7 @@ input::-webkit-inner-spin-button {
 .nav-wrapper {
   @include justify-space-between-flex-items;
 }
+
 
 .dropdown-trigger.white-text {
 
@@ -752,5 +790,16 @@ input.invalid:not([type]), input.invalid:not([type]):focus, input.invalid[type=t
       font-weight: 400;
       color: $black;
     }
+  }
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+canvas#pie-chart {
+  @media (max-width: $small-mobile) {
+    max-width: 300px;
+    max-height: 300px;
   }
 }

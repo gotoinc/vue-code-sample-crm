@@ -75,6 +75,7 @@ export default {
     transition: transform .3s, -webkit-transform .3s;
     bottom: 0 !important;
     height: auto !important;
+    z-index: 10;
 
     @media (max-width: $small-tablet) {
       width: 100%;

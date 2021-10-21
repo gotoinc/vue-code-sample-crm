@@ -112,6 +112,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .dropdown-content {
   top: -50px;
   min-width: 179px;
