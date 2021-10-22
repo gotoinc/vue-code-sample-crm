@@ -1,0 +1,376 @@
+@import "../../assets/helpers/mixins.scss";
+@import "../../assets/helpers/_vars.scss";
+
+body {
+  font-family: "Roboto";
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.empty-layout {
+  @include align-center-flex-elements;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-top: 5rem;
+  height: $full-height;
+
+  @media (max-width: $small-tablet) {
+    padding-top: 1rem;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px $light-gray inset !important;
+  box-shadow: 0 0 0 1000px $light-gray inset !important;
+}
+
+input:not([type]),
+input[type="text"]:not(.browser-default),
+input[type="password"]:not(.browser-default),
+input[type="email"]:not(.browser-default),
+input[type="url"]:not(.browser-default),
+input[type="time"]:not(.browser-default),
+input[type="date"]:not(.browser-default),
+input[type="datetime"]:not(.browser-default),
+input[type="datetime-local"]:not(.browser-default),
+input[type="tel"]:not(.browser-default),
+input[type="number"]:not(.browser-default),
+input[type="search"]:not(.browser-default),
+textarea.materialize-textarea {
+  border-bottom: none;
+  box-shadow: none;
+  margin: 0;
+  font-size: 13px;
+  line-height: 24px;
+  padding: 4px 16px;
+  width: calc(100% - 32px);
+}
+
+input:not([type]):focus:not([readonly]),
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="url"]:not(.browser-default):focus:not([readonly]),
+input[type="time"]:not(.browser-default):focus:not([readonly]),
+input[type="date"]:not(.browser-default):focus:not([readonly]),
+input[type="datetime"]:not(.browser-default):focus:not([readonly]),
+input[type="datetime-local"]:not(.browser-default):focus:not([readonly]),
+input[type="tel"]:not(.browser-default):focus:not([readonly]),
+input[type="number"]:not(.browser-default):focus:not([readonly]),
+input[type="search"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  &:focus {
+    border-bottom: none;
+    box-shadow: none;
+  }
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.helper-text.invalid.active {
+  transform: none;
+}
+
+.app-page {
+  padding: $default-indentation;
+
+  @media (max-width: $small-tablet) {
+    padding: 20px;
+  }
+}
+
+.page-title {
+  display: flex !important;
+  align-items: baseline;
+  margin-bottom: 30px;
+}
+
+.app-main-layout {
+  position: relative;
+  min-height: $full-height;
+}
+
+.app-content {
+  padding-left: 250px;
+  transition: padding-left 0.3s;
+  position: relative;
+
+  @media (max-width: $small-tablet) {
+    padding-left: 0;
+  }
+
+  &.full {
+    padding-left: 0;
+  }
+
+  @media (max-width: $small-tablet) {
+    padding-left: 0;
+  }
+}
+
+.page-title h3 {
+  padding-bottom: 16px !important;
+  margin-bottom: 30px;
+  line-height: 30px !important;
+  font-weight: 500;
+}
+
+.page-title {
+  @include align-center-flex-elements;
+  @include justify-space-between-flex-items;
+  border-bottom: solid 1px rgba(51, 51, 51, 0.12);
+
+  a {
+    color: $black;
+  }
+}
+
+.page-subtitle h4,
+.page-title h4 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.page-title h3 {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 0;
+}
+
+.app-page {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+input.invalid:not([type]),
+input.invalid:not([type]):focus,
+input.invalid[type="text"]:not(.browser-default),
+input.invalid[type="text"]:not(.browser-default):focus,
+input.invalid[type="password"]:not(.browser-default),
+input.invalid[type="password"]:not(.browser-default):focus,
+input.invalid[type="email"]:not(.browser-default),
+input.invalid[type="email"]:not(.browser-default):focus,
+input.invalid[type="url"]:not(.browser-default),
+input.invalid[type="url"]:not(.browser-default):focus,
+input.invalid[type="time"]:not(.browser-default),
+input.invalid[type="time"]:not(.browser-default):focus,
+input.invalid[type="date"]:not(.browser-default),
+input.invalid[type="date"]:not(.browser-default):focus,
+input.invalid[type="datetime"]:not(.browser-default),
+input.invalid[type="datetime"]:not(.browser-default):focus,
+input.invalid[type="datetime-local"]:not(.browser-default),
+input.invalid[type="datetime-local"]:not(.browser-default):focus,
+input.invalid[type="tel"]:not(.browser-default),
+input.invalid[type="tel"]:not(.browser-default):focus,
+input.invalid[type="number"]:not(.browser-default),
+input.invalid[type="number"]:not(.browser-default):focus,
+input.invalid[type="search"]:not(.browser-default),
+input.invalid[type="search"]:not(.browser-default):focus,
+textarea.materialize-textarea.invalid,
+textarea.materialize-textarea.invalid:focus,
+.select-wrapper.invalid > input.select-dropdown,
+.select-wrapper.invalid > input.select-dropdown:focus {
+  border-bottom: none;
+  box-shadow: none;
+  margin-top: 2px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px $light-gray inset !important;
+  box-shadow: 0 0 0 1000px $light-gray inset !important;
+}
+input:not([type]),
+input[type="text"]:not(.browser-default),
+input[type="password"]:not(.browser-default),
+input[type="email"]:not(.browser-default),
+input[type="url"]:not(.browser-default),
+input[type="time"]:not(.browser-default),
+input[type="date"]:not(.browser-default),
+input[type="datetime"]:not(.browser-default),
+input[type="datetime-local"]:not(.browser-default),
+input[type="tel"]:not(.browser-default),
+input[type="number"]:not(.browser-default),
+input[type="search"]:not(.browser-default),
+textarea.materialize-textarea {
+  @include default-input;
+  width: calc(100% - 32px);
+}
+input:not([type]):focus:not([readonly]),
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="url"]:not(.browser-default):focus:not([readonly]),
+input[type="time"]:not(.browser-default):focus:not([readonly]),
+input[type="date"]:not(.browser-default):focus:not([readonly]),
+input[type="datetime"]:not(.browser-default):focus:not([readonly]),
+input[type="datetime-local"]:not(.browser-default):focus:not([readonly]),
+input[type="tel"]:not(.browser-default):focus:not([readonly]),
+input[type="number"]:not(.browser-default):focus:not([readonly]),
+input[type="search"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  &:focus {
+    border-bottom: none;
+    box-shadow: none;
+  }
+}
+
+input {
+  filter: none;
+}
+
+input#limit {
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#amount {
+  background-color: $light-gray;
+  border-radius: 14px;
+  border: none;
+  padding: 2px 16px;
+  width: 40%;
+  font-size: 13px;
+  line-height: 24px;
+  color: $black;
+  font-weight: 400;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+#description {
+  background-color: $light-gray;
+  border-radius: 14px;
+  border: none;
+  padding: 13px 16px;
+  resize: none;
+
+  &:focus-visible,
+  &:active {
+    outline: none;
+    border: none;
+  }
+}
+
+.dropdown-content li > a,
+.dropdown-content li > span {
+  color: $black;
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+[type="checkbox"] + span:not(.lever):before,
+[type="checkbox"]:not(.filled-in) + span:not(.lever):after {
+  border: 2px solid $blue;
+}
+
+[type="checkbox"]:checked + span:not(.lever):before {
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-right: 2px solid $blue;
+  border-bottom: 2px solid $blue;
+}
+
+.auth-submit {
+  width: 100%;
+}
+
+.auth-card {
+  width: 400px;
+
+  @media (max-width: $small-tablet) {
+    width: 90%;
+  }
+}
+
+.app-loader,
+.currency-line,
+.page-title {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.app-loader {
+  width: 100%;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-top: $default-indentation;
+}
+
+.form {
+    max-width: 350px ;
+  @media (max-width: 600px) {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+  border: $yellow 2px solid;
+  background-color: $yellow;
+}
+
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
+  background-color: $white;
+}
+
+[type="radio"]:not(:checked) + span:before,
+[type="radio"]:not(:checked) + span:after {
+  border: 1px spxolid $black;
+}
+
+.input-field {
+  margin-top: 4px;
+}
+
+.switch label input[type="checkbox"]:checked + .lever {
+  background-color: $blue;
+}
+
+.switch label input[type="checkbox"]:checked + .lever:after {
+  background-color: $blue;
+}
+
+input[type="checkbox"]:checked:not(:disabled) ~ .lever:active::before,
+input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
+  transform: scale(1.8);
+  background-color: rgba(115, 149, 189, 0.15);
+}
