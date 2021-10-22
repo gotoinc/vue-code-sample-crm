@@ -12,13 +12,14 @@
 
       <main class="app-content" :class="{ full: !isNavbarOpened }">
         <div class="app-page">
-          <router-view />
+          <router-view :isMobile="windowWidth <= 800" />
         </div>
       </main>
 
       <div class="fixed-action-btn">
         <router-link
           v-tooltip="'Create_new_record_tooltip'"
+          :key="locale"
           class="btn-floating btn-large blue"
           to="/record"
         >
