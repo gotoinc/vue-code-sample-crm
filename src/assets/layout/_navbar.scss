@@ -1,3 +1,6 @@
+@use "../../assets/helpers/vars";
+@import "../../assets/helpers/mixins.scss";
+
 .dropdown-content {
   top: -50px;
   min-width: 179px;
@@ -63,6 +66,7 @@
 
   @media (max-width: $small-tablet) {
     background-color: $white;
+    padding: 0 20px;
   }
 }
 
@@ -122,4 +126,8 @@
   font-size: 13px;
   line-height: 24px;
   font-weight: 700;
+}
+
+nav ul a {
+  padding: 0px 0px 0px 15px;
 }
