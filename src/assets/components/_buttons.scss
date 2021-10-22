@@ -19,11 +19,11 @@
   }
 
   &:hover {
-    background-color: $light-gray;
+    background-color: $light-gray !important;
   }
 
   &:active {
-    background-color: $gray;
+    background-color: $light-gray;
   }
 }
 
@@ -33,6 +33,10 @@
   box-shadow: none;
   margin-right: 30px;
   margin-bottom: 30px;
+
+  &:hover {
+    background-color: $light-gray !important;
+  }
 
   @media (max-width: $small-tablet) {
     margin-right: 0;
@@ -60,6 +64,7 @@
 .btn {
   &:hover {
     background-color: $gray;
+    box-shadow: none;
   }
 
   &:focus {
