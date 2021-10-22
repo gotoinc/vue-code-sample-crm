@@ -124,7 +124,7 @@ export default {
             ...record,
             categoryName: categories.find(c => c.id === record.categoryId)
               .title,
-            typeClass: record.type === "income" ? "green" : "red",
+            typeClass: record.type === "income" ? "income-green" : "outcome-red",
             typeText: record.type === "income" ? "Income" : "Outcome",
           };
         })

@@ -155,9 +155,16 @@
   font-size: 12px !important;
   line-height: 24px !important;
   padding: 2px 12px !important;
-  background-color: $pink !important;
   border-radius: 30px;
   height: 28px !important;
+
+  &.outcome-red {
+    background: $pink;
+  }
+
+  &.income-green {
+    background: #9FDFA2;
+  }
 }
 
 .data-outcome {

@@ -26,7 +26,8 @@
             v-tooltip="'Show_details'"
             class="btn-small btn open-btn"
             @click="$router.push(`/detail/${record.id}`)"
-          > <p class="open-btn-text">{{ "Open" | localizeFilter}}</p>
+          >
+            <p class="open-btn-text">{{ "Open" | localizeFilter }}</p>
             <i class="material-icons">chevron_right</i>
           </button>
         </td>
