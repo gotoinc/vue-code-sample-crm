@@ -7,7 +7,7 @@
 
 .dropdown-content.select-dropdown {
   top: 55px !important;
-  height: 380px !important;
+  max-height: 380px !important;
 }
 
 .select-dropdown.dropdown-content li.selected {
