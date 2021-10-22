@@ -15,7 +15,7 @@
       </p>
 
       <section v-else class="history-table">
-        <h5 class="exchange-title">Exchange rates</h5>
+        <h5 class="exchange-title">{{ "Record_history" | localizeFilter }}</h5>
         <HistoryTable :records="items" />
 
         <Paginate
