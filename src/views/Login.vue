@@ -138,14 +138,3 @@ export default {
   },
 };
 </script>
-
-
-<style lang="scss" scoped>
-  @import "../assets/_vars.scss";
-  @import "../assets/main.scss";
-
-
-
-
-
-</style>

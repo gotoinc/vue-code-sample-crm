@@ -1,0 +1,125 @@
+.dropdown-content {
+  top: -50px;
+  min-width: 179px;
+}
+
+.sidebar-btn {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  z-index: 100;
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 30px;
+    margin: auto;
+    background: $white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.4s ease;
+
+    &.top {
+      transform: translateY(-8px);
+    }
+
+    &.bottom {
+      transform: translateY(8px);
+    }
+  }
+
+  &.active {
+    .top {
+      transform: rotate(-45deg);
+    }
+    .mid {
+      opacity: 0;
+    }
+    .bottom {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.dropdown-trigger.white-text {
+  font-weight: 700;
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px !important;
+  padding: 0 $default-indentation;
+  z-index: 1000;
+  background-color: $blue;
+  box-shadow: none;
+
+  @media (max-width: $small-tablet) {
+    background-color: $white;
+  }
+}
+
+.nav-wrapper {
+  @include justify-space-between-flex-items;
+}
+
+.dropdown-trigger.white-text {
+  @media (max-width: $small-tablet) {
+    color: $black !important;
+
+    &:hover {
+      background-color: $white;
+    }
+  }
+}
+
+.nav-wrapper,
+.navbar-left {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  @include align-center-flex-elements;
+}
+
+.navbar-left > a {
+  margin-right: $default-indentation / 2;
+}
+
+.black-text.router-link-exact-active.router-link-active {
+  background-color: $light-gray;
+}
+
+.nav-date {
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: 500;
+
+  @media (max-width: $small-tablet) {
+    display: none;
+  }
+}
+
+.dropdown-content {
+  border-radius: 14px;
+  box-shadow: none;
+  filter: drop-shadow(2px 14px 34px rgba(41, 63, 141, 0.08));
+
+  li:hover {
+    background-color: #fafbfc;
+  }
+}
+
+.dropdown-content li > a,
+.dropdown-content li > span {
+  font-size: 13px;
+  line-height: 24px;
+  font-weight: 700;
+}

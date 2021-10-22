@@ -29,8 +29,11 @@
         />
       </section>
 
-      <section v-if="!loading" class="chart-section">
-        <ChartPie :data="chartData" :options="chartOptions" />
+      <section v-if="!loading && categories.length" class="chart-section">
+        <div class="pie-wrapper">
+          <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
+        </div>
+        <div class="legend-con" v-html="message" />
       </section>
     </div>
   </div>
@@ -62,18 +65,29 @@ export default {
     categories: [],
     records: [],
     chartData: null,
-    chartOptions: null,
+    message: "test",
   }),
 
   computed: {
     getColors() {
+      const initialColors = [
+        "#428EFF",
+        "#ACB9FF",
+        "#9FDFA2",
+        "#B6C4CF",
+        "#E8B6FF",
+        "#C5EAFF",
+        "#FFE890",
+        "#FFA68A",
+      ];
+      let i = 0;
       return this.categories.map(() => {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        while (color.length < 7) {
-          color += letters[Math.floor(Math.random() * 16)];
+        if (typeof initialColors[i] === "undefined") {
+          i = 0;
         }
-        return color;
+        const result = initialColors[i];
+        i++;
+        return result;
       });
     },
   },
@@ -81,6 +95,14 @@ export default {
   methods: {
     ...mapActions("record", ["fetchRecords"]),
     ...mapActions("category", ["fetchCategories"]),
+
+    setLegend(html) {
+      this.message = html;
+    },
+
+    updateDataset(el, idx) {
+      this.$refs.chartPie.updateChartDataset(el, idx);
+    },
 
     setup(categories) {
       this.setupPagination(
@@ -123,72 +145,14 @@ export default {
     this.setup(this.categories);
 
     this.loading = false;
+
+    this.$nextTick(() =>
+      this.$el.querySelectorAll(".custom-legend-item").forEach((item, i) => {
+        item.addEventListener("click", () => {
+          this.updateDataset(item, i);
+        });
+      })
+    );
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "../assets/main";
-
-.history-wrapper {
-  display: flex;
-  align-items: stretch;
-
-  .history-table {
-    flex-grow: 1;
-    margin-right: 24px;
-
-    table {
-      margin: 0 auto;
-      @media (max-width: 900px) {
-        height: max-content;
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        padding: 0;
-      }
-
-      th {
-        padding-left: 0;
-        padding-right: 0;
-      }
-
-      td {
-        @media (max-width: 900px) {
-          padding-left: 5px;
-          padding-right: 15px;
-        }
-      }
-    }
-  }
-  .chart-section {
-    display: flex;
-    justify-content: center;
-  }
-
-  .history-table,
-  .chart-section {
-    border-radius: 30px;
-    background-color: $white;
-    -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
-    box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
-    padding: 30px;
-
-    @media (max-width: 1300px) {
-      width: 100%;
-    }
-
-    @media (max-width: 900px) {
-      padding: 0;
-    }
-  }
-
-  @media (max-width: 1300px) {
-    flex-direction: column-reverse;
-  }
-}
-
-
-
-</style>
