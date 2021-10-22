@@ -283,7 +283,6 @@ input::-webkit-inner-spin-button {
 table {
   padding: 30px;
   border-radius: 30px;
-  width: 95%;
 
   th {
     padding: 13px 5px;
@@ -515,6 +514,7 @@ textarea {
 .select-dropdown.dropdown-trigger {
 padding: 2px 16px !important;
 }
+
 @media only screen and (min-width: 601px) {
   .categories-row.row .col.m6 {
     max-width: 330px;
@@ -523,38 +523,17 @@ padding: 2px 16px !important;
   }
 }
 
-.create-title {
-  background-color: $light-gray;
-  border-radius: 14px;
-  border: none;
-  padding: 9px 16px;
-  resize: none;
-  margin-top: 5px;
-}
-
 input#limit {
-  border-bottom: none;
-  height: auto;
-  font-size: 13px;
-  line-height: 24px;
-  margin: 0;
-  padding: 4px 0px;
-  font-weight: 400;
-  width: calc(100% - 32px);
-
   &:focus {
     box-shadow: none;
   }
 }
-
 
 .create-col {
   @media (max-width: 1250px) {
     margin-bottom: 30px;
   }
 }
-
-
 
 .edit-label, .create-label {
   font-size: 12px;
@@ -571,20 +550,13 @@ input:-webkit-autofill:focus {
     box-shadow: 0 0 0 1000px $light-gray  inset !important;
 }
 input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
- border-bottom: none;
- box-shadow: none;
- margin: 0;
- font-size: 13px;
- line-height: 24px;
- padding: 4px 16px;
+ @include default-input;
  width: calc(100% - 32px);
- 
 }
 input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
   &:focus {
   border-bottom: none;
   box-shadow: none;
- 
  }
 }
 
@@ -601,11 +573,6 @@ input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before, input[type=
   background-color: rgba(115, 149, 189, 0.15);
 }
 
-.profile-user {
-  height: auto !important;
-  padding: 6px 8px !important;
-}
-
 input#email, input#password, input#name {
   border-radius: 14px;
   background-color: $light-gray;
@@ -613,11 +580,6 @@ input#email, input#password, input#name {
 
 input#name {
   height: 3rem;
-}
-
-#name-inp, #-limit-inp {
-  height: auto;
-  padding: 4px 0;
 }
 
 .login-btn { 
