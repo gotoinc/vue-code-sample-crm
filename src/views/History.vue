@@ -21,9 +21,10 @@
         <Paginate
           v-model="page"
           :page-count="pageCount"
+          :page-range="isMobile ? 1 : 3"
           :click-handler="pageChangeHandle"
-          :prev-text="'Prev' | localizeFilter"
-          :next-text="'Next' | localizeFilter"
+          :prev-text="isMobile ? 'Prev_short' : 'Prev' | localizeFilter"
+          :next-text="isMobile ? 'Next_short' : 'Next' | localizeFilter"
           :container-class="'pagination center'"
           :page-class="'waves-effect'"
         />
@@ -55,6 +56,13 @@ export default {
     ChartPie,
     HistoryTable,
   },
+  props: {
+    isMobile: {
+      required: true,
+      type: Boolean,
+    }
+  },
+
   mixins: [paginationMixin],
 
   metaInfo() {
