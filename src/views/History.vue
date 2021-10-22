@@ -16,7 +16,7 @@
 
       <section v-else class="history-table">
         <h5 class="exchange-title">{{ "Record_history" | localizeFilter }}</h5>
-        <HistoryTable :records="items" />
+        <HistoryTable :records="items" :passedItems="(page - 1) * pageSize"/>
 
         <Paginate
           v-model="page"
@@ -124,7 +124,8 @@ export default {
             ...record,
             categoryName: categories.find(c => c.id === record.categoryId)
               .title,
-            typeClass: record.type === "income" ? "income-green" : "outcome-red",
+            typeClass:
+              record.type === "income" ? "income-green" : "outcome-red",
             typeText: record.type === "income" ? "Income" : "Outcome",
           };
         })
