@@ -29,7 +29,10 @@
         />
       </section>
 
-      <section v-if="!loading && categories.length" class="chart-section">
+      <section
+        v-if="!loading && categories.length && getCategoriesWithOutcomes.length"
+        class="chart-section"
+      >
         <div class="pie-wrapper">
           <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
         </div>
@@ -90,6 +93,16 @@ export default {
         return result;
       });
     },
+    getCategoriesWithOutcomes() {
+      return this.categories.filter(c => {
+        if (this.records.length) {
+          const outcomesOfCategory = this.records.filter(
+            r => r.categoryId === c.id && r.type === "outcome"
+          );
+          if (outcomesOfCategory.length) return c;
+        }
+      });
+    },
   },
 
   methods: {
@@ -118,11 +131,12 @@ export default {
       );
 
       this.chartData = {
-        labels: this.categories.map(c => c.title),
+        labels: this.getCategoriesWithOutcomes.map(c => c.title),
+
         datasets: [
           {
             label: "Outcome by category",
-            data: this.categories.map(c => {
+            data: this.getCategoriesWithOutcomes.map(c => {
               return this.records.reduce((acc, r) => {
                 if (r.categoryId === c.id && r.type === "outcome") {
                   acc += +r.amount;
