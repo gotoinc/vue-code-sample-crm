@@ -29,7 +29,7 @@
               <i v-else class="material-icons right">expand_more</i>
             </a>
 
-            <ul id="dropdown" class="dropdown-content">
+            <ul id="dropdown" class="dropdown-content" @click="$emit('choseFromMenu')">
               <li>
                 <router-link to="/profile" class="black-text">
                   {{ "ProfileTitle" | localizeFilter }}

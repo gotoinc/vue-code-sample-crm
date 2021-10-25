@@ -6,6 +6,7 @@
       <Navbar
         :is-navbar-opened="isNavbarOpened"
         @click="isNavbarOpened = !isNavbarOpened"
+        @choseFromMenu="closeSideBar"
       />
 
       <Sidebar :key="locale" v-model="isNavbarOpened" @click="closeSideBar" />

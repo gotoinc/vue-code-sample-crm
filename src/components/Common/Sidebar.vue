@@ -53,14 +53,6 @@ export default {
       },
     ],
   }),
-  watch: {
-    $route: {
-      handler: function (newVal) {
-        const isLinkFromList = this.links.some(l => l.url === newVal.path);
-        if (!isLinkFromList) this.$emit("click");
-      },
-    },
-  },
   methods: {
     handler: function (navigate, e) {
       navigate(e);
