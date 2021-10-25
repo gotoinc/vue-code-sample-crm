@@ -15,7 +15,7 @@ export default {
     const tooltipWidth = M.Tooltip.getInstance(el).tooltipEl.offsetWidth;
     M.Tooltip.getInstance(el).tooltipEl.setAttribute(
       "style",
-      `left: ${window.innerWidth - tooltipWidth - 23}px;`
+      `left: ${document.body.offsetWidth - tooltipWidth - 23}px;`
     );
   },
 
