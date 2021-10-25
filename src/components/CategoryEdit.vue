@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Edit</h4>
+        <h4>{{ "Edit" | localizeFilter }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
