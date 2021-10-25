@@ -356,7 +356,7 @@ input#limit {
 
 [type="radio"]:not(:checked) + span:before,
 [type="radio"]:not(:checked) + span:after {
-  border: 1px spxolid $black;
+  border: 1px solid $black;
 }
 
 .input-field {
