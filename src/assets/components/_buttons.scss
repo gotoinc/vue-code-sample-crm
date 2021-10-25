@@ -27,19 +27,22 @@
   }
 }
 
-.btn-floating.btn-large.blue {
-  border-radius: 14px;
-  background-color: $light-blue !important;
-  box-shadow: none;
-  margin-right: 30px;
-  margin-bottom: 30px;
+.fixed-action-btn {
+  right: 53px;
 
-  &:hover {
-    background-color: $light-gray !important;
+  .btn-floating.btn-large.blue {
+    border-radius: 14px;
+    background-color: $light-blue !important;
+    box-shadow: none;
+    margin-bottom: 30px;
+
+    &:hover {
+      background-color: $light-gray !important;
+    }
   }
 
   @media (max-width: $small-tablet) {
-    margin-right: 0;
+    right: 23px;
   }
 }
 

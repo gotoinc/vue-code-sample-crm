@@ -11,6 +11,14 @@ export default {
     }
   },
 
+  update(el) {
+    const tooltipWidth = M.Tooltip.getInstance(el).tooltipEl.offsetWidth;
+    M.Tooltip.getInstance(el).tooltipEl.setAttribute(
+      "style",
+      `left: ${window.innerWidth - tooltipWidth - 23}px;`
+    );
+  },
+
   unbind(el) {
     const tooltip = M.Tooltip.getInstance(el);
 

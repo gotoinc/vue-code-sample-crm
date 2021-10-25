@@ -382,4 +382,8 @@ input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
   color: $black;
   border-radius: 14px;
   margin-left: -53px;
+
+  @media (max-width: $small-tablet) {
+    margin-left: -23px;
+  }
 }
