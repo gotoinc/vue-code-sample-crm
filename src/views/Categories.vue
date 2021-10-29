@@ -6,7 +6,7 @@
     <section>
       <Loader v-if="loading" />
 
-      <div v-else class="row">
+      <div v-else class="row categories-row">
         <CategoryCreate @created="addNewCategory" />
 
         <CategoryEdit

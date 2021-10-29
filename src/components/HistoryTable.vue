@@ -10,25 +10,25 @@
         <th>{{ "Open" | localizeFilter }}</th>
       </tr>
     </thead>
-
     <tbody>
       <tr v-for="(record, idx) in records" :key="record.id">
-        <td>{{ idx + 1 }}</td>
+        <td>{{ (idx + 1) + passedItems }}</td>
         <td>{{ record.amount | currencyFilter }}</td>
         <td>{{ record.date | dateFilter("datetime") }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
-          <span class="white-text badge" :class="record.typeClass">
+          <span class="white-text badge table-type" :class="record.typeClass">
             {{ record.typeText | localizeFilter }}
           </span>
         </td>
         <td>
           <button
             v-tooltip="'Show_details'"
-            class="btn-small btn"
+            class="btn-small btn open-btn"
             @click="$router.push(`/detail/${record.id}`)"
           >
-            <i class="material-icons">open_in_new</i>
+            <p class="open-btn-text">{{ "Open" | localizeFilter }}</p>
+            <i class="material-icons">chevron_right</i>
           </button>
         </td>
       </tr>
@@ -45,6 +45,10 @@ export default {
       required: true,
       type: Array,
     },
+    passedItems: {
+      required: true,
+      type: Number,
+    }
   },
 };
 </script>

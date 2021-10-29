@@ -1,48 +1,52 @@
 <template>
-  <nav class="navbar orange lighten-1">
-    <div class="nav-wrapper">
-      <div class="navbar-left">
-        <a href="#" @click.prevent="$emit('click')">
-          <div class="sidebar-btn" :class="{ active: isNavbarOpened }">
-            <span class="top"></span>
-            <span class="mid"></span>
-            <span class="bottom"></span>
-          </div>
-        </a>
-        <span class="black-text">{{ date | dateFilter("datetime") }}</span>
-      </div>
-
-      <ul class="right hide-on-small-and-down">
-        <li>
-          <a
-            ref="dropdown"
-            class="dropdown-trigger black-text"
-            href="#"
-            data-target="dropdown"
-          >
-            {{ info.name }}
-            <i class="material-icons right">arrow_drop_down</i>
+  <div class="navbar-fixed">
+    <nav class="navbar">
+      <div class="nav-wrapper">
+        <div class="navbar-left">
+          <a href="#" @click.prevent="$emit('click')">
+            <div class="sidebar-btn" :class="{ active: isNavbarOpened }">
+              <span class="top"></span>
+              <span class="mid"></span>
+              <span class="bottom"></span>
+            </div>
           </a>
+          <span class="nav-date">{{ date | dateFilter("datetime") }}</span>
+        </div>
 
-          <ul id="dropdown" class="dropdown-content">
-            <li>
-              <router-link to="/profile" class="black-text">
-                <i class="material-icons">account_circle</i
-                >{{ "ProfileTitle" | localizeFilter }}
-              </router-link>
-            </li>
-            <li class="divider" tabindex="-1"></li>
-            <li>
-              <a href="#" class="black-text" @click.prevent="logoutUser">
-                <i class="material-icons">assignment_return</i
-                >{{ "LogoutTitle" | localizeFilter }}
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
+        <ul class="right">
+          <li>
+            <a
+              ref="dropdown"
+              class="dropdown-trigger white-text"
+              href="#"
+              data-target="dropdown"
+            >
+              {{ info.name }}
+
+              <i v-if="isDropdownOpened" class="material-icons right">
+                expand_less
+              </i>
+              <i v-else class="material-icons right">expand_more</i>
+            </a>
+
+            <ul id="dropdown" class="dropdown-content" @click="$emit('choseFromMenu')">
+              <li>
+                <router-link to="/profile" class="black-text">
+                  {{ "ProfileTitle" | localizeFilter }}
+                </router-link>
+              </li>
+
+              <li>
+                <a href="#" class="black-text" @click.prevent="logoutUser">
+                  {{ "LogoutTitle" | localizeFilter }}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -62,6 +66,7 @@ export default {
     date: new Date(),
     interval: null,
     dropdown: null,
+    isDropdownOpened: false,
   }),
 
   methods: {
@@ -75,6 +80,16 @@ export default {
 
   computed: {
     ...mapState("info", ["info"]),
+  },
+  watch: {
+    dropdown: {
+      deep: true,
+      handler: function (newValue) {
+        if (newValue) {
+          this.isDropdownOpened = newValue.isOpen;
+        }
+      },
+    },
   },
 
   mounted() {
@@ -95,51 +110,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.dropdown-content {
-  min-width: 160px;
-}
-
-.sidebar-btn {
-  width: 25px;
-  height: 25px;
-  position: relative;
-  z-index: 100;
-  cursor: pointer;
-
-  span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    margin: auto;
-    background: black;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition: all 0.4s ease;
-
-    &.top {
-      transform: translateY(-8px);
-    }
-
-    &.bottom {
-      transform: translateY(8px);
-    }
-  }
-
-  &.active {
-    .top {
-      transform: rotate(-45deg);
-    }
-    .mid {
-      opacity: 0;
-    }
-    .bottom {
-      transform: rotate(45deg);
-    }
-  }
-}
-</style>

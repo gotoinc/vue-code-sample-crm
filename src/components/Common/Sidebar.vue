@@ -3,16 +3,14 @@
     <router-link
       v-for="(link, i) in links"
       :key="i"
-      v-slot="{ navigate }"
+      v-slot="{ href, navigate, isExactActive }"
       custom
-      active-class="active"
       :to="link.url"
-      :exact="link.exact"
     >
-      <li>
+      <li :class="[isExactActive && 'router-link-exact-active active']">
         <a
-          class="waves-effect waves-orange pointer"
-          @click="navigate"
+          :href="href"
+          @click="handler(navigate, $event)"
           @keypress.enter="navigate"
         >
           {{ link.title }}
@@ -55,7 +53,11 @@ export default {
       },
     ],
   }),
+  methods: {
+    handler: function (navigate, e) {
+      navigate(e);
+      this.$emit("click");
+    },
+  },
 };
 </script>
-
-<style scoped></style>

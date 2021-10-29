@@ -1,0 +1,222 @@
+.breadcrumb-wrap a,
+.breadcrumb-wrap a:before {
+  font-weight: 500;
+  font-size: 30px;
+  color: $black !important;
+
+  @media (max-width: $small-tablet) {
+    font-size: 20px;
+  }
+}
+
+.breadcrumb-wrap {
+  padding-bottom: 16px;
+  border-bottom: 1px solid $light-gray;
+}
+
+.breadcrumb-wrap,
+.breadcrumb-wrap a,
+.breadcrumb-wrap a:before {
+  @include align-center-flex-elements;
+}
+
+.breadcrumb-wrap {
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.breadcrumb-wrap a,
+.breadcrumb-wrap a:before {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: $black !important;
+}
+
+.history-wrapper {
+  display: flex;
+  align-items: stretch;
+
+  .history-table {
+    flex-grow: 1;
+    margin-right: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+
+    @media (max-width: 900px) {
+      overflow-x: scroll;
+    }
+
+    table {
+      margin: 0 auto;
+      @media (max-width: 900px) {
+        height: max-content;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0;
+      }
+
+      th {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      td {
+        @media (max-width: 900px) {
+          padding-left: 5px;
+          padding-right: 15px;
+        }
+      }
+    }
+  }
+  .pie-wrapper canvas {
+    position: relative;
+    width: fit-content;
+  }
+
+  .history-table,
+  .chart-section {
+    border-radius: 30px;
+    background-color: $white;
+    -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+    padding: 30px;
+
+    @media (max-width: 1300px) {
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.pagination li.active {
+  background-color: $blue !important;
+}
+
+.pagination {
+  margin-top: 30px;
+
+  li {
+    a {
+      font-size: 13px;
+      font-weight: 400;
+      color: $black;
+    }
+  }
+}
+
+// Chart component styles
+.custom-legend-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  row-gap: 20px;
+
+  .custom-legend-item {
+    width: fit-content;
+    max-width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .custom-legend-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+
+    .chart-legend-label-text {
+      font-weight: 500;
+    }
+  }
+}
+
+.exchange-title {
+  font-weight: 500;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+.table-type {
+  font-size: 12px !important;
+  line-height: 24px !important;
+  padding: 2px 12px !important;
+  border-radius: 30px;
+  height: 28px !important;
+
+  &.outcome-red {
+    background: $pink;
+  }
+
+  &.income-green {
+    background: #9FDFA2;
+  }
+}
+
+.data-outcome {
+  font-size: 12px;
+  line-height: 18px;
+  color: $gray;
+  font-weight: 400;
+}
+
+.outcome-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+  border-bottom: 0.7px dashed $dark-gray;
+}
+
+.card-outcome {
+  background-color: $white !important;
+  margin-top: 30px;
+  -webkit-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+  box-shadow: -6px 42px 100px -42px rgba(34, 60, 80, 0.2);
+  border-radius: 30px;
+  padding: 30px;
+  min-width: 280px;
+}
+
+.card .card-content {
+  .name {
+    color: $black;
+    font-size: 13px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+
+  .outcome-value {
+    color: $black;
+    font-size: 13px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+}
+
+.card-content {
+  @media (max-width: $small-tablet) {
+    padding: 12px !important;
+  }
+}
+
+.row .col {
+  @media (max-width: $small-tablet) {
+    padding: 0;
+  }
+}

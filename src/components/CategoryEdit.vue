@@ -2,27 +2,34 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Edit</h4>
+        <h4>{{ "Edit" | localizeFilter }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
-        <div class="input-field">
+        <label class="edit-label">
+          {{ "Choose_category_label" | localizeFilter }}
+        </label>
+        <div
+          class="input-field"
+          :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
+        >
           <select ref="select" v-model="current">
             <option v-for="c in categories" :key="c.id" :value="c.id">
               {{ c.title }}
             </option>
           </select>
-          <label>{{ "Choose_category_label" | localizeFilter }}</label>
         </div>
-
-        <div class="input-field">
+        <label class="edit-label" for="name">
+          {{ "Category_title" | localizeFilter }}
+        </label>
+        <div class="input-field create-title">
           <input
-            id="name"
+            id="name-inp"
             v-model="title"
             type="text"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-          <label for="name">{{ "Category_title" | localizeFilter }}</label>
+
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -30,15 +37,17 @@
             {{ "Enter_title_message" | localizeFilter }}
           </span>
         </div>
-
-        <div class="input-field">
+        <label class="edit-label" for="limit">{{
+          "Limit" | localizeFilter
+        }}</label>
+        <div class="input-field create-title">
           <input
             id="limit"
             v-model.number="limit"
             type="number"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-          <label for="limit">{{ "Limit" | localizeFilter }}</label>
+
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
@@ -48,9 +57,8 @@
           </span>
         </div>
 
-        <button class="btn waves-effect waves-light" type="submit">
+        <button class="btn waves-effect waves-light create" type="submit">
           {{ "Update" | localizeFilter }}
-          <i class="material-icons right">send</i>
         </button>
       </form>
     </div>
@@ -77,6 +85,7 @@ export default {
     title: "",
     limit: 100,
     current: null,
+    isDropdownOpened: false,
   }),
 
   validations: {
@@ -116,6 +125,14 @@ export default {
       this.title = title;
       this.limit = limit;
     },
+    select: {
+      deep: true,
+      handler: function (newVal) {
+        if (newVal && newVal.dropdown) {
+          this.isDropdownOpened = newVal.dropdown.isOpen;
+        }
+      },
+    },
   },
 
   created() {
@@ -137,3 +154,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/main";
+
+.arrow-down::v-deep {
+  .select-wrapper:after {
+    @include select-icon-arrow-reset;
+    background-image: $arrow-down;
+  }
+}
+
+.arrow-up::v-deep {
+  .select-wrapper:after {
+    @include select-icon-arrow-reset;
+    background-image: $arrow-up;
+  }
+}
+</style>

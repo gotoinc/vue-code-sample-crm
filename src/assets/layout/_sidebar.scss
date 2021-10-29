@@ -1,0 +1,70 @@
+.app-sidenav {
+  box-shadow: 10px 20px 64px rgba(30, 70, 129, 0.1);
+  padding-top: 28px;
+  top: 64px;
+  width: 250px;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  bottom: 0 !important;
+  height: auto !important;
+  z-index: 11;
+
+  @media (max-width: $small-tablet) {
+    width: 100%;
+    text-align: center;
+    height: 100vh;
+  }
+
+  &.open {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+
+  li {
+    cursor: pointer;
+
+    @media (max-width: $small-tablet) {
+      padding-bottom: 5px;
+      padding-top: 5px;
+    }
+    a {
+      font-size: 13px;
+      color: $black;
+      font-weight: 400;
+
+      &:hover {
+        @media (max-width: $small-tablet) {
+          text-decoration: underline;
+        }
+      }
+
+      @media (max-width: $small-tablet) {
+        font-size: 46px;
+        color: $black;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 0;
+      }
+
+      @media (max-width: $mobile) {
+        font-size: 32px;
+        color: $black;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+    }
+
+    &.router-link-exact-active.active {
+      a {
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.sidenav li > a:hover {
+  @media (max-width: $small-tablet) {
+    background-color: transparent;
+  }
+}

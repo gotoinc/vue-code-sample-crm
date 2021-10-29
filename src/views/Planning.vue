@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "Planning" | localizeFilter }}</h3>
-      <h4>{{ info.bill | currencyFilter("EUR") }}</h4>
+      <h3 class="planning">{{ "Planning" | localizeFilter }}</h3>
+      <h4 class="planning-sum">{{ info.bill | currencyFilter("EUR") }}</h4>
     </div>
 
     <Loader v-if="loading" />
@@ -14,10 +14,15 @@
 
     <section v-else>
       <div v-for="cat in categories" :key="cat.id">
-        <p>
-          <strong>{{ cat.title }}</strong>
-          {{ cat.spend | currencyFilter }} из {{ cat.limit | currencyFilter }}
-        </p>
+        <div class="categories-name">
+          <p>
+            <strong>{{ cat.title }}</strong>
+          </p>
+          <p>
+            {{ cat.spend | currencyFilter }} {{ "Out_of" | localizeFilter }}
+            {{ cat.limit | currencyFilter }}
+          </p>
+        </div>
         <div v-tooltip.noloc="cat.tooltip" class="progress">
           <div
             class="determinate"
@@ -72,8 +77,9 @@ export default {
 
       const persent = (100 * spend) / cat.limit;
       const progressPercent = persent > 100 ? 100 : persent;
-      const progressColor =
-        persent < 60 ? "green" : persent < 100 ? "yellow" : "red";
+      let progressColor = "progress";
+      progressColor +=
+        persent < 60 ? "-green" : persent < 100 ? "-yellow" : "-red";
 
       const toolTipValue = cat.limit - spend;
       const tooltip = `${
@@ -95,3 +101,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.progress {
+  &-green {
+    background: #9fdfa2;
+  }
+  &-yellow {
+    background: #ffe788;
+  }
+  &-red {
+    background: #ff847b;
+  }
+}
+</style>

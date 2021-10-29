@@ -6,19 +6,21 @@
       <Navbar
         :is-navbar-opened="isNavbarOpened"
         @click="isNavbarOpened = !isNavbarOpened"
+        @choseFromMenu="closeSideBar"
       />
 
-      <Sidebar :key="locale" v-model="isNavbarOpened" />
+      <Sidebar :key="locale" v-model="isNavbarOpened" @click="closeSideBar" />
 
       <main class="app-content" :class="{ full: !isNavbarOpened }">
         <div class="app-page">
-          <router-view />
+          <router-view :is-mobile="windowWidth <= 800" />
         </div>
       </main>
 
       <div class="fixed-action-btn">
         <router-link
-          v-tooltip="'Create_new_record_tooltip'"
+          :key="locale"
+          v-tooltip.customClass="'Create_new_record_tooltip'"
           class="btn-floating btn-large blue"
           to="/record"
         >
@@ -46,6 +48,7 @@ export default {
   data: () => ({
     isNavbarOpened: false,
     loading: true,
+    windowWidth: window.innerWidth,
   }),
 
   computed: {
@@ -59,6 +62,13 @@ export default {
 
   methods: {
     ...mapActions("info", ["fetchInfo"]),
+
+    closeSideBar() {
+      if (this.windowWidth <= 800) this.isNavbarOpened = false;
+    },
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
   },
 
   watch: {
@@ -73,6 +83,14 @@ export default {
     }
 
     this.loading = false;
+
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
   },
 };
 </script>
