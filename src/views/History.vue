@@ -16,7 +16,7 @@
 
       <section v-else class="history-table">
         <h5 class="exchange-title">{{ "Record_history" | localizeFilter }}</h5>
-        <HistoryTable :records="items" :passedItems="(page - 1) * pageSize"/>
+        <HistoryTable :records="items" :passed-items="(page - 1) * pageSize" />
 
         <Paginate
           v-model="page"
@@ -56,14 +56,14 @@ export default {
     ChartPie,
     HistoryTable,
   },
+
+  mixins: [paginationMixin],
   props: {
     isMobile: {
       required: true,
       type: Boolean,
-    }
+    },
   },
-
-  mixins: [paginationMixin],
 
   metaInfo() {
     return {

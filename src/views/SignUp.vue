@@ -14,7 +14,6 @@
               ($v.email.$dirty && !$v.email.email),
           }"
         />
-        
 
         <small
           v-if="$v.email.$dirty && !$v.email.required"
@@ -30,7 +29,7 @@
           Email should be valid
         </small>
       </div>
- <label class="edit-label"  for="password">Password</label>
+      <label class="edit-label" for="password">Password</label>
       <div class="input-field">
         <input
           id="password"
@@ -42,8 +41,6 @@
               ($v.password.$dirty && !$v.password.minLength),
           }"
         />
-
-       
 
         <small
           v-if="$v.password.$dirty && !$v.password.required"
@@ -61,7 +58,7 @@
           {{ password.length }}
         </small>
       </div>
- <label class="edit-label" for="name">Name</label>
+      <label class="edit-label" for="name">Name</label>
       <div class="input-field">
         <input
           id="name"
@@ -69,7 +66,7 @@
           type="text"
           :class="{ invalid: $v.name.$dirty && !$v.name.required }"
         />
-       
+
         <small
           v-if="$v.name.$dirty && !$v.name.required"
           class="helper-text invalid"
@@ -87,9 +84,11 @@
 
     <div class="card-action">
       <div>
-        <button class="btn waves-effect waves-light auth-submit create login-btn" type="submit">
+        <button
+          class="btn waves-effect waves-light auth-submit create login-btn"
+          type="submit"
+        >
           Sign up
-          
         </button>
       </div>
 
@@ -168,9 +167,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/main.scss";
+@import "../assets/main.scss";
 
-  .helper-text.invalid {
-    color: $color-invalid;
-  }
+.helper-text.invalid {
+  color: $color-invalid;
+}
 </style>

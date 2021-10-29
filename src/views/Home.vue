@@ -3,7 +3,10 @@
     <div class="page-title">
       <h3>{{ "Account" | localizeFilter }}</h3>
 
-      <button @click="refresh" class="btn waves-effect waves-light btn-small reload">
+      <button
+        class="btn waves-effect waves-light btn-small reload"
+        @click="refresh"
+      >
         <i class="material-icons">refresh</i>
       </button>
     </div>
@@ -33,14 +36,14 @@ export default {
     };
   },
 
-  data: () => ({
-    loading: true,
-  }),
-
   components: {
     HomeBill,
     HomeCurrency,
   },
+
+  data: () => ({
+    loading: true,
+  }),
 
   computed: {
     ...mapState("info", ["currency"]),

@@ -225,7 +225,6 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/main";
 
-
 .arrow-down::v-deep {
   .select-wrapper:after {
     @include select-icon-arrow-reset;

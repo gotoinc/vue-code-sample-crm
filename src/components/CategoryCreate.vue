@@ -5,16 +5,18 @@
         <h4>{{ "Create" | localizeFilter }}</h4>
       </div>
 
-      <form @submit.prevent="submitHandler"> 
-        <label class="create-label" for="name">{{ "Category_title" | localizeFilter }}</label>
+      <form @submit.prevent="submitHandler">
+        <label class="create-label" for="name">{{
+          "Category_title" | localizeFilter
+        }}</label>
         <div class="input-field create-title">
-          <input 
+          <input
             id="name-inp"
             v-model="title"
             type="text"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-         
+
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -22,7 +24,9 @@
             {{ "Enter_title_message" | localizeFilter }}
           </span>
         </div>
-      <label class="edit-label" for="limit">{{ "Limit" | localizeFilter }}</label>
+        <label class="edit-label" for="limit">{{
+          "Limit" | localizeFilter
+        }}</label>
         <div class="input-field create-title">
           <input
             id="limit"
@@ -30,7 +34,7 @@
             type="number"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-         
+
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
@@ -42,7 +46,6 @@
 
         <button class="btn waves-effect waves-light create" type="submit">
           {{ "Create" | localizeFilter }}
-         
         </button>
       </form>
     </div>

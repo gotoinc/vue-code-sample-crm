@@ -22,21 +22,25 @@
           >
             <div class="card-content">
               <div class="outcome-row">
-                <p class="name"> {{ "Description" | localizeFilter }} </p>
-                <p class="outcome-value"> {{ record.description }} </p>
+                <p class="name">{{ "Description" | localizeFilter }}</p>
+                <p class="outcome-value">{{ record.description }}</p>
               </div>
 
               <div class="outcome-row">
-                <p class="name"> {{ "Sum" | localizeFilter }} </p>
-                <p class="outcome-value"> {{ record.amount | currencyFilter }} </p>
+                <p class="name">{{ "Sum" | localizeFilter }}</p>
+                <p class="outcome-value">
+                  {{ record.amount | currencyFilter }}
+                </p>
               </div>
 
               <div class="outcome-row">
-                <p class="name"> {{ "Category" | localizeFilter }} </p>
-                <p class="outcome-value"> {{ record.categoryName }} </p>
+                <p class="name">{{ "Category" | localizeFilter }}</p>
+                <p class="outcome-value">{{ record.categoryName }}</p>
               </div>
 
-              <small class="data-outcome">{{ record.date | dateFilter("datetime") }}</small>
+              <small class="data-outcome">{{
+                record.date | dateFilter("datetime")
+              }}</small>
             </div>
           </div>
         </div>

@@ -5,14 +5,17 @@
     </div>
 
     <form class="form" @submit.prevent="submitHandler">
-      <label class="edit-label" for="description">{{ "Name" | localizeFilter }}</label>
+      <label class="edit-label" for="description">{{
+        "Name" | localizeFilter
+      }}</label>
       <div class="input-field create-title profile-user">
-        <input class="profile-user"          
+        <input
           v-model="name"
+          class="profile-user"
           type="text"
           :class="{ invalid: $v.name.$dirty && !$v.name.required }"
         />
-        
+
         <small
           v-if="$v.name.$dirty && !$v.name.required"
           class="helper-text invalid"
@@ -32,7 +35,6 @@
 
       <button class="btn waves-effect waves-light create" type="submit">
         {{ "Update" | localizeFilter }}
-      
       </button>
     </form>
   </div>

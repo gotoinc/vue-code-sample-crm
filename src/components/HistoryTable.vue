@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <tr v-for="(record, idx) in records" :key="record.id">
-        <td>{{ (idx + 1) + passedItems }}</td>
+        <td>{{ idx + 1 + passedItems }}</td>
         <td>{{ record.amount | currencyFilter }}</td>
         <td>{{ record.date | dateFilter("datetime") }}</td>
         <td>{{ record.categoryName }}</td>
@@ -48,7 +48,7 @@ export default {
     passedItems: {
       required: true,
       type: Number,
-    }
+    },
   },
 };
 </script>
