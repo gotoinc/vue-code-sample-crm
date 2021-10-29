@@ -15,10 +15,10 @@
       <ul class="right hide-on-small-and-down">
         <li>
           <a
+            ref="dropdown"
             class="dropdown-trigger black-text"
             href="#"
             data-target="dropdown"
-            ref="dropdown"
           >
             {{ info.name }}
             <i class="material-icons right">arrow_drop_down</i>
