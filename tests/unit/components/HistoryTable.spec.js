@@ -1,19 +1,19 @@
 import { shallowMount } from "@vue/test-utils";
-import CategoryCreate from "@/components/CategoryCreate";
+import HistoryTable from "@/components/HistoryTable";
 import Vue from "vue";
 import localizeFilter from "@/filters/localize.filter";
+import currencyFilter from "@/filters/currency.filter";
 Vue.filter("localizeFilter", localizeFilter);
-import Vuelidate from "vuelidate";
-Vue.use(Vuelidate);
+Vue.filter("currencyFilter", currencyFilter);
 
-describe("CategoryCreate", () => {
+describe("HistoryTable", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(CategoryCreate, {
+    wrapper = shallowMount(HistoryTable, {
       propsData: {
-        title: "Test title",
-        limit: 100,
+        records: [],
       },
+      stubs: ["router-link"],
     });
   });
 

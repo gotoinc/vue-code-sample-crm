@@ -1,18 +1,17 @@
 import { shallowMount } from "@vue/test-utils";
-import CategoryCreate from "@/components/CategoryCreate";
+import HomeBill from "@/components/HomeBill";
 import Vue from "vue";
 import localizeFilter from "@/filters/localize.filter";
+import currencyFilter from "@/filters/currency.filter";
 Vue.filter("localizeFilter", localizeFilter);
-import Vuelidate from "vuelidate";
-Vue.use(Vuelidate);
+Vue.filter("currencyFilter", currencyFilter);
 
-describe("CategoryCreate", () => {
+describe("HomeBill", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(CategoryCreate, {
+    wrapper = shallowMount(HomeBill, {
       propsData: {
-        title: "Test title",
-        limit: 100,
+        rates: {},
       },
     });
   });

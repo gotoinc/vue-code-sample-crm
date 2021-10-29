@@ -3,8 +3,8 @@
     <router-link
       v-for="(link, i) in links"
       :key="i"
-      custom
       v-slot="{ navigate }"
+      custom
       active-class="active"
       :to="link.url"
       :exact="link.exact"

@@ -18,8 +18,8 @@
         <div class="input-field">
           <input
             id="name"
-            type="text"
             v-model="title"
+            type="text"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
           <label for="name">{{ "Category_title" | localizeFilter }}</label>
@@ -34,8 +34,8 @@
         <div class="input-field">
           <input
             id="limit"
-            type="number"
             v-model.number="limit"
+            type="number"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
           <label for="limit">{{ "Limit" | localizeFilter }}</label>
