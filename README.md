@@ -34,7 +34,11 @@ firebase deploy
 ## Usage
 Simple accounting system to track users’s personal income and expenses. 
 The app helps user to plan a budget, distribute finances and keep records of financial transactions.
-
+### Credentials for the test account
+```
+email: test.user@test.test
+password: Test12345
+```
 ## Project structure
 
 
