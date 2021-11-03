@@ -79,7 +79,7 @@ export default {
       const progressPercent = persent > 100 ? 100 : persent;
       let progressColor = "progress";
       progressColor +=
-        persent < 60 ? "-green" : persent < 100 ? "-yellow" : "-red";
+        persent < 60 ? "-green" : persent <= 100 ? "-yellow" : "-red";
 
       const toolTipValue = cat.limit - spend;
       const tooltip = `${
