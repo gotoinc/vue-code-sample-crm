@@ -89,7 +89,8 @@ export default {
     },
   },
 
-  mounted() {
+  async mounted() {
+    await this.$nextTick();
     this.name = this.info.name;
     this.isRuLocale = this.info.locale === "ru-RU";
 

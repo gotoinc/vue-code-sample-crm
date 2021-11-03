@@ -10,9 +10,9 @@
         <CategoryCreate @created="addNewCategory" />
 
         <CategoryEdit
-          v-if="categories.length"
-          :key="categories.length + updateCount"
-          :categories="categories"
+          v-if="categoriesList.length"
+          :key="categoriesList.length + updateCount"
+          :categories="categoriesList"
           @updated="updateCategory"
         />
 
@@ -49,7 +49,11 @@ export default {
     loading: true,
     updateCount: 0,
   }),
-
+  computed: {
+    categoriesList() {
+      return this.categories ? this.categories : [];
+    },
+  },
   methods: {
     ...mapActions("category", ["fetchCategories"]),
 

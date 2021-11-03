@@ -101,7 +101,7 @@ export default {
   },
 
   mounted() {
-    // M.updateTextFields();
+    M.updateTextFields();
   },
 };
 </script>

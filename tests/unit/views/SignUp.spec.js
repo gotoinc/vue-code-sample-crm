@@ -1,21 +1,19 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
-import Login from "@/views/Login";
+import SignUp from "@/views/SignUp";
 import Vue from "vue";
 import VueRouter from "vue-router";
-import localizeFilter from "@/filters/localize.filter";
 import { routes } from "@/router";
-Vue.filter("localizeFilter", localizeFilter);
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 
-describe("Login", () => {
+describe("SignUp", () => {
   const router = new VueRouter({ routes });
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Login, {
+    wrapper = shallowMount(SignUp, {
       localVue,
       router,
       stubs: ["router-link"],

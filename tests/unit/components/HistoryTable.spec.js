@@ -12,6 +12,7 @@ describe("HistoryTable", () => {
     wrapper = shallowMount(HistoryTable, {
       propsData: {
         records: [],
+        passedItems: 1,
       },
       stubs: ["router-link"],
     });
