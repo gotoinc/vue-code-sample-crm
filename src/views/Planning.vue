@@ -2,7 +2,9 @@
   <div>
     <div class="page-title">
       <h3 class="planning">{{ "Planning" | localizeFilter }}</h3>
-      <h4 class="planning-sum">{{ info.bill | currencyFilter("EUR") }}</h4>
+      <h4 class="planning-sum">
+        {{ "Balance" | localizeFilter }}: {{ info.bill | currencyFilter("EUR") }}
+      </h4>
     </div>
 
     <Loader v-if="loading" />
