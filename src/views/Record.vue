@@ -57,11 +57,16 @@
           id="amount"
           v-model.number="amount"
           type="number"
-          :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
+          :class="{
+            invalid:
+              $v.amount.$dirty && (!$v.amount.minValue || !$v.amount.required),
+          }"
         />
 
         <span
-          v-if="$v.amount.$dirty && !$v.amount.minValue"
+          v-if="
+            $v.amount.$dirty && (!$v.amount.minValue || !$v.amount.required)
+          "
           class="helper-text invalid"
         >
           {{ "Min_value_message" | localizeFilter }}
@@ -81,12 +86,12 @@
             invalid: $v.description.$dirty && !$v.description.required,
           }"
         />
-        <label
+        <span
           v-if="$v.description.$dirty && !$v.description.required"
           class="helper-text invalid"
         >
           {{ "Description_required_message" | localizeFilter }}
-        </label>
+        </span>
       </div>
 
       <button class="btn waves-effect waves-light create" type="submit">
@@ -126,6 +131,7 @@ export default {
       required,
     },
     amount: {
+      required,
       minValue: minValue(1),
     },
   },
@@ -198,6 +204,9 @@ export default {
         }
       },
     },
+    category: function () {
+      this.clear();
+    },
   },
 
   async mounted() {
@@ -224,7 +233,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/main";
-
 
 .arrow-down::v-deep {
   .select-wrapper:after {
