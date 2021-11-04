@@ -55,5 +55,6 @@
   "Out_of" : "out of",
   "Prev_short" : "Prev",
   "Next_short" : "Next",
-  "Edit" : "Edit"
+  "Edit" : "Edit",
+  "Chart_expenses_title" : "Expenses by category"
  }

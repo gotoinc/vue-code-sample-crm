@@ -35,6 +35,8 @@
         class="chart-section"
       >
         <div class="pie-wrapper">
+          <h5 class="exchange-title">{{ "Chart_expenses_title" | localizeFilter }}</h5>
+
           <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
         </div>
         <div class="legend-con" v-html="message" />

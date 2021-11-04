@@ -55,5 +55,6 @@
   "Out_of" : "из",
   "Prev_short" : "Пред",
   "Next_short" : "След",
-  "Edit" : "Редактировать"
+  "Edit" : "Редактировать",
+  "Chart_expenses_title" : "Расходы по категориям"
 }
