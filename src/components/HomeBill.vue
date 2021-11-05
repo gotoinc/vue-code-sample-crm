@@ -3,7 +3,7 @@
     <div class="card white bill-card">
       <div class="card-content ">
         <span class="card-title">
-          {{ "Currency_account" | localizeFilter }}
+          {{ $t("Currency_account") }}
         </span>
 
         <p

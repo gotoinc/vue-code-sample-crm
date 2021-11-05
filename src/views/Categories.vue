@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "Categories" | localizeFilter }}</h3>
+      <h3>{{ $t("Categories") }}</h3>
     </div>
     <section>
       <Loader v-if="loading" />
@@ -17,7 +17,7 @@
         />
 
         <p v-else class="center">
-          {{ "Message_no_categories" | localizeFilter }}
+          {{ $t("Message_no_categories") }}
         </p>
       </div>
     </section>

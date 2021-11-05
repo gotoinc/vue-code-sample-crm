@@ -4,15 +4,15 @@
       <div class="card-content">
         <div class="card-header">
           <span class="card-title">
-            {{ "Exchange_rates" | localizeFilter }}
+            {{ $t("Exchange_rates") }}
           </span>
         </div>
         <table class="exchange-table">
           <thead>
             <tr>
-              <th>{{ "Currency" | localizeFilter }}</th>
-              <th>{{ "Rate" | localizeFilter }}</th>
-              <th>{{ "Date" | localizeFilter }}</th>
+              <th>{{ $t("Currency") }}</th>
+              <th>{{ $t("Rate") }}</th>
+              <th>{{ $t("Date") }}</th>
             </tr>
           </thead>
 

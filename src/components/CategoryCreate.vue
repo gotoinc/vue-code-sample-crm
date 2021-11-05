@@ -2,27 +2,29 @@
   <div class="col s12 m6 create-col">
     <div>
       <div class="page-subtitle">
-        <h4>{{ "Create" | localizeFilter }}</h4>
+        <h4>{{ $t("Create") }}</h4>
       </div>
 
-      <form @submit.prevent="submitHandler"> 
-        <label class="create-label" for="name">{{ "Category_title" | localizeFilter }}</label>
+      <form @submit.prevent="submitHandler">
+        <label class="create-label" for="name">
+          {{ $t("Category_title") }}
+        </label>
         <div class="input-field create-title">
-          <input 
+          <input
             id="name-inp"
             v-model="title"
             type="text"
             :class="{ invalid: $v.title.$dirty && !$v.title.required }"
           />
-         
+
           <span
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
           >
-            {{ "Enter_title_message" | localizeFilter }}
+            {{ $t("Enter_title_message") }}
           </span>
         </div>
-      <label class="edit-label" for="limit">{{ "Limit" | localizeFilter }}</label>
+        <label class="edit-label" for="limit">{{ $t("Limit") }}</label>
         <div class="input-field create-title">
           <input
             id="limit"
@@ -30,19 +32,18 @@
             type="number"
             :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
           />
-         
+
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
           >
-            {{ "Min_value_message" | localizeFilter }}
+            {{ $t("Min_value_message") }}
             {{ $v.limit.$params.minValue.min }}
           </span>
         </div>
 
         <button class="btn waves-effect waves-light create" type="submit">
-          {{ "Create" | localizeFilter }}
-         
+          {{ $t("Create") }}
         </button>
       </form>
     </div>
@@ -52,7 +53,6 @@
 <script>
 import { required, minValue } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
-import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: "CategoryCreate",
@@ -93,7 +93,7 @@ export default {
       this.title = "";
       this.limit = 100;
       this.$v.$reset();
-      this.$message(localizeFilter("Created_category"));
+      this.$message(this.$t("Created_category"));
     },
   },
 

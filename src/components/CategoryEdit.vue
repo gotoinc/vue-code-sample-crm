@@ -2,12 +2,12 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>{{ "Edit" | localizeFilter }}</h4>
+        <h4>{{ $t("Edit") }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
         <label class="edit-label">
-          {{ "Choose_category_label" | localizeFilter }}
+          {{ $t("Choose_category_label") }}
         </label>
         <div
           class="input-field"
@@ -20,7 +20,7 @@
           </select>
         </div>
         <label class="edit-label" for="name">
-          {{ "Category_title" | localizeFilter }}
+          {{ $t("Category_title") }}
         </label>
         <div class="input-field create-title">
           <input
@@ -34,12 +34,12 @@
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
           >
-            {{ "Enter_title_message" | localizeFilter }}
+            {{ $t("Enter_title_message") }}
           </span>
         </div>
-        <label class="edit-label" for="limit">{{
-          "Limit" | localizeFilter
-        }}</label>
+        <label class="edit-label" for="limit">
+          {{ $t("Limit") }}
+        </label>
         <div class="input-field create-title">
           <input
             id="limit"
@@ -52,13 +52,13 @@
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
           >
-            {{ "Min_value_message" | localizeFilter }}
+            {{ $t("Min_value_message") }}
             {{ $v.limit.$params.minValue.min }}
           </span>
         </div>
 
         <button class="btn waves-effect waves-light create" type="submit">
-          {{ "Update" | localizeFilter }}
+          {{ $t("Update") }}
         </button>
       </form>
     </div>
@@ -67,7 +67,6 @@
 
 <script>
 import { minValue, required } from "vuelidate/lib/validators";
-import localizeFilter from "@/filters/localize.filter";
 import { mapActions } from "vuex";
 
 export default {
@@ -113,7 +112,7 @@ export default {
       };
 
       await this.updateCategory(categoryData).then(() => {
-        this.$message(localizeFilter("Category_updated"));
+        this.$message(this.$t("Category_updated"));
         this.$emit("updated", categoryData);
       });
     },

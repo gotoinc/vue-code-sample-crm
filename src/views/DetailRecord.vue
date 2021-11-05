@@ -5,10 +5,10 @@
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
         <router-link to="/history" class="breadcrumb">
-          {{ "History" | localizeFilter }}
+          {{ $t("History") }}
         </router-link>
         <a class="breadcrumb" @click.prevent>
-          {{ getRecordType | localizeFilter }}
+          {{ $t(getRecordType) }}
         </a>
       </div>
       <div class="row">
@@ -22,17 +22,17 @@
           >
             <div class="card-content">
               <div class="outcome-row">
-                <p class="name"> {{ "Description" | localizeFilter }} </p>
+                <p class="name"> {{ $t("Description") }} </p>
                 <p class="outcome-value"> {{ record.description }} </p>
               </div>
 
               <div class="outcome-row">
-                <p class="name"> {{ "Sum" | localizeFilter }} </p>
+                <p class="name"> {{ $t("Sum") }} </p>
                 <p class="outcome-value"> {{ record.amount | currencyFilter }} </p>
               </div>
 
               <div class="outcome-row">
-                <p class="name"> {{ "Category" | localizeFilter }} </p>
+                <p class="name"> {{ $t("Category") }} </p>
                 <p class="outcome-value"> {{ record.categoryName }} </p>
               </div>
 
