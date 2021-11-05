@@ -168,7 +168,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/main.scss";
+  @import "../assets/scss/main.scss";
 
   .helper-text.invalid {
     color: $color-invalid;
