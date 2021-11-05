@@ -15,7 +15,7 @@
       </p>
 
       <section v-else class="history-table">
-        <h5 class="exchange-title">{{ $("Record_history") }}</h5>
+        <h5 class="exchange-title">{{ $t("Record_history") }}</h5>
         <HistoryTable :records="items" :passed-items="(page - 1) * pageSize" />
 
         <Paginate
