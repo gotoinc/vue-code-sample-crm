@@ -2,7 +2,7 @@
 
 ## Technologies
 This project is build with such technologies as:
-* [Vue 2](https://vuejs.org/)
+* [Vue](https://vuejs.org/)
 * [Vuex 3](https://vuex.vuejs.org/)
 * [Vue Router](https://router.vuejs.org/)
 * [Materialize](https://materializecss.com/)
