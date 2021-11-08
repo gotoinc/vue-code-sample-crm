@@ -137,7 +137,7 @@ export default {
         return isNotAlreadyUsed && isNotCloseColor;
       });
 
-      if (isHueUnique) {
+      if (isHueUnique || defaultHue.length === 60) {
         defaultHue.push(hue);
         return `hsl(${hue}, 100%, ${light}%)`;
       }
