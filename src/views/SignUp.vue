@@ -159,7 +159,7 @@ export default {
         await this.signUp(formData);
         this.$router.push("/");
       } catch (e) {
-        console.log(e);
+        throw e;
       }
     },
   },

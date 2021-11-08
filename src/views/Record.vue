@@ -177,7 +177,6 @@ export default {
           this.$message(this.$t("Record_created"));
           this.clear();
         } catch (e) {
-          console.log(e);
           throw e;
         }
       } else {

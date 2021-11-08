@@ -25,7 +25,6 @@ const actions = {
       commit("info/CLEAR_INFO", null, { root: true });
       commit("SET_IS_AUTHORIZED", false);
     } catch (e) {
-      console.log(e);
       throw e;
     }
   },

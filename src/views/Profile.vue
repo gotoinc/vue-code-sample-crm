@@ -81,7 +81,7 @@ export default {
           locale: this.isRuLocale ? "ru-RU" : "en-EN",
         });
       } catch (e) {
-        console.log(e);
+        throw e;
       }
     },
   },

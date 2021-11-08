@@ -126,7 +126,7 @@ export default {
         await this.login(formData);
         this.$router.push("/");
       } catch (e) {
-        console.log(e);
+        throw e;
       }
     },
   },
