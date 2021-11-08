@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
 import Categories from '@/views/Categories'
-import localizeFilter from "@/filters/localize.filter";
 
 describe('Categories', () => {
     let wrapper;

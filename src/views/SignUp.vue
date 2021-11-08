@@ -14,7 +14,6 @@
               ($v.email.$dirty && !$v.email.email),
           }"
         />
-        
 
         <small
           v-if="$v.email.$dirty && !$v.email.required"
@@ -30,7 +29,7 @@
           Email should be valid
         </small>
       </div>
- <label class="edit-label"  for="password">Password</label>
+      <label class="edit-label" for="password">Password</label>
       <div class="input-field">
         <input
           id="password"
@@ -42,8 +41,6 @@
               ($v.password.$dirty && !$v.password.minLength),
           }"
         />
-
-       
 
         <small
           v-if="$v.password.$dirty && !$v.password.required"
@@ -61,7 +58,7 @@
           {{ password.length }}
         </small>
       </div>
- <label class="edit-label" for="name">Name</label>
+      <label class="edit-label" for="name">Name</label>
       <div class="input-field">
         <input
           id="name"
@@ -69,7 +66,7 @@
           type="text"
           :class="{ invalid: $v.name.$dirty && !$v.name.required }"
         />
-       
+
         <small
           v-if="$v.name.$dirty && !$v.name.required"
           class="helper-text invalid"
@@ -87,9 +84,11 @@
 
     <div class="card-action">
       <div>
-        <button class="btn waves-effect waves-light auth-submit create login-btn" type="submit">
+        <button
+          class="btn waves-effect waves-light auth-submit create login-btn"
+          type="submit"
+        >
           Sign up
-          
         </button>
       </div>
 
@@ -102,22 +101,22 @@
 </template>
 
 <script>
-import { email, minLength, required } from "vuelidate/lib/validators";
-import { mapActions } from "vuex";
+import { email, minLength, required } from 'vuelidate/lib/validators';
+import { mapActions } from 'vuex';
 
 export default {
-  name: "SignUp",
+  name: 'SignUp',
 
   metaInfo() {
     return {
-      title: this.$title("SignupTitle"),
+      title: this.$title('SignupTitle'),
     };
   },
 
   data: () => ({
-    email: "",
-    password: "",
-    name: "",
+    email: '',
+    password: '',
+    name: '',
     agree: false,
   }),
 
@@ -137,12 +136,12 @@ export default {
     },
 
     agree: {
-      checked: v => v,
+      checked: (v) => v,
     },
   },
 
   methods: {
-    ...mapActions("auth", ["signUp"]),
+    ...mapActions('auth', ['signUp']),
 
     async submitHandler() {
       if (this.$v.$invalid) {
@@ -158,7 +157,7 @@ export default {
 
       try {
         await this.signUp(formData);
-        this.$router.push("/");
+        this.$router.push('/');
       } catch (e) {
         console.log(e);
       }
@@ -166,11 +165,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-  @import "../assets/scss/main.scss";
-
-  .helper-text.invalid {
-    color: $color-invalid;
-  }
-</style>

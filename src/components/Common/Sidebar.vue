@@ -21,38 +21,38 @@
 </template>
 
 <script>
-import localizeFilter from "@/filters/localize.filter";
-
 export default {
   name: "Sidebar",
 
   props: ["value"],
 
-  data: () => ({
-    links: [
-      {
-        title: localizeFilter("Menu_Account"),
-        url: "/",
-        exact: true,
-      },
-      {
-        title: localizeFilter("Menu_History"),
-        url: "/history",
-      },
-      {
-        title: localizeFilter("Menu_Planning"),
-        url: "/planning",
-      },
-      {
-        title: localizeFilter("Menu_New_Record"),
-        url: "/record",
-      },
-      {
-        title: localizeFilter("Menu_Categories"),
-        url: "/categories",
-      },
-    ],
-  }),
+  data: function(){
+    return({
+      links: [
+        {
+          title: this.$t("Menu_Account"),
+          url: "/",
+          exact: true,
+        },
+        {
+          title: this.$t("Menu_History"),
+          url: "/history",
+        },
+        {
+          title: this.$t("Menu_Planning"),
+          url: "/planning",
+        },
+        {
+          title: this.$t("Menu_New_Record"),
+          url: "/record",
+        },
+        {
+          title: this.$t("Menu_Categories"),
+          url: "/categories",
+        },
+      ],
+    });
+  },
   methods: {
     handler: function (navigate, e) {
       navigate(e);

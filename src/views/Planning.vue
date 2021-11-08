@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="page-title">
-      <h3 class="planning">{{ "Planning" | localizeFilter }}</h3>
-      <h4 class="planning-sum">{{ info.bill | currencyFilter("EUR") }}</h4>
+      <h3 class="planning">{{ $t("Planning") }}</h3>
+      <h4 class="planning-sum">
+        {{ $t("Balance") }}:
+        {{ info.bill | currencyFilter("EUR") }}
+      </h4>
     </div>
 
     <Loader v-if="loading" />
@@ -19,7 +22,7 @@
             <strong>{{ cat.title }}</strong>
           </p>
           <p>
-            {{ cat.spend | currencyFilter }} {{ "Out_of" | localizeFilter }}
+            {{ cat.spend | currencyFilter }} {{ $t("Out_of") }}
             {{ cat.limit | currencyFilter }}
           </p>
         </div>
@@ -38,7 +41,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import currencyFilter from "@/filters/currency.filter";
-import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: "Planning",
@@ -79,13 +81,11 @@ export default {
       const progressPercent = persent > 100 ? 100 : persent;
       let progressColor = "progress";
       progressColor +=
-        persent < 60 ? "-green" : persent < 100 ? "-yellow" : "-red";
+        persent < 60 ? "-green" : persent <= 100 ? "-yellow" : "-red";
 
       const toolTipValue = cat.limit - spend;
       const tooltip = `${
-        toolTipValue < 0
-          ? localizeFilter("MoreThan")
-          : localizeFilter("Balance")
+        toolTipValue < 0 ? this.$t("MoreThan") : this.$t("Balance")
       } ${currencyFilter(Math.abs(toolTipValue))}`;
 
       return {
@@ -103,6 +103,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/main";
+
 .progress {
   &-green {
     background: #9fdfa2;
@@ -112,6 +114,11 @@ export default {
   }
   &-red {
     background: #ff847b;
+  }
+}
+.page-title {
+  @media (max-width: $small-tablet) {
+    flex-direction: column;
   }
 }
 </style>

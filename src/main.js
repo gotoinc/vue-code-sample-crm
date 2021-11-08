@@ -7,7 +7,6 @@ import router from "./router";
 import store from "./store";
 import dateFilter from "@/filters/date.filter";
 import currencyFilter from "@/filters/currency.filter";
-import localizeFilter from "@/filters/localize.filter";
 import tooltipDirective from "@/directives/tooltip.directive";
 import Loader from "@/components/Common/Loader";
 
@@ -15,6 +14,7 @@ import "materialize-css/dist/js/materialize.min.js";
 import messagePlugin from "@/utils/message.plugin";
 import titlePlugin from "@/utils/title.plugin";
 import Paginate from "vuejs-paginate";
+import { i18n } from "@/plugins/i18n";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -28,7 +28,6 @@ Vue.use(messagePlugin);
 Vue.use(titlePlugin);
 Vue.filter("dateFilter", dateFilter);
 Vue.filter("currencyFilter", currencyFilter);
-Vue.filter("localizeFilter", localizeFilter);
 Vue.directive("tooltip", tooltipDirective);
 Vue.component("Loader", Loader);
 Vue.component("Paginate", Paginate);
@@ -49,6 +48,7 @@ firebase.auth().onAuthStateChanged(() => {
     app = new Vue({
       router,
       store,
+      i18n,
       render: h => h(App),
     }).$mount("#app");
   }

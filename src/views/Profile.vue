@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "ProfileTitle" | localizeFilter }}</h3>
+      <h3>{{ $t("ProfileTitle") }}</h3>
     </div>
 
     <form class="form" @submit.prevent="submitHandler">
-      <label class="edit-label" for="description">{{ "Name" | localizeFilter }}</label>
+      <label class="edit-label" for="description">{{ $t("Name") }}</label>
       <div class="input-field create-title profile-user">
         <input class="profile-user"          
           v-model="name"
@@ -17,7 +17,7 @@
           v-if="$v.name.$dirty && !$v.name.required"
           class="helper-text invalid"
         >
-          {{ "Message_Enter_Name" | localizeFilter }}
+          {{ $t("Message_Enter_Name") }}
         </small>
       </div>
 
@@ -31,7 +31,7 @@
       </div>
 
       <button class="btn waves-effect waves-light create" type="submit">
-        {{ "Update" | localizeFilter }}
+        {{ $t("Update") }}
       
       </button>
     </form>
@@ -41,7 +41,6 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import { required } from "vuelidate/lib/validators";
-import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: "Profile",

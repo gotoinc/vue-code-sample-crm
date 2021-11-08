@@ -34,7 +34,11 @@ firebase deploy
 ## Usage
 Simple accounting system to track users’s personal income and expenses. 
 The app helps user to plan a budget, distribute finances and keep records of financial transactions.
-
+### Credentials for the test account
+```
+email: test.user@test.test
+password: Test12345
+```
 ## Project structure
 
 
@@ -43,123 +47,51 @@ The app helps user to plan a budget, distribute finances and keep records of fin
 vue-code-sample-crm
 |            
 +---public
-|   |   favicon.ico
-|   |   index.html
-|   |   robots.txt
 |   |   
 |   \---img
 |       \---icons
-|               ...
-|  
 |             
 +---src
-|   |   App.vue
-|   |   main.js
-|   |   registerServiceWorker.js
+|   | 
 |   |   
 |   +---assets
-|   |       main.scss
-|   |       mixins.scss
-|   |       _fonts.scss
-|   |       _vars.scss
 |   |       
 |   +---components
-|   |   |   CategoryCreate.vue
-|   |   |   CategoryEdit.vue
-|   |   |   HistoryTable.vue
-|   |   |   HomeBill.vue
-|   |   |   HomeCurrency.vue
 |   |   |   
-|   |   +---Charts
-|   |   |       ChartPie.js
+|   |   +---Charts   
 |   |   |       
-|   |   \---Common
-|   |           Loader.vue
-|   |           Navbar.vue
-|   |           Sidebar.vue
+|   |   \---Common       
 |   |           
 |   +---directives
-|   |       tooltip.directive.js
 |   |       
 |   +---filters
-|   |       currency.filter.js
-|   |       date.filter.js
-|   |       localize.filter.js
 |   |       
 |   +---fonts
-|   |       Roboto-Bold.eot
-|   |       Roboto-Bold.ttf
-|   |       Roboto-Bold.woff
-|   |       Roboto-Bold.woff2
-|   |       Roboto-Medium.eot
-|   |       Roboto-Medium.ttf
-|   |       Roboto-Medium.woff
-|   |       Roboto-Medium.woff2
-|   |       Roboto-Regular.eot
-|   |       Roboto-Regular.ttf
-|   |       Roboto-Regular.woff
-|   |       Roboto-Regular.woff2
 |   |       
 |   +---layouts
-|   |       AuthLayout.vue
-|   |       MainLayout.vue
 |   |       
 |   +---locales
-|   |       en.json
-|   |       ru.json
 |   |       
 |   +---mixins
-|   |       pagination.mixin.js
 |   |       
 |   +---router
-|   |       index.js
 |   |       
 |   +---store
-|   |   |   index.js
 |   |   |   
 |   |   \---modules
-|   |           auth.js
-|   |           category.js
-|   |           errors.js
-|   |           info.js
-|   |           record.js
 |   |           
 |   +---utils
-|   |       message.plugin.js
-|   |       messages.js
-|   |       title.plugin.js
 |   |       
 |   \---views
-|           Categories.vue
-|           DetailRecord.vue
-|           History.vue
-|           Home.vue
-|           Login.vue
-|           Planning.vue
-|           Profile.vue
-|           Record.vue
-|           SignUp.vue
 |           
 +---tests
 |   \---unit
 |       +---components
-|       |   |   CategoryCreate.spec.js
+|       |   | 
 |       |   |   
 |       |   \---Common
-|       |           Sidebar.spec.js
 |       |           
 |       \---views
-|               Categories.spec.js
-|
-|   .env
-|   .eslintrc.js
-|   .firebaserc
-|   .gitignore
-|   babel.config.js
-|   firebase.json
-|   package-lock.json
-|   package.json
-|   README.md
 ```
 /src folder contains:
 * /assets - project styles (SCSS variables, mixins, stylesheets);

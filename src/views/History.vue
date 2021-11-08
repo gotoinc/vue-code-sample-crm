@@ -1,30 +1,30 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "Record_history" | localizeFilter }}</h3>
+      <h3>{{ $t("Record_history") }}</h3>
     </div>
 
     <div class="history-wrapper">
       <Loader v-if="loading" />
 
       <p v-else-if="!records.length" class="center">
-        {{ "Message_no_records" | localizeFilter }}
+        {{ $t("Message_no_records") }}
         <router-link to="/record">
-          {{ "Add_record_message" | localizeFilter }}
+          {{ $t("Add_record_message") }}
         </router-link>
       </p>
 
       <section v-else class="history-table">
-        <h5 class="exchange-title">{{ "Record_history" | localizeFilter }}</h5>
-        <HistoryTable :records="items" :passedItems="(page - 1) * pageSize"/>
+        <h5 class="exchange-title">{{ $t("Record_history") }}</h5>
+        <HistoryTable :records="items" :passed-items="(page - 1) * pageSize" />
 
         <Paginate
           v-model="page"
           :page-count="pageCount"
           :page-range="isMobile ? 1 : 3"
           :click-handler="pageChangeHandle"
-          :prev-text="isMobile ? 'Prev_short' : 'Prev' | localizeFilter"
-          :next-text="isMobile ? 'Next_short' : 'Next' | localizeFilter"
+          :prev-text="isMobile ? $t('Prev_short') : $t('Prev')"
+          :next-text="isMobile ? $t('Next_short') : $t('Next')"
           :container-class="'pagination center'"
           :page-class="'waves-effect'"
         />
@@ -35,6 +35,10 @@
         class="chart-section"
       >
         <div class="pie-wrapper">
+          <h5 class="exchange-title">
+            {{ $t("Chart_expenses_title") }}
+          </h5>
+
           <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
         </div>
         <div class="legend-con" v-html="message" />
@@ -56,14 +60,14 @@ export default {
     ChartPie,
     HistoryTable,
   },
+
+  mixins: [paginationMixin],
   props: {
     isMobile: {
       required: true,
       type: Boolean,
-    }
+    },
   },
-
-  mixins: [paginationMixin],
 
   metaInfo() {
     return {

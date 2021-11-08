@@ -11,6 +11,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.helper-text.invalid {
+  color: $color-invalid;
+}
+
 .empty-layout {
   @include align-center-flex-elements;
   display: -webkit-flex;
@@ -375,4 +379,15 @@ input[type="checkbox"]:checked:not(:disabled) ~ .lever:active::before,
 input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
   transform: scale(1.8);
   background-color: rgba(115, 149, 189, 0.15);
+}
+
+.custom-tooltip {
+  background-color: $light-blue;
+  color: $black;
+  border-radius: 14px;
+  margin-left: -53px;
+
+  @media (max-width: $small-tablet) {
+    margin-left: -23px;
+  }
 }
