@@ -52,6 +52,7 @@
 
 <script>
 import { required, minValue } from "vuelidate/lib/validators";
+
 import { mapActions } from "vuex";
 
 export default {

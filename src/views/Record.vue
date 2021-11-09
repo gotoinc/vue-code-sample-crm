@@ -105,6 +105,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+
 import { minValue, required } from "vuelidate/lib/validators";
 
 export default {

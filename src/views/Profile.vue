@@ -40,6 +40,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+
 import { required } from "vuelidate/lib/validators";
 
 export default {

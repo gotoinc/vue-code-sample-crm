@@ -50,6 +50,7 @@
 <script>
 import ChartPie from "@/components/Charts/ChartPie";
 import HistoryTable from "@/components/HistoryTable";
+
 import paginationMixin from "@/mixins/pagination.mixin";
 
 import { mapActions } from "vuex";
