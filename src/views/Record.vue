@@ -231,7 +231,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/main";
+@import "../assets/scss/main.scss";
 
 .arrow-down::v-deep {
   .select-wrapper:after {

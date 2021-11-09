@@ -101,22 +101,22 @@
 </template>
 
 <script>
-import { email, minLength, required } from "vuelidate/lib/validators";
-import { mapActions } from "vuex";
+import { email, minLength, required } from 'vuelidate/lib/validators';
+import { mapActions } from 'vuex';
 
 export default {
-  name: "SignUp",
+  name: 'SignUp',
 
   metaInfo() {
     return {
-      title: this.$title("SignupTitle"),
+      title: this.$title('SignupTitle'),
     };
   },
 
   data: () => ({
-    email: "",
-    password: "",
-    name: "",
+    email: '',
+    password: '',
+    name: '',
     agree: false,
   }),
 
@@ -136,12 +136,12 @@ export default {
     },
 
     agree: {
-      checked: v => v,
+      checked: (v) => v,
     },
   },
 
   methods: {
-    ...mapActions("auth", ["signUp"]),
+    ...mapActions('auth', ['signUp']),
 
     async submitHandler() {
       if (this.$v.$invalid) {
@@ -157,7 +157,7 @@ export default {
 
       try {
         await this.signUp(formData);
-        this.$router.push("/");
+        this.$router.push('/');
       } catch (e) {
         console.log(e);
       }

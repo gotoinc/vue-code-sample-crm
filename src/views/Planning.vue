@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/main";
+@import "../assets/scss/main";
 
 .progress {
   &-green {
