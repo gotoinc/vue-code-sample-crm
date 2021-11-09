@@ -74,12 +74,12 @@
           Name is required
         </small>
       </div>
-      <p>
+      <div>
         <label>
           <input v-model="agree" type="checkbox" />
           <span>I agree to the terms</span>
         </label>
-      </p>
+      </div>
     </div>
 
     <div class="card-action">
