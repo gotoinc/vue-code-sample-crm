@@ -130,6 +130,7 @@ export default {
       const defaultHue = [216, 231, 122, 208, 281, 202, 48, 14];
       const hue = Math.floor(Math.random() * 360);
       const light = Math.floor(Math.random() * 20 + 70);
+      const saturation = Math.floor(Math.random() * 60 + 40);
 
       const isHueUnique = defaultHue.every(h => {
         const isNotAlreadyUsed = hue !== h;
@@ -139,7 +140,7 @@ export default {
 
       if (isHueUnique || defaultHue.length === 60) {
         defaultHue.push(hue);
-        return `hsl(${hue}, 100%, ${light}%)`;
+        return `hsl(${hue}, ${saturation}%, ${light}%)`;
       }
 
       return this.generateRandomColor();
