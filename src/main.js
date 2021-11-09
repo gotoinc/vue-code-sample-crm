@@ -15,6 +15,7 @@ import messagePlugin from "@/utils/message.plugin";
 import titlePlugin from "@/utils/title.plugin";
 import Paginate from "vuejs-paginate";
 import { i18n } from "@/plugins/i18n";
+import FlagIcon from "vue-flag-icon";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -24,6 +25,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(VueMeta);
+Vue.use(FlagIcon);
 Vue.use(messagePlugin);
 Vue.use(titlePlugin);
 Vue.filter("dateFilter", dateFilter);

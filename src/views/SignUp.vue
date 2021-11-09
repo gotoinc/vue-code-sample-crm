@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">Home bookkeeping</span>
+      <span class="card-title">{{ $t("App_name") }}</span>
       <label class="edit-label" for="email">Email</label>
       <div class="input-field">
         <input
@@ -19,17 +19,17 @@
           v-if="$v.email.$dirty && !$v.email.required"
           class="helper-text invalid"
         >
-          Email should not be empty
+          {{ $t("Email_required_message") }}
         </small>
 
         <small
           v-if="$v.email.$dirty && !$v.email.email"
           class="helper-text invalid"
         >
-          Email should be valid
+          {{ $t("Email_valid_message") }}
         </small>
       </div>
-      <label class="edit-label" for="password">Password</label>
+      <label class="edit-label" for="password">{{ $t("Password") }}</label>
       <div class="input-field">
         <input
           id="password"
@@ -46,19 +46,22 @@
           v-if="$v.password.$dirty && !$v.password.required"
           class="helper-text invalid"
         >
-          Enter password
+          {{ $t("Password_required_message") }}
         </small>
 
         <small
           v-if="$v.password.$dirty && !$v.password.minLength"
           class="helper-text invalid"
         >
-          Password length should be minimum
-          {{ $v.password.$params.minLength.min }} characters, you have only
-          {{ password.length }}
+          {{
+            $t("Password_length_message", {
+              minLength: $v.password.$params.minLength.min,
+              currLength: password.length,
+            })
+          }}
         </small>
       </div>
-      <label class="edit-label" for="name">Name</label>
+      <label class="edit-label" for="name">{{ $t("Name") }}</label>
       <div class="input-field">
         <input
           id="name"
@@ -71,13 +74,13 @@
           v-if="$v.name.$dirty && !$v.name.required"
           class="helper-text invalid"
         >
-          Name is required
+          {{ $t("Message_Enter_Name") }}
         </small>
       </div>
       <div>
         <label>
           <input v-model="agree" type="checkbox" />
-          <span>I agree to the terms</span>
+          <span>{{ $t("Agree_terms") }}</span>
         </label>
       </div>
     </div>
@@ -88,13 +91,22 @@
           class="btn waves-effect waves-light auth-submit create login-btn"
           type="submit"
         >
-          Sign up
+          {{ $t("Sign_up") }}
         </button>
       </div>
 
       <p class="center">
-        Already have an account?
-        <router-link to="/login">Login!</router-link>
+        {{ $t("Have_account") }}?
+        <router-link to="/login">{{ $t("Login") }}!</router-link>
+      </p>
+
+      <p class="center flag-wrapper">
+        <a @click="setLocale('en')">
+          <flag iso="us" />
+        </a>
+        <a @click="setLocale('ru')">
+          <flag iso="ru" />
+        </a>
       </p>
     </div>
   </form>
@@ -142,6 +154,10 @@ export default {
 
   methods: {
     ...mapActions("auth", ["signUp"]),
+
+    setLocale(locale) {
+      this.$i18n.locale = locale;
+    },
 
     async submitHandler() {
       if (this.$v.$invalid) {

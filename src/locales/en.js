@@ -1,13 +1,17 @@
 export const en = {
+  // Profile
   ProfileTitle: "Profile",
   Name: "Name",
   Message_Enter_Name: "Please enter the name",
   Update: "Update",
+
+  // Sidebar
   Menu_Account: "Account",
   Menu_History: "Record history",
   Menu_Planning: "Planning",
   Menu_New_Record: "New Record",
   Menu_Categories: "Categories",
+
   Categories: "Categories",
   Message_no_categories: "You don't have any category yet.",
   History: "History",
@@ -57,4 +61,17 @@ export const en = {
   Next_short: "Next",
   Edit: "Edit",
   Chart_expenses_title: "Expenses by category",
+
+  //  Login & Sign up
+  App_name: "Home bookkeeping",
+  No_account: "Don't have an account",
+  Have_account: "Already have an account",
+  Sign_up: "Sign up",
+  Password: "Password",
+  Email_required_message: "Email should not be empty",
+  Email_valid_message: "Email should be valid",
+  Password_required_message: "Enter password",
+  Agree_terms: "I agree to the terms",
+  Password_length_message:
+    "Password length should be minimum {minLength} characters, you have only {currLength}",
 };

@@ -252,6 +252,18 @@ input#limit {
   cursor: pointer;
 }
 
+.flag-wrapper {
+  a {
+    cursor: pointer;
+
+    &:first-child {
+      span {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
 #amount {
   background-color: $light-gray;
   border-radius: 14px;

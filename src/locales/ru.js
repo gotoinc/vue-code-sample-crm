@@ -1,13 +1,17 @@
 export const ru = {
+  // Profile
   ProfileTitle: "Профиль",
   Name: "Имя",
   Message_Enter_Name: "Пожалуйста, введите имя",
   Update: "Обновить",
+
+  // Sidebar
   Menu_Account: "Счет",
   Menu_History: "История записей",
   Menu_Planning: "Планирование",
   Menu_New_Record: "Новая запись",
   Menu_Categories: "Категории",
+
   Categories: "Категории",
   Message_no_categories: "У Вас еще нет ни одной категории.",
   History: "История",
@@ -57,4 +61,17 @@ export const ru = {
   Next_short: "След",
   Edit: "Редактировать",
   Chart_expenses_title: "Расходы по категориям",
+
+  //  Login & Sign up
+  App_name: "Домашняя бухгалтерия",
+  No_account: "Еще нет аккаунта",
+  Have_account: "Уже есть аккаунт",
+  Sign_up: "Зарегестрироваться",
+  Password: "Пароль",
+  Email_required_message: "Email обязателен",
+  Email_valid_message: "Введите валидный email",
+  Password_required_message: "Введите пароль",
+  Agree_terms: "Я ознакомлен с условиями соглашения",
+  Password_length_message:
+    "Минимальная длина пароля должна быть {minLength} символов, сейчас только {currLength}",
 };
