@@ -142,7 +142,7 @@ export default {
         return isNotAlreadyUsed && isNotCloseColor;
       });
 
-      if (isHueUnique || defaultHue.length === 60) {
+      if (isHueUnique || defaultHue.length >= 60) {
         defaultHue.push(hue);
         return `hsl(${hue}, ${saturation}%, ${light}%)`;
       }
@@ -150,23 +150,7 @@ export default {
       return this.generateRandomColor();
     },
 
-    setup(categories) {
-      this.setupPagination(
-        this.records.map(record => {
-          return {
-            ...record,
-            categoryName: categories.find(c => c.id === record.categoryId)
-              .title,
-            typeClass:
-              record.type === constants.TYPE_INCOME
-                ? "income-green"
-                : "outcome-red",
-            typeText:
-              record.type === constants.TYPE_OUTCOME ? "Income" : "Outcome",
-          };
-        })
-      );
-
+    setupChartData() {
       this.chartData = {
         labels: this.getCategoriesWithOutcomes.map(c => c.title),
 
@@ -175,7 +159,10 @@ export default {
             label: "Outcome by category",
             data: this.getCategoriesWithOutcomes.map(c => {
               return this.records.reduce((acc, r) => {
-                if (r.categoryId === c.id && r.type === constants.TYPE_OUTCOME) {
+                if (
+                  r.categoryId === c.id &&
+                  r.type === constants.TYPE_OUTCOME
+                ) {
                   acc += +r.amount;
                 }
                 return acc;
@@ -187,23 +174,47 @@ export default {
         ],
       };
     },
-  },
 
-  async mounted() {
-    this.records = await this.fetchRecords();
-    this.categories = await this.fetchCategories();
+    paginationSetup(categories) {
+      this.setupPagination(
+        this.records.map(record => {
+          return {
+            ...record,
+            categoryName: categories.find(c => c.id === record.categoryId)
+              .title,
+            typeClass:
+              record.type === constants.TYPE_INCOME
+                ? "income-green"
+                : "outcome-red",
+            typeText:
+              record.type === constants.TYPE_INCOME ? "Income" : "Outcome",
+          };
+        })
+      );
+    },
 
-    this.setup(this.categories);
-
-    this.loading = false;
-
-    this.$nextTick(() =>
+    setupChatLabelsLogic() {
       this.$el.querySelectorAll(".custom-legend-item").forEach((item, i) => {
         item.addEventListener("click", () => {
           this.updateDataset(item, i);
         });
-      })
-    );
+      });
+    },
+
+    async fetchHistoryData() {
+      this.records = await this.fetchRecords();
+      this.categories = await this.fetchCategories();
+    },
+  },
+
+  async mounted() {
+    await this.fetchHistoryData().then(() => {
+      this.paginationSetup(this.categories);
+      this.setupChartData();
+      this.loading = false;
+    });
+
+    this.$nextTick(() => this.setupChatLabelsLogic());
   },
 };
 </script>

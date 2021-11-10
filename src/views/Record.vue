@@ -17,7 +17,7 @@
       <label>{{ $t("Choose_category_label") }}</label>
       <div
         class="input-field"
-        :class="isDroprownOpened ? 'arrow-up' : 'arrow-down'"
+        :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
       >
         <select ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
@@ -127,7 +127,7 @@ export default {
     type: "outcome",
     amount: 1,
     description: "",
-    isDroprownOpened: false,
+    isDropdownOpened: false,
     constants: constants,
   }),
 
@@ -197,6 +197,17 @@ export default {
       this.description = "";
       this.amount = 1;
     },
+
+    async setupRecordData() {
+      await this.fetchCategories().then(categories => {
+        this.categories = categories;
+        this.loading = false;
+      });
+
+      if (this.categories.length) {
+        this.category = this.categories[0].id;
+      }
+    },
   },
 
   watch: {
@@ -204,7 +215,7 @@ export default {
       deep: true,
       handler: function (newValue) {
         if (newValue && newValue.dropdown) {
-          this.isDroprownOpened = newValue.dropdown.isOpen;
+          this.isDropdownOpened = newValue.dropdown.isOpen;
         }
       },
     },
@@ -214,12 +225,7 @@ export default {
   },
 
   async mounted() {
-    this.categories = await this.fetchCategories();
-    this.loading = false;
-
-    if (this.categories.length) {
-      this.category = this.categories[0].id;
-    }
+    await this.setupRecordData();
 
     setTimeout(() => {
       this.select = M.FormSelect.init(this.$refs.select);

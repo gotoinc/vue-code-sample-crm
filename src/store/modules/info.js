@@ -9,13 +9,7 @@ const state = {
 const mutations = {
   SET_INFO: (state, info) => {
     state.info = info;
-
-    const locales = {
-      "ru-RU": "ru",
-      "en-EN": "en",
-    };
-
-    i18n.locale = locales[info.locale];
+    i18n.locale = info.locale;
   },
   CLEAR_INFO: state => (state.info = {}),
   SET_CURRENCY: (state, currency) => {

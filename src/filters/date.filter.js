@@ -14,6 +14,6 @@ export default (value, format = "date") => {
       (options.second = "2-digit");
   }
 
-  const locale = store.state.info.info.locale || "en-EN";
+  const locale = store.state.info.info.locale || "en";
   return Intl.DateTimeFormat(locale, options).format(new Date(value));
 };

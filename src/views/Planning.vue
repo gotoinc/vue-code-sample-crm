@@ -61,6 +61,39 @@ export default {
   methods: {
     ...mapActions("record", ["fetchRecords"]),
     ...mapActions("category", ["fetchCategories"]),
+
+    async setupCategoriesData() {
+      const records = await this.fetchRecords();
+      const categories = await this.fetchCategories();
+
+      this.categories = categories.map(cat => {
+        const spend = records
+          .filter(r => r.categoryId === cat.id)
+          .filter(r => r.type === constants.TYPE_OUTCOME)
+          .reduce((acc, r) => {
+            return (acc += +r.amount);
+          }, 0);
+
+        const persent = (100 * spend) / cat.limit;
+        const progressPercent = persent > 100 ? 100 : persent;
+        let progressColor = "progress";
+        progressColor +=
+          persent < 60 ? "-green" : persent <= 100 ? "-yellow" : "-red";
+
+        const toolTipValue = cat.limit - spend;
+        const tooltip = `${
+          toolTipValue < 0 ? this.$t("MoreThan") : this.$t("Balance")
+        } ${currencyFilter(Math.abs(toolTipValue))}`;
+
+        return {
+          ...cat,
+          progressColor,
+          progressPercent,
+          spend,
+          tooltip,
+        };
+      });
+    },
   },
 
   computed: {
@@ -68,38 +101,7 @@ export default {
   },
 
   async mounted() {
-    const records = await this.fetchRecords();
-    const categories = await this.fetchCategories();
-
-    this.categories = categories.map(cat => {
-      const spend = records
-        .filter(r => r.categoryId === cat.id)
-        .filter(r => r.type === constants.TYPE_OUTCOME)
-        .reduce((acc, r) => {
-          return (acc += +r.amount);
-        }, 0);
-
-      const persent = (100 * spend) / cat.limit;
-      const progressPercent = persent > 100 ? 100 : persent;
-      let progressColor = "progress";
-      progressColor +=
-        persent < 60 ? "-green" : persent <= 100 ? "-yellow" : "-red";
-
-      const toolTipValue = cat.limit - spend;
-      const tooltip = `${
-        toolTipValue < 0 ? this.$t("MoreThan") : this.$t("Balance")
-      } ${currencyFilter(Math.abs(toolTipValue))}`;
-
-      return {
-        ...cat,
-        progressColor,
-        progressPercent,
-        spend,
-        tooltip,
-      };
-    });
-
-    this.loading = false;
+    await this.setupCategoriesData().then(() => (this.loading = false));
   },
 };
 </script>

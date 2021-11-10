@@ -69,6 +69,18 @@ export default {
   methods: {
     ...mapActions("record", ["fetchRecord"]),
     ...mapActions("category", ["fetchCategory"]),
+
+    async getRecordData() {
+      const id = this.$route.params.id;
+      const record = await this.fetchRecord(id);
+      const category = await this.fetchCategory(record.categoryId);
+
+      this.record = {
+        ...record,
+        categoryName: category.title,
+      };
+      this.loading = false;
+    },
   },
 
   computed: {
@@ -78,15 +90,7 @@ export default {
   },
 
   async mounted() {
-    const id = this.$route.params.id;
-    const record = await this.fetchRecord(id);
-    const category = await this.fetchCategory(record.categoryId);
-
-    this.record = {
-      ...record,
-      categoryName: category.title,
-    };
-    this.loading = false;
+    await this.getRecordData();
   },
 };
 </script>

@@ -66,8 +66,10 @@ export default {
   },
 
   async mounted() {
-    this.categories = await this.fetchCategories();
-    this.loading = false;
+    await this.fetchCategories().then(categories => {
+      this.categories = categories;
+      this.loading = false;
+    });
   },
 };
 </script>

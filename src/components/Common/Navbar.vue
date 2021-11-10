@@ -80,6 +80,17 @@ export default {
       await this.logout();
       this.$router.push("/login?message=logout");
     },
+
+    setTimeInterval() {
+      this.interval = setInterval(() => {
+        this.date = new Date();
+      }, 1000);
+    },
+    setInitialDropdown() {
+      this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
+        constrainWidth: true,
+      });
+    },
   },
 
   computed: {
@@ -97,12 +108,8 @@ export default {
   },
 
   mounted() {
-    this.interval = setInterval(() => {
-      this.date = new Date();
-    }, 1000);
-    this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
-      constrainWidth: true,
-    });
+    this.setTimeInterval();
+    this.setInitialDropdown();
   },
 
   beforeDestroy() {

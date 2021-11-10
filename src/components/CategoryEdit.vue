@@ -117,6 +117,13 @@ export default {
         this.$emit("updated", categoryData);
       });
     },
+
+    setInitCategoryData() {
+      const { title, limit, id } = this.categories[0];
+      this.current = id;
+      this.limit = limit;
+      this.title = title;
+    },
   },
 
   watch: {
@@ -136,10 +143,7 @@ export default {
   },
 
   created() {
-    const { title, limit, id } = this.categories[0];
-    this.current = id;
-    this.limit = limit;
-    this.title = title;
+    this.setInitCategoryData();
   },
 
   mounted() {
