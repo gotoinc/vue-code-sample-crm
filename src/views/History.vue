@@ -53,6 +53,8 @@ import HistoryTable from "@/components/HistoryTable";
 
 import paginationMixin from "@/mixins/pagination.mixin";
 
+import constants from "@/utils/constants";
+
 import { mapActions } from "vuex";
 
 export default {
@@ -82,6 +84,7 @@ export default {
     records: [],
     chartData: null,
     message: "test",
+    constants,
   }),
 
   computed: {
@@ -107,7 +110,7 @@ export default {
       return this.categories.filter(c => {
         if (this.records.length) {
           const outcomesOfCategory = this.records.filter(
-            r => r.categoryId === c.id && r.type === "outcome"
+            r => r.categoryId === c.id && r.type === constants.TYPE_OUTCOME
           );
           if (outcomesOfCategory.length) return c;
         }
@@ -155,8 +158,11 @@ export default {
             categoryName: categories.find(c => c.id === record.categoryId)
               .title,
             typeClass:
-              record.type === "income" ? "income-green" : "outcome-red",
-            typeText: record.type === "income" ? "Income" : "Outcome",
+              record.type === constants.TYPE_INCOME
+                ? "income-green"
+                : "outcome-red",
+            typeText:
+              record.type === constants.TYPE_OUTCOME ? "Income" : "Outcome",
           };
         })
       );
@@ -169,7 +175,7 @@ export default {
             label: "Outcome by category",
             data: this.getCategoriesWithOutcomes.map(c => {
               return this.records.reduce((acc, r) => {
-                if (r.categoryId === c.id && r.type === "outcome") {
+                if (r.categoryId === c.id && r.type === constants.TYPE_OUTCOME) {
                   acc += +r.amount;
                 }
                 return acc;

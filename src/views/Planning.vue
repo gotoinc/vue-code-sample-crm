@@ -42,6 +42,7 @@
 import { mapActions, mapState } from "vuex";
 
 import currencyFilter from "@/filters/currency.filter";
+import constants from "@/utils/constants";
 
 export default {
   name: "Planning",
@@ -73,7 +74,7 @@ export default {
     this.categories = categories.map(cat => {
       const spend = records
         .filter(r => r.categoryId === cat.id)
-        .filter(r => r.type === "outcome")
+        .filter(r => r.type === constants.TYPE_OUTCOME)
         .reduce((acc, r) => {
           return (acc += +r.amount);
         }, 0);

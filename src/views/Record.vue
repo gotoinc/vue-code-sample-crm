@@ -108,6 +108,8 @@ import { mapActions, mapState } from "vuex";
 
 import { minValue, required } from "vuelidate/lib/validators";
 
+import constants from "@/utils/constants";
+
 export default {
   name: "Record",
 
@@ -126,6 +128,7 @@ export default {
     amount: 1,
     description: "",
     isDroprownOpened: false,
+    constants: constants,
   }),
 
   validations: {
@@ -142,7 +145,7 @@ export default {
     ...mapState("info", ["info"]),
 
     canCreateRecord() {
-      if (this.type === "income") {
+      if (this.type === this.constants.TYPE_INCOME) {
         return true;
       }
       return this.info.bill >= this.amount;
@@ -171,7 +174,7 @@ export default {
           });
 
           const bill =
-            this.type === "income"
+            this.type === this.constants.TYPE_INCOME
               ? this.info.bill + this.amount
               : this.info.bill - this.amount;
 
