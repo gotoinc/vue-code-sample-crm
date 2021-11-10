@@ -4,15 +4,15 @@
       <div class="card-content">
         <div class="card-header">
           <span class="card-title">
-            {{ $t("Exchange_rates") }}
+            {{ $t("views.exchange_rates") }}
           </span>
         </div>
         <table class="exchange-table">
           <thead>
             <tr>
-              <th>{{ $t("Currency") }}</th>
-              <th>{{ $t("Rate") }}</th>
-              <th>{{ $t("Date") }}</th>
+              <th>{{ $t("views.currency") }}</th>
+              <th>{{ $t("views.rate") }}</th>
+              <th>{{ $t("views.date") }}</th>
             </tr>
           </thead>
 

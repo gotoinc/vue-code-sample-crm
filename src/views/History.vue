@@ -1,21 +1,21 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ $t("Record_history") }}</h3>
+      <h3>{{ $t("views.record_history") }}</h3>
     </div>
 
     <div class="history-wrapper">
       <Loader v-if="loading" />
 
       <p v-else-if="!records.length" class="center">
-        {{ $t("Message_no_records") }}
+        {{ $t("messages.message_no_records") }}
         <router-link to="/record">
-          {{ $t("Add_record_message") }}
+          {{ $t("messages.add_record_message") }}
         </router-link>
       </p>
 
       <section v-else class="history-table">
-        <h5 class="exchange-title">{{ $t("Record_history") }}</h5>
+        <h5 class="exchange-title">{{ $t("views.record_history") }}</h5>
         <HistoryTable :records="items" :passed-items="(page - 1) * pageSize" />
 
         <Paginate
@@ -23,8 +23,8 @@
           :page-count="pageCount"
           :page-range="isMobile ? 1 : 3"
           :click-handler="pageChangeHandle"
-          :prev-text="isMobile ? $t('Prev_short') : $t('Prev')"
-          :next-text="isMobile ? $t('Next_short') : $t('Next')"
+          :prev-text="isMobile ? $t('views.prev_short') : $t('views.prev')"
+          :next-text="isMobile ? $t('views.next_short') : $t('views.next')"
           :container-class="'pagination center'"
           :page-class="'waves-effect'"
         />
@@ -36,7 +36,7 @@
       >
         <div class="pie-wrapper">
           <h5 class="exchange-title">
-            {{ $t("Chart_expenses_title") }}
+            {{ $t("views.chart_expenses_title") }}
           </h5>
 
           <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
@@ -52,6 +52,8 @@ import ChartPie from "@/components/Charts/ChartPie";
 import HistoryTable from "@/components/HistoryTable";
 
 import paginationMixin from "@/mixins/pagination.mixin";
+
+import constants from "@/utils/constants";
 
 import { mapActions } from "vuex";
 
@@ -72,7 +74,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Record_history"),
+      title: this.$title("views.record_history"),
     };
   },
 
@@ -82,6 +84,7 @@ export default {
     records: [],
     chartData: null,
     message: "test",
+    constants,
   }),
 
   computed: {
@@ -107,7 +110,7 @@ export default {
       return this.categories.filter(c => {
         if (this.records.length) {
           const outcomesOfCategory = this.records.filter(
-            r => r.categoryId === c.id && r.type === "outcome"
+            r => r.categoryId === c.id && r.type === constants.TYPE_OUTCOME
           );
           if (outcomesOfCategory.length) return c;
         }
@@ -139,7 +142,7 @@ export default {
         return isNotAlreadyUsed && isNotCloseColor;
       });
 
-      if (isHueUnique || defaultHue.length === 60) {
+      if (isHueUnique || defaultHue.length >= 60) {
         defaultHue.push(hue);
         return `hsl(${hue}, ${saturation}%, ${light}%)`;
       }
@@ -147,20 +150,7 @@ export default {
       return this.generateRandomColor();
     },
 
-    setup(categories) {
-      this.setupPagination(
-        this.records.map(record => {
-          return {
-            ...record,
-            categoryName: categories.find(c => c.id === record.categoryId)
-              .title,
-            typeClass:
-              record.type === "income" ? "income-green" : "outcome-red",
-            typeText: record.type === "income" ? "Income" : "Outcome",
-          };
-        })
-      );
-
+    setupChartData() {
       this.chartData = {
         labels: this.getCategoriesWithOutcomes.map(c => c.title),
 
@@ -169,7 +159,10 @@ export default {
             label: "Outcome by category",
             data: this.getCategoriesWithOutcomes.map(c => {
               return this.records.reduce((acc, r) => {
-                if (r.categoryId === c.id && r.type === "outcome") {
+                if (
+                  r.categoryId === c.id &&
+                  r.type === constants.TYPE_OUTCOME
+                ) {
                   acc += +r.amount;
                 }
                 return acc;
@@ -181,23 +174,47 @@ export default {
         ],
       };
     },
-  },
 
-  async mounted() {
-    this.records = await this.fetchRecords();
-    this.categories = await this.fetchCategories();
+    paginationSetup(categories) {
+      this.setupPagination(
+        this.records.map(record => {
+          return {
+            ...record,
+            categoryName: categories.find(c => c.id === record.categoryId)
+              .title,
+            typeClass:
+              record.type === constants.TYPE_INCOME
+                ? "income-green"
+                : "outcome-red",
+            typeText:
+              record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome",
+          };
+        })
+      );
+    },
 
-    this.setup(this.categories);
-
-    this.loading = false;
-
-    this.$nextTick(() =>
+    setupChatLabelsLogic() {
       this.$el.querySelectorAll(".custom-legend-item").forEach((item, i) => {
         item.addEventListener("click", () => {
           this.updateDataset(item, i);
         });
-      })
-    );
+      });
+    },
+
+    async fetchHistoryData() {
+      this.records = await this.fetchRecords();
+      this.categories = await this.fetchCategories();
+    },
+  },
+
+  async mounted() {
+    await this.fetchHistoryData().then(() => {
+      this.paginationSetup(this.categories);
+      this.setupChartData();
+      this.loading = false;
+    });
+
+    this.$nextTick(() => this.setupChatLabelsLogic());
   },
 };
 </script>

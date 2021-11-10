@@ -1,4 +1,4 @@
 export default {
-  logout: "SystemLogout",
-  login: "FirstLogin",
+  logout: "messages.system_logout",
+  login: "messages.first_login",
 };

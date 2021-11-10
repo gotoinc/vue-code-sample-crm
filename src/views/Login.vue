@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">{{ $t("App_name") }}</span>
+      <span class="card-title">{{ $t("auth.App_name") }}</span>
       <label class="edit-label" for="email">Email</label>
       <div class="input-field">
         <input
@@ -19,17 +19,17 @@
           v-if="$v.email.$dirty && !$v.email.required"
           class="helper-text invalid"
         >
-          {{ $t("Email_required_message") }}
+          {{ $t("auth.Email_required_message") }}
         </small>
 
         <small
           v-if="$v.email.$dirty && !$v.email.email"
           class="helper-text invalid"
         >
-          {{ $t("Email_valid_message") }}
+          {{ $t("auth.Email_valid_message") }}
         </small>
       </div>
-      <label class="edit-label" for="password">{{ $t("Password") }}</label>
+      <label class="edit-label" for="password">{{ $t("auth.Password") }}</label>
       <div class="input-field">
         <input
           id="password"
@@ -46,7 +46,7 @@
           v-if="$v.password.$dirty && !$v.password.required"
           class="helper-text invalid"
         >
-          {{ $t("Password_required_message") }}
+          {{ $t("auth.Password_required_message") }}
         </small>
 
         <small
@@ -54,7 +54,7 @@
           class="helper-text invalid"
         >
           {{
-            $t("Password_length_message", {
+            $t("auth.Password_length_message", {
               minLength: $v.password.$params.minLength.min,
               currLength: password.length,
             })
@@ -68,14 +68,14 @@
           class="btn waves-effect waves-light auth-submit create login-btn"
           type="submit"
         >
-          {{ $t("Login") }}
+          {{ $t("common.login") }}
         </button>
       </div>
 
       <p class="center">
-        {{ $t("No_account") }}?
+        {{ $t("auth.No_account") }}?
         <router-link class="sign-up-link" to="/signup">
-          {{ $t("Sign_up") }}
+          {{ $t("auth.Sign_up") }}
         </router-link>
       </p>
 
@@ -103,7 +103,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Login"),
+      title: this.$title("common.login"),
     };
   },
 

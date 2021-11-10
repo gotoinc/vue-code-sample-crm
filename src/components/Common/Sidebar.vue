@@ -26,32 +26,32 @@ export default {
 
   props: ["value"],
 
-  data: function(){
-    return({
+  data: function () {
+    return {
       links: [
         {
-          title: this.$t("Menu_Account"),
+          title: this.$t("menu.menuAccount"),
           url: "/",
           exact: true,
         },
         {
-          title: this.$t("Menu_History"),
+          title: this.$t("menu.menuHistory"),
           url: "/history",
         },
         {
-          title: this.$t("Menu_Planning"),
+          title: this.$t("menu.menuPlanning"),
           url: "/planning",
         },
         {
-          title: this.$t("Menu_New_Record"),
+          title: this.$t("menu.menuNewRecord"),
           url: "/record",
         },
         {
-          title: this.$t("Menu_Categories"),
+          title: this.$t("menu.menuCategories"),
           url: "/categories",
         },
       ],
-    });
+    };
   },
   methods: {
     handler: function (navigate, e) {

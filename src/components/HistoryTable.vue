@@ -3,11 +3,11 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>{{ $t("Sum") }}</th>
-        <th>{{ $t("Date") }}</th>
-        <th>{{ $t("Category") }}</th>
-        <th>{{ $t("Type") }}</th>
-        <th>{{ $t("Open") }}</th>
+        <th>{{ $t("views.sum") }}</th>
+        <th>{{ $t("views.date") }}</th>
+        <th>{{ $t("views.category") }}</th>
+        <th>{{ $t("views.type") }}</th>
+        <th>{{ $t("views.open") }}</th>
       </tr>
     </thead>
     <tbody>
@@ -23,11 +23,11 @@
         </td>
         <td>
           <button
-            v-tooltip="'Show_details'"
+            v-tooltip="'views.show_details'"
             class="btn-small btn open-btn"
             @click="$router.push(`/detail/${record.id}`)"
           >
-            <p class="open-btn-text">{{ $t("Open") }}</p>
+            <p class="open-btn-text">{{ $t("views.open") }}</p>
             <i class="material-icons">chevron_right</i>
           </button>
         </td>

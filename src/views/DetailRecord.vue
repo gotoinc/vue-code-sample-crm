@@ -5,7 +5,7 @@
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
         <router-link to="/history" class="breadcrumb">
-          {{ $t("History") }}
+          {{ $t("views.history") }}
         </router-link>
         <a class="breadcrumb" @click.prevent>
           {{ $t(getRecordType) }}
@@ -13,30 +13,28 @@
       </div>
       <div class="row">
         <div class="col s12 m6">
-          <div
-            :class="{
-              red: record.type === 'outcome',
-              green: record.type === 'income',
-            }"
-            class="card card-outcome"
-          >
+          <div class="card card-outcome">
             <div class="card-content">
               <div class="outcome-row">
-                <p class="name"> {{ $t("Description") }} </p>
-                <p class="outcome-value"> {{ record.description }} </p>
+                <p class="name">{{ $t("views.description") }}</p>
+                <p class="outcome-value">{{ record.description }}</p>
               </div>
 
               <div class="outcome-row">
-                <p class="name"> {{ $t("Sum") }} </p>
-                <p class="outcome-value"> {{ record.amount | currencyFilter }} </p>
+                <p class="name">{{ $t("views.sum") }}</p>
+                <p class="outcome-value">
+                  {{ record.amount | currencyFilter }}
+                </p>
               </div>
 
               <div class="outcome-row">
-                <p class="name"> {{ $t("Category") }} </p>
-                <p class="outcome-value"> {{ record.categoryName }} </p>
+                <p class="name">{{ $t("views.category") }}</p>
+                <p class="outcome-value">{{ record.categoryName }}</p>
               </div>
 
-              <small class="data-outcome">{{ record.date | dateFilter("datetime") }}</small>
+              <small class="data-outcome">
+                {{ record.date | dateFilter("datetime") }}
+              </small>
             </div>
           </div>
         </div>
@@ -52,12 +50,14 @@
 <script>
 import { mapActions } from "vuex";
 
+import constants from "@/utils/constants";
+
 export default {
   name: "DetailRecord",
 
   metaInfo() {
     return {
-      title: this.$title("Details"),
+      title: this.$title("views.details"),
     };
   },
 
@@ -69,24 +69,28 @@ export default {
   methods: {
     ...mapActions("record", ["fetchRecord"]),
     ...mapActions("category", ["fetchCategory"]),
+
+    async getRecordData() {
+      const id = this.$route.params.id;
+      const record = await this.fetchRecord(id);
+      const category = await this.fetchCategory(record.categoryId);
+
+      this.record = {
+        ...record,
+        categoryName: category.title,
+      };
+      this.loading = false;
+    },
   },
 
   computed: {
     getRecordType() {
-      return this.record.type === "income" ? "Income" : "Outcome";
+      return this.record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome";
     },
   },
 
   async mounted() {
-    const id = this.$route.params.id;
-    const record = await this.fetchRecord(id);
-    const category = await this.fetchCategory(record.categoryId);
-
-    this.record = {
-      ...record,
-      categoryName: category.title,
-    };
-    this.loading = false;
+    await this.getRecordData();
   },
 };
 </script>

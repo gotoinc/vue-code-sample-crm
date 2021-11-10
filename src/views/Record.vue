@@ -1,23 +1,23 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ $t("New_record") }}</h3>
+      <h3>{{ $t("views.new_record") }}</h3>
     </div>
 
     <Loader v-if="loading" />
 
     <p v-else-if="!categories.length" class="center">
-      {{ $t("Message_no_categories") }}
+      {{ $t("messages.message_no_categories") }}
       <router-link to="/">
-        {{ $t("Add_record_message") }}
+        {{ $t("messages.add_record_message") }}
       </router-link>
     </p>
 
     <form v-else class="form" @submit.prevent="handleSubmit">
-      <label>{{ $t("Choose_category_label") }}</label>
+      <label>{{ $t("views.choose_category_label") }}</label>
       <div
         class="input-field"
-        :class="isDroprownOpened ? 'arrow-up' : 'arrow-down'"
+        :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
       >
         <select ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
@@ -35,7 +35,7 @@
             type="radio"
             value="income"
           />
-          <span class="income-outcome">{{ $t("Income") }}</span>
+          <span class="income-outcome">{{ $t("common.income") }}</span>
         </label>
       </div>
 
@@ -48,11 +48,11 @@
             type="radio"
             value="outcome"
           />
-          <span class="income-outcome">{{ $t("Outcome") }}</span>
+          <span class="income-outcome">{{ $t("common.outcome") }}</span>
         </label>
       </div>
 
-      <label for="amount">{{ $t("Sum") }}</label>
+      <label for="amount">{{ $t("views.sum") }}</label>
 
       <div class="input-field">
         <input
@@ -71,12 +71,12 @@
           "
           class="helper-text invalid"
         >
-          {{ $t("Min_value_message") }}
+          {{ $t("messages.min_value_message") }}
           {{ $v.amount.$params.minValue.min }}
         </span>
       </div>
 
-      <label for="description">{{ $t("Description") }}</label>
+      <label for="description">{{ $t("views.description") }}</label>
 
       <div class="input-field">
         <textarea
@@ -92,12 +92,12 @@
           v-if="$v.description.$dirty && !$v.description.required"
           class="helper-text invalid"
         >
-          {{ $t("Description_required_message") }}
+          {{ $t("messages.description_required_message") }}
         </span>
       </div>
 
       <button class="btn waves-effect waves-light create" type="submit">
-        {{ $t("Create") }}
+        {{ $t("common.create") }}
       </button>
     </form>
   </div>
@@ -108,12 +108,14 @@ import { mapActions, mapState } from "vuex";
 
 import { minValue, required } from "vuelidate/lib/validators";
 
+import constants from "@/utils/constants";
+
 export default {
   name: "Record",
 
   metaInfo() {
     return {
-      title: this.$title("New_record"),
+      title: this.$title("views.new_record"),
     };
   },
 
@@ -125,7 +127,8 @@ export default {
     type: "outcome",
     amount: 1,
     description: "",
-    isDroprownOpened: false,
+    isDropdownOpened: false,
+    constants: constants,
   }),
 
   validations: {
@@ -142,7 +145,7 @@ export default {
     ...mapState("info", ["info"]),
 
     canCreateRecord() {
-      if (this.type === "income") {
+      if (this.type === this.constants.TYPE_INCOME) {
         return true;
       }
       return this.info.bill >= this.amount;
@@ -171,20 +174,20 @@ export default {
           });
 
           const bill =
-            this.type === "income"
+            this.type === this.constants.TYPE_INCOME
               ? this.info.bill + this.amount
               : this.info.bill - this.amount;
 
           await this.updateInfo({ bill });
 
-          this.$message(this.$t("Record_created"));
+          this.$message(this.$t("messages.record_created"));
           this.clear();
         } catch (e) {
           throw e;
         }
       } else {
         this.$message(
-          `${this.$t("No_money")} (${this.amount - this.info.bill})`
+          `${this.$t("messages.no_money")} (${this.amount - this.info.bill})`
         );
       }
     },
@@ -194,6 +197,17 @@ export default {
       this.description = "";
       this.amount = 1;
     },
+
+    async setupRecordData() {
+      await this.fetchCategories().then(categories => {
+        this.categories = categories;
+        this.loading = false;
+      });
+
+      if (this.categories.length) {
+        this.category = this.categories[0].id;
+      }
+    },
   },
 
   watch: {
@@ -201,7 +215,7 @@ export default {
       deep: true,
       handler: function (newValue) {
         if (newValue && newValue.dropdown) {
-          this.isDroprownOpened = newValue.dropdown.isOpen;
+          this.isDropdownOpened = newValue.dropdown.isOpen;
         }
       },
     },
@@ -211,12 +225,7 @@ export default {
   },
 
   async mounted() {
-    this.categories = await this.fetchCategories();
-    this.loading = false;
-
-    if (this.categories.length) {
-      this.category = this.categories[0].id;
-    }
+    await this.setupRecordData();
 
     setTimeout(() => {
       this.select = M.FormSelect.init(this.$refs.select);

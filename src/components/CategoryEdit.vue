@@ -2,12 +2,12 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>{{ $t("Edit") }}</h4>
+        <h4>{{ $t("common.edit") }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
         <label class="edit-label">
-          {{ $t("Choose_category_label") }}
+          {{ $t("views.choose_category_label") }}
         </label>
         <div
           class="input-field"
@@ -20,7 +20,7 @@
           </select>
         </div>
         <label class="edit-label" for="name">
-          {{ $t("Category_title") }}
+          {{ $t("views.category_title") }}
         </label>
         <div class="input-field create-title">
           <input
@@ -34,11 +34,11 @@
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
           >
-            {{ $t("Enter_title_message") }}
+            {{ $t("messages.enter_title_message") }}
           </span>
         </div>
         <label class="edit-label" for="limit">
-          {{ $t("Limit") }}
+          {{ $t("views.limit") }}
         </label>
         <div class="input-field create-title">
           <input
@@ -52,13 +52,13 @@
             v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid"
           >
-            {{ $t("Min_value_message") }}
+            {{ $t("messages.min_value_message") }}
             {{ $v.limit.$params.minValue.min }}
           </span>
         </div>
 
         <button class="btn waves-effect waves-light create" type="submit">
-          {{ $t("Update") }}
+          {{ $t("common.update") }}
         </button>
       </form>
     </div>
@@ -113,9 +113,16 @@ export default {
       };
 
       await this.updateCategory(categoryData).then(() => {
-        this.$message(this.$t("Category_updated"));
+        this.$message(this.$t("messages.category_updated"));
         this.$emit("updated", categoryData);
       });
+    },
+
+    setInitCategoryData() {
+      const { title, limit, id } = this.categories[0];
+      this.current = id;
+      this.limit = limit;
+      this.title = title;
     },
   },
 
@@ -136,10 +143,7 @@ export default {
   },
 
   created() {
-    const { title, limit, id } = this.categories[0];
-    this.current = id;
-    this.limit = limit;
-    this.title = title;
+    this.setInitCategoryData();
   },
 
   mounted() {

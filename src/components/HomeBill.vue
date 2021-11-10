@@ -3,7 +3,7 @@
     <div class="card white bill-card">
       <div class="card-content ">
         <span class="card-title">
-          {{ $t("Currency_account") }}
+          {{ $t("views.currency_account") }}
         </span>
 
         <p
