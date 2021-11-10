@@ -5,7 +5,7 @@
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
         <router-link to="/history" class="breadcrumb">
-          {{ $t("History") }}
+          {{ $t("views.history") }}
         </router-link>
         <a class="breadcrumb" @click.prevent>
           {{ $t(getRecordType) }}
@@ -16,19 +16,19 @@
           <div class="card card-outcome">
             <div class="card-content">
               <div class="outcome-row">
-                <p class="name">{{ $t("Description") }}</p>
+                <p class="name">{{ $t("views.description") }}</p>
                 <p class="outcome-value">{{ record.description }}</p>
               </div>
 
               <div class="outcome-row">
-                <p class="name">{{ $t("Sum") }}</p>
+                <p class="name">{{ $t("views.sum") }}</p>
                 <p class="outcome-value">
                   {{ record.amount | currencyFilter }}
                 </p>
               </div>
 
               <div class="outcome-row">
-                <p class="name">{{ $t("Category") }}</p>
+                <p class="name">{{ $t("views.category") }}</p>
                 <p class="outcome-value">{{ record.categoryName }}</p>
               </div>
 
@@ -57,7 +57,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Details"),
+      title: this.$title("views.details"),
     };
   },
 
@@ -85,7 +85,7 @@ export default {
 
   computed: {
     getRecordType() {
-      return this.record.type === constants.TYPE_INCOME ? "Income" : "Outcome";
+      return this.record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome";
     },
   },
 

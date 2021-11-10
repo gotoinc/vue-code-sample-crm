@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ $t("ProfileTitle") }}</h3>
+      <h3>{{ $t("profile.profileTitle") }}</h3>
     </div>
 
     <form class="form" @submit.prevent="submitHandler">
-      <label class="edit-label" for="description">{{ $t("Name") }}</label>
+      <label class="edit-label" for="description">
+        {{ $t("common.name") }}
+      </label>
       <div class="input-field create-title profile-user">
         <input
           v-model="name"
@@ -18,21 +20,21 @@
           v-if="$v.name.$dirty && !$v.name.required"
           class="helper-text invalid"
         >
-          {{ $t("Message_Enter_Name") }}
+          {{ $t("common.message_Enter_Name") }}
         </small>
       </div>
 
       <div class="switch">
         <label class="edit-label">
-          English
+          {{ $t("profile.eng") }}
           <input v-model="isRuLocale" type="checkbox" />
           <span class="lever"></span>
-          Russian
+          {{ $t("profile.rus") }}
         </label>
       </div>
 
       <button class="btn waves-effect waves-light create" type="submit">
-        {{ $t("Update") }}
+        {{ $t("common.update") }}
       </button>
     </form>
   </div>
@@ -50,7 +52,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("ProfileTitle"),
+      title: this.$title("profile.profileTitle"),
     };
   },
 

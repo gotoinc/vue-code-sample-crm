@@ -36,13 +36,13 @@
             >
               <li>
                 <router-link to="/profile" class="black-text">
-                  {{ $t("ProfileTitle") }}
+                  {{ $t("profile.profileTitle") }}
                 </router-link>
               </li>
 
               <li>
                 <a href="#" class="black-text" @click.prevent="logoutUser">
-                  {{ $t("LogoutTitle") }}
+                  {{ $t("views.logout_title") }}
                 </a>
               </li>
             </ul>

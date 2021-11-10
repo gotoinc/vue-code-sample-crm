@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ $t("Categories") }}</h3>
+      <h3>{{ $t("views.categories") }}</h3>
     </div>
     <section>
       <Loader v-if="loading" />
@@ -17,7 +17,7 @@
         />
 
         <p v-else class="center">
-          {{ $t("Message_no_categories") }}
+          {{ $t("messages.message_no_categories") }}
         </p>
       </div>
     </section>
@@ -35,7 +35,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Menu_Categories"),
+      title: this.$title("menu.menuCategories"),
     };
   },
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ $t("Account") }}</h3>
+      <h3>{{ $t("views.account") }}</h3>
 
       <button
         class="btn waves-effect waves-light btn-small reload"
@@ -32,7 +32,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Account"),
+      title: this.$title("views.account"),
     };
   },
 

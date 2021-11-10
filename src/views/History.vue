@@ -1,21 +1,21 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ $t("Record_history") }}</h3>
+      <h3>{{ $t("views.record_history") }}</h3>
     </div>
 
     <div class="history-wrapper">
       <Loader v-if="loading" />
 
       <p v-else-if="!records.length" class="center">
-        {{ $t("Message_no_records") }}
+        {{ $t("messages.message_no_records") }}
         <router-link to="/record">
-          {{ $t("Add_record_message") }}
+          {{ $t("messages.add_record_message") }}
         </router-link>
       </p>
 
       <section v-else class="history-table">
-        <h5 class="exchange-title">{{ $t("Record_history") }}</h5>
+        <h5 class="exchange-title">{{ $t("views.record_history") }}</h5>
         <HistoryTable :records="items" :passed-items="(page - 1) * pageSize" />
 
         <Paginate
@@ -23,8 +23,8 @@
           :page-count="pageCount"
           :page-range="isMobile ? 1 : 3"
           :click-handler="pageChangeHandle"
-          :prev-text="isMobile ? $t('Prev_short') : $t('Prev')"
-          :next-text="isMobile ? $t('Next_short') : $t('Next')"
+          :prev-text="isMobile ? $t('views.prev_short') : $t('views.prev')"
+          :next-text="isMobile ? $t('views.next_short') : $t('views.next')"
           :container-class="'pagination center'"
           :page-class="'waves-effect'"
         />
@@ -36,7 +36,7 @@
       >
         <div class="pie-wrapper">
           <h5 class="exchange-title">
-            {{ $t("Chart_expenses_title") }}
+            {{ $t("views.chart_expenses_title") }}
           </h5>
 
           <ChartPie ref="chartPie" :data="chartData" @generated="setLegend" />
@@ -74,7 +74,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Record_history"),
+      title: this.$title("views.record_history"),
     };
   },
 
@@ -187,7 +187,7 @@ export default {
                 ? "income-green"
                 : "outcome-red",
             typeText:
-              record.type === constants.TYPE_INCOME ? "Income" : "Outcome",
+              record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome",
           };
         })
       );

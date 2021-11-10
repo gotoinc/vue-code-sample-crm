@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="page-title">
-      <h3 class="planning">{{ $t("Planning") }}</h3>
+      <h3 class="planning">{{ $t("views.planning") }}</h3>
       <h4 class="planning-sum">
-        {{ $t("Balance") }}:
+        {{ $t("views.balance") }}:
         {{ info.bill | currencyFilter("EUR") }}
       </h4>
     </div>
@@ -22,7 +22,7 @@
             <strong>{{ cat.title }}</strong>
           </p>
           <p>
-            {{ cat.spend | currencyFilter }} {{ $t("Out_of") }}
+            {{ cat.spend | currencyFilter }} {{ $t("common.out_of") }}
             {{ cat.limit | currencyFilter }}
           </p>
         </div>
@@ -49,7 +49,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Planning"),
+      title: this.$title("views.planning"),
     };
   },
 
@@ -82,7 +82,7 @@ export default {
 
         const toolTipValue = cat.limit - spend;
         const tooltip = `${
-          toolTipValue < 0 ? this.$t("MoreThan") : this.$t("Balance")
+          toolTipValue < 0 ? this.$t("messages.more_than") : this.$t("views.balance")
         } ${currencyFilter(Math.abs(toolTipValue))}`;
 
         return {
