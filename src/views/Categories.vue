@@ -55,7 +55,6 @@ export default {
 
     addNewCategory(category) {
       this.categories.push(category);
-      console.log(this.categories);
     },
 
     updateCategory(categoryData) {

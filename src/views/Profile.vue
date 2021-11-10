@@ -40,6 +40,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+
 import { required } from "vuelidate/lib/validators";
 
 export default {
@@ -81,7 +82,7 @@ export default {
           locale: this.isRuLocale ? "ru-RU" : "en-EN",
         });
       } catch (e) {
-        console.log(e);
+        throw e;
       }
     },
   },

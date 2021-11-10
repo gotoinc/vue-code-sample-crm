@@ -49,7 +49,6 @@ const actions = {
           commit("SET_CURRENCY", data);
         });
     } catch (e) {
-      console.log(e);
       throw e;
     }
   },

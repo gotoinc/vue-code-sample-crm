@@ -50,6 +50,7 @@
 <script>
 import ChartPie from "@/components/Charts/ChartPie";
 import HistoryTable from "@/components/HistoryTable";
+
 import paginationMixin from "@/mixins/pagination.mixin";
 
 import { mapActions } from "vuex";
@@ -86,23 +87,20 @@ export default {
   computed: {
     getColors() {
       const initialColors = [
-        "#428EFF",
-        "#ACB9FF",
-        "#9FDFA2",
-        "#B6C4CF",
-        "#E8B6FF",
-        "#C5EAFF",
-        "#FFE890",
-        "#FFA68A",
+        "hsl(216, 100%, 63%)",
+        "hsl(231, 100%, 84%)",
+        "hsl(122, 50%, 75%)",
+        "hsl(208, 21%, 76%)",
+        "hsl(281, 100%, 86%)",
+        "hsl(202, 100%, 89%)",
+        "hsl(48, 100%, 78%)",
+        "hsl(14, 100%, 77%)",
       ];
-      let i = 0;
-      return this.categories.map(() => {
-        if (typeof initialColors[i] === "undefined") {
-          i = 0;
+      return this.categories.map((c, idx) => {
+        if (typeof initialColors[idx] === "undefined") {
+          return this.generateRandomColor();
         }
-        const result = initialColors[i];
-        i++;
-        return result;
+        return initialColors[idx];
       });
     },
     getCategoriesWithOutcomes() {
@@ -127,6 +125,26 @@ export default {
 
     updateDataset(el, idx) {
       this.$refs.chartPie.updateChartDataset(el, idx);
+    },
+
+    generateRandomColor() {
+      const defaultHue = [216, 231, 122, 208, 281, 202, 48, 14];
+      const hue = Math.floor(Math.random() * 360);
+      const light = Math.floor(Math.random() * 20 + 70);
+      const saturation = Math.floor(Math.random() * 60 + 40);
+
+      const isHueUnique = defaultHue.every(h => {
+        const isNotAlreadyUsed = hue !== h;
+        const isNotCloseColor = !(hue < h + 3 && hue > h - 3);
+        return isNotAlreadyUsed && isNotCloseColor;
+      });
+
+      if (isHueUnique || defaultHue.length === 60) {
+        defaultHue.push(hue);
+        return `hsl(${hue}, ${saturation}%, ${light}%)`;
+      }
+
+      return this.generateRandomColor();
     },
 
     setup(categories) {

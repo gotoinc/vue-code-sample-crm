@@ -40,6 +40,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+
 import currencyFilter from "@/filters/currency.filter";
 
 export default {

@@ -26,7 +26,7 @@
         </select>
       </div>
 
-      <p>
+      <div>
         <label class="income">
           <input
             v-model="type"
@@ -37,9 +37,9 @@
           />
           <span class="income-outcome">{{ $t("Income") }}</span>
         </label>
-      </p>
+      </div>
 
-      <p>
+      <div>
         <label>
           <input
             v-model="type"
@@ -50,8 +50,10 @@
           />
           <span class="income-outcome">{{ $t("Outcome") }}</span>
         </label>
-      </p>
+      </div>
+
       <label for="amount">{{ $t("Sum") }}</label>
+
       <div class="input-field">
         <input
           id="amount"
@@ -103,6 +105,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+
 import { minValue, required } from "vuelidate/lib/validators";
 
 export default {
@@ -177,7 +180,6 @@ export default {
           this.$message(this.$t("Record_created"));
           this.clear();
         } catch (e) {
-          console.log(e);
           throw e;
         }
       } else {
