@@ -45,11 +45,11 @@
             id="limit"
             v-model.number="limit"
             type="number"
-            :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
+            :class="{ invalid: $v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required) }"
           />
 
           <span
-            v-if="$v.limit.$dirty && !$v.limit.minValue"
+            v-if="$v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required)"
             class="helper-text invalid"
           >
             {{ $t("messages.min_value_message") }}
@@ -94,6 +94,7 @@ export default {
     },
     limit: {
       minValue: minValue(100),
+      required,
     },
   },
 
