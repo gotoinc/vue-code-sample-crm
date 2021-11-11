@@ -4,7 +4,7 @@
       <h3>{{ $t("views.account") }}</h3>
 
       <button
-        class="btn waves-effect waves-light btn-small reload"
+        class="btn waves-effect waves-light btn-small btn-reload btn-yellow"
         @click="refresh"
       >
         <i class="material-icons">refresh</i>

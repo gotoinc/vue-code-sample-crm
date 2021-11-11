@@ -35,7 +35,7 @@
             type="radio"
             value="income"
           />
-          <span class="income-outcome">{{ $t("common.income") }}</span>
+          <span class="income-outcome-radio">{{ $t("common.income") }}</span>
         </label>
       </div>
 
@@ -48,7 +48,7 @@
             type="radio"
             value="outcome"
           />
-          <span class="income-outcome">{{ $t("common.outcome") }}</span>
+          <span class="income-outcome-radio">{{ $t("common.outcome") }}</span>
         </label>
       </div>
 
@@ -96,7 +96,7 @@
         </span>
       </div>
 
-      <button class="btn waves-effect waves-light create" type="submit">
+      <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
         {{ $t("common.create") }}
       </button>
     </form>

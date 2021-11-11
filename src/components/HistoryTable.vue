@@ -24,10 +24,10 @@
         <td>
           <button
             v-tooltip="'views.show_details'"
-            class="btn-small btn open-btn"
+            class="btn-small btn btn-open"
             @click="$router.push(`/detail/${record.id}`)"
           >
-            <p class="open-btn-text">{{ $t("views.open") }}</p>
+            <p class="btn-open-text">{{ $t("views.open") }}</p>
             <i class="material-icons">chevron_right</i>
           </button>
         </td>

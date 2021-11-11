@@ -5,7 +5,7 @@
       <label class="edit-label" for="email">Email</label>
       <div class="input-field">
         <input
-          id="email"
+          id="auth-input"
           v-model.trim="email"
           type="text"
           :class="{
@@ -32,7 +32,7 @@
       <label class="edit-label" for="password">{{ $t("auth.Password") }}</label>
       <div class="input-field">
         <input
-          id="password"
+          id="auth-input"
           v-model="password"
           type="password"
           :class="{
@@ -65,7 +65,7 @@
     <div class="card-action">
       <div>
         <button
-          class="btn waves-effect waves-light auth-submit create login-btn"
+          class="btn waves-effect waves-light auth-submit btn-yellow btn-create btn-login"
           type="submit"
         >
           {{ $t("common.login") }}
@@ -74,7 +74,7 @@
 
       <p class="center">
         {{ $t("auth.No_account") }}?
-        <router-link class="sign-up-link" to="/signup">
+        <router-link id="sign-up-link" to="/signup">
           {{ $t("auth.Sign_up") }}
         </router-link>
       </p>

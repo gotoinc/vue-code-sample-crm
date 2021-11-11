@@ -42,7 +42,7 @@
           </span>
         </div>
 
-        <button class="btn waves-effect waves-light create" type="submit">
+        <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
           {{ $t("common.create") }}
         </button>
       </form>

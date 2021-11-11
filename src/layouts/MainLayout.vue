@@ -21,7 +21,7 @@
         <router-link
           :key="locale"
           v-tooltip.customClass="'messages.create_new_record_tooltip'"
-          class="btn-floating btn-large blue"
+          class="btn-floating btn-large btn-blue"
           to="/record"
         >
           <i class="large material-icons">add</i>

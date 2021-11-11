@@ -8,10 +8,10 @@
       <label class="edit-label" for="description">
         {{ $t("common.name") }}
       </label>
-      <div class="input-field create-title profile-user">
+      <div class="input-field create-title">
         <input
           v-model="name"
-          class="profile-user"
+          id="name-inp"
           type="text"
           :class="{ invalid: $v.name.$dirty && !$v.name.required }"
         />
@@ -33,7 +33,7 @@
         </label>
       </div>
 
-      <button class="btn waves-effect waves-light create" type="submit">
+      <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
         {{ $t("common.update") }}
       </button>
     </form>
