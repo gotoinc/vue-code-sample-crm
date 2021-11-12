@@ -94,7 +94,7 @@ input[type="number"] {
     line-height: 30px !important;
     font-weight: 500;
     font-size: 30px;
-    margin: 0px 0px 30px 0px;
+    margin: 0px;
   }
 }
 
@@ -160,16 +160,18 @@ select {
   font-weight: 500;
 }
 
-[type="checkbox"] + span:not(.lever):before,
-[type="checkbox"]:not(.filled-in) + span:not(.lever):after {
-  border: 2px solid $blue;
-}
+#terms-checkbox {
+  &:not(.filled-in) + span:not(.lever):after,
+  & + span:not(.lever):before{
+    border: 2px solid $blue;
+  }
 
-[type="checkbox"]:checked + span:not(.lever):before {
-  border-top: 2px solid transparent;
-  border-left: 2px solid transparent;
-  border-right: 2px solid $blue;
-  border-bottom: 2px solid $blue;
+  &:checked + span:not(.lever):before {
+      border-top: 2px solid transparent;
+      border-left: 2px solid transparent;
+      border-right: 2px solid $blue;
+      border-bottom: 2px solid $blue;
+    }
 }
 
 .auth-submit {
@@ -201,11 +203,8 @@ select {
 }
 
 .form {
-  max-width: 350px;
-
-  @media (max-width: 600px) {
-    width: 100%;
-    max-width: none;
+  @media (min-width: 601px) {
+    max-width: 350px;
   }
 }
 
@@ -217,39 +216,8 @@ select {
   transform: translateX(-50%);
 }
 
-[type="radio"]:checked + span:after,
-[type="radio"].with-gap:checked + span:before,
-[type="radio"].with-gap:checked + span:after {
-  border: $yellow 2px solid;
-  background-color: $yellow;
-}
-
-[type="radio"]:checked + span:after,
-[type="radio"].with-gap:checked + span:after {
-  background-color: $white;
-}
-
-[type="radio"]:not(:checked) + span:before,
-[type="radio"]:not(:checked) + span:after {
-  border: 1px solid $black;
-}
-
 .input-field {
   margin-top: 4px;
-}
-
-.switch label input[type="checkbox"]:checked + .lever {
-  background-color: $blue;
-}
-
-.switch label input[type="checkbox"]:checked + .lever:after {
-  background-color: $blue;
-}
-
-input[type="checkbox"]:checked:not(:disabled) ~ .lever:active::before,
-input[type="checkbox"]:checked:not(:disabled).tabbed:focus ~ .lever::before {
-  transform: scale(1.8);
-  background-color: rgba(115, 149, 189, 0.15);
 }
 
 .custom-tooltip {

@@ -49,11 +49,3 @@ table {
     line-height: 24px;
   }
 }
-
-@media only screen and (min-width: 601px) {
-  .categories-row.row .col.m6 {
-    max-width: 350px;
-    min-width: 350px;
-    margin-right: 140px;
-  }
-}

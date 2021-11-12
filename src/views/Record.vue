@@ -30,12 +30,12 @@
         <label class="income">
           <input
             v-model="type"
-            class="with-gap"
+            class="with-gap income-outcome-radio"
             name="type"
             type="radio"
             value="income"
           />
-          <span class="income-outcome-radio">{{ $t("common.income") }}</span>
+          <span class="income-outcome-radio-label">{{ $t("common.income") }}</span>
         </label>
       </div>
 
@@ -43,12 +43,12 @@
         <label>
           <input
             v-model="type"
-            class="with-gap"
+            class="with-gap income-outcome-radio"
             name="type"
             type="radio"
             value="outcome"
           />
-          <span class="income-outcome-radio">{{ $t("common.outcome") }}</span>
+          <span class="income-outcome-radio-label">{{ $t("common.outcome") }}</span>
         </label>
       </div>
 

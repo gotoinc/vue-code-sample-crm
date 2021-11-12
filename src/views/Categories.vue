@@ -6,13 +6,14 @@
     <section>
       <Loader v-if="loading" />
 
-      <div v-else class="row categories-row">
-        <CategoryCreate @created="addNewCategory" />
+      <div v-else class="categories-row">
+        <CategoryCreate class="categories-col" @created="addNewCategory" />
 
         <CategoryEdit
           v-if="categories.length"
           :key="categories.length + updateCount"
           :categories="categories"
+          class="categories-col"
           @updated="updateCategory"
         />
 
