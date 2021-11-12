@@ -1,9 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 import HomeCurrency from "@/components/HomeCurrency";
 import Vue from "vue";
-import localizeFilter from "@/filters/localize.filter";
 import dateFilter from "@/filters/date.filter";
-Vue.filter("localizeFilter", localizeFilter);
 Vue.filter("dateFilter", dateFilter);
 
 describe("HomeCurrency", () => {

@@ -1,9 +1,7 @@
 import { shallowMount } from "@vue/test-utils";
 import HistoryTable from "@/components/HistoryTable";
 import Vue from "vue";
-import localizeFilter from "@/filters/localize.filter";
 import currencyFilter from "@/filters/currency.filter";
-Vue.filter("localizeFilter", localizeFilter);
 Vue.filter("currencyFilter", currencyFilter);
 
 describe("HistoryTable", () => {

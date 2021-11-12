@@ -187,7 +187,9 @@ export default {
                 ? "income-green"
                 : "outcome-red",
             typeText:
-              record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome",
+              record.type === constants.TYPE_INCOME
+                ? "common.income"
+                : "common.outcome",
           };
         })
       );

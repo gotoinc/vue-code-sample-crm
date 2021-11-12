@@ -30,7 +30,10 @@
             id="limit"
             v-model.number="limit"
             type="number"
-            :class="{ invalid: $v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required) }"
+            :class="{
+              invalid:
+                $v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required),
+            }"
           />
 
           <span
@@ -42,7 +45,10 @@
           </span>
         </div>
 
-        <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
+        <button
+          class="btn waves-effect waves-light btn-create btn-yellow"
+          type="submit"
+        >
           {{ $t("common.create") }}
         </button>
       </form>

@@ -2,9 +2,7 @@ import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Login from "@/views/Login";
 import Vue from "vue";
 import VueRouter from "vue-router";
-import localizeFilter from "@/filters/localize.filter";
 import { routes } from "@/router";
-Vue.filter("localizeFilter", localizeFilter);
 import Vuelidate from "vuelidate";
 Vue.use(Vuelidate);
 

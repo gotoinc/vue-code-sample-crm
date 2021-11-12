@@ -88,7 +88,12 @@
     <div class="card-action">
       <div>
         <button
-          class="btn waves-effect waves-light auth-submit btn-create btn-yellow btn-login"
+          class="
+            btn
+            waves-effect waves-light
+            auth-submit
+            btn-create btn-yellow btn-login
+          "
           type="submit"
         >
           {{ $t("auth.Sign_up") }}
@@ -97,7 +102,9 @@
 
       <p class="center">
         {{ $t("auth.Have_account") }}?
-        <router-link id="sign-up-link" to="/login">{{ $t("common.login") }}!</router-link>
+        <router-link id="sign-up-link" to="/login"
+          >{{ $t("common.login") }}!</router-link
+        >
       </p>
 
       <p class="center flag-wrapper">

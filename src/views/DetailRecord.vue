@@ -85,7 +85,9 @@ export default {
 
   computed: {
     getRecordType() {
-      return this.record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome";
+      return this.record.type === constants.TYPE_INCOME
+        ? "common.income"
+        : "common.outcome";
     },
   },
 

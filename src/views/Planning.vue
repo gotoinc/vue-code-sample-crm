@@ -82,7 +82,9 @@ export default {
 
         const toolTipValue = cat.limit - spend;
         const tooltip = `${
-          toolTipValue < 0 ? this.$t("messages.more_than") : this.$t("views.balance")
+          toolTipValue < 0
+            ? this.$t("messages.more_than")
+            : this.$t("views.balance")
         } ${currencyFilter(Math.abs(toolTipValue))}`;
 
         return {
