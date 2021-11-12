@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "Account" | localizeFilter }}</h3>
+      <h3>{{ $t("views.account") }}</h3>
 
       <button
-        class="btn waves-effect waves-light btn-small reload"
+        class="btn waves-effect waves-light btn-small btn-reload btn-yellow"
         @click="refresh"
       >
         <i class="material-icons">refresh</i>
@@ -32,7 +32,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Account"),
+      title: this.$title("views.account"),
     };
   },
 

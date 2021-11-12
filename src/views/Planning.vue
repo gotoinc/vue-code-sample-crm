@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="page-title">
-      <h3 class="planning">{{ "Planning" | localizeFilter }}</h3>
-      <h4 class="planning-sum">{{ info.bill | currencyFilter("EUR") }}</h4>
+      <h3 class="planning">{{ $t("views.planning") }}</h3>
+      <h4 class="planning-sum">
+        {{ $t("views.balance") }}:
+        {{ info.bill | currencyFilter("EUR") }}
+      </h4>
     </div>
 
     <Loader v-if="loading" />
@@ -19,7 +22,7 @@
             <strong>{{ cat.title }}</strong>
           </p>
           <p>
-            {{ cat.spend | currencyFilter }} {{ "Out_of" | localizeFilter }}
+            {{ cat.spend | currencyFilter }} {{ $t("common.out_of") }}
             {{ cat.limit | currencyFilter }}
           </p>
         </div>
@@ -37,15 +40,16 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+
 import currencyFilter from "@/filters/currency.filter";
-import localizeFilter from "@/filters/localize.filter";
+import constants from "@/utils/constants";
 
 export default {
   name: "Planning",
 
   metaInfo() {
     return {
-      title: this.$title("Planning"),
+      title: this.$title("views.planning"),
     };
   },
 
@@ -57,6 +61,39 @@ export default {
   methods: {
     ...mapActions("record", ["fetchRecords"]),
     ...mapActions("category", ["fetchCategories"]),
+
+    async setupCategoriesData() {
+      const records = await this.fetchRecords();
+      const categories = await this.fetchCategories();
+
+      this.categories = categories.map(cat => {
+        const spend = records
+          .filter(r => r.categoryId === cat.id)
+          .filter(r => r.type === constants.TYPE_OUTCOME)
+          .reduce((acc, r) => {
+            return (acc += +r.amount);
+          }, 0);
+
+        const persent = (100 * spend) / cat.limit;
+        const progressPercent = persent > 100 ? 100 : persent;
+        let progressColor = "progress";
+        progressColor +=
+          persent < 60 ? "-green" : persent <= 100 ? "-yellow" : "-red";
+
+        const toolTipValue = cat.limit - spend;
+        const tooltip = `${
+          toolTipValue < 0 ? this.$t("messages.more_than") : this.$t("views.balance")
+        } ${currencyFilter(Math.abs(toolTipValue))}`;
+
+        return {
+          ...cat,
+          progressColor,
+          progressPercent,
+          spend,
+          tooltip,
+        };
+      });
+    },
   },
 
   computed: {
@@ -64,45 +101,14 @@ export default {
   },
 
   async mounted() {
-    const records = await this.fetchRecords();
-    const categories = await this.fetchCategories();
-
-    this.categories = categories.map(cat => {
-      const spend = records
-        .filter(r => r.categoryId === cat.id)
-        .filter(r => r.type === "outcome")
-        .reduce((acc, r) => {
-          return (acc += +r.amount);
-        }, 0);
-
-      const persent = (100 * spend) / cat.limit;
-      const progressPercent = persent > 100 ? 100 : persent;
-      let progressColor = "progress";
-      progressColor +=
-        persent < 60 ? "-green" : persent < 100 ? "-yellow" : "-red";
-
-      const toolTipValue = cat.limit - spend;
-      const tooltip = `${
-        toolTipValue < 0
-          ? localizeFilter("MoreThan")
-          : localizeFilter("Balance")
-      } ${currencyFilter(Math.abs(toolTipValue))}`;
-
-      return {
-        ...cat,
-        progressColor,
-        progressPercent,
-        spend,
-        tooltip,
-      };
-    });
-
-    this.loading = false;
+    await this.setupCategoriesData().then(() => (this.loading = false));
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/main";
+
 .progress {
   &-green {
     background: #9fdfa2;
@@ -112,6 +118,11 @@ export default {
   }
   &-red {
     background: #ff847b;
+  }
+}
+.page-title {
+  @media (max-width: $small-tablet) {
+    flex-direction: column;
   }
 }
 </style>

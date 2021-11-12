@@ -1,23 +1,23 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "New_record" | localizeFilter }}</h3>
+      <h3>{{ $t("views.new_record") }}</h3>
     </div>
 
     <Loader v-if="loading" />
 
     <p v-else-if="!categories.length" class="center">
-      {{ "Message_no_categories" | localizeFilter }}
+      {{ $t("messages.message_no_categories") }}
       <router-link to="/">
-        {{ "Add_record_message" | localizeFilter }}
+        {{ $t("messages.add_record_message") }}
       </router-link>
     </p>
 
     <form v-else class="form" @submit.prevent="handleSubmit">
-      <label>{{ "Choose_category_label" | localizeFilter }}</label>
+      <label>{{ $t("views.choose_category_label") }}</label>
       <div
         class="input-field"
-        :class="isDroprownOpened ? 'arrow-up' : 'arrow-down'"
+        :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
       >
         <select ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
@@ -26,7 +26,7 @@
         </select>
       </div>
 
-      <p>
+      <div>
         <label class="income">
           <input
             v-model="type"
@@ -35,11 +35,11 @@
             type="radio"
             value="income"
           />
-          <span class="income-outcome">{{ "Income" | localizeFilter }}</span>
+          <span class="income-outcome-radio">{{ $t("common.income") }}</span>
         </label>
-      </p>
+      </div>
 
-      <p>
+      <div>
         <label>
           <input
             v-model="type"
@@ -48,28 +48,35 @@
             type="radio"
             value="outcome"
           />
-          <span class="income-outcome">{{ "Outcome" | localizeFilter }}</span>
+          <span class="income-outcome-radio">{{ $t("common.outcome") }}</span>
         </label>
-      </p>
-      <label for="amount">{{ "Sum" | localizeFilter }}</label>
+      </div>
+
+      <label for="amount">{{ $t("views.sum") }}</label>
+
       <div class="input-field">
         <input
           id="amount"
           v-model.number="amount"
           type="number"
-          :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
+          :class="{
+            invalid:
+              $v.amount.$dirty && (!$v.amount.minValue || !$v.amount.required),
+          }"
         />
 
         <span
-          v-if="$v.amount.$dirty && !$v.amount.minValue"
+          v-if="
+            $v.amount.$dirty && (!$v.amount.minValue || !$v.amount.required)
+          "
           class="helper-text invalid"
         >
-          {{ "Min_value_message" | localizeFilter }}
+          {{ $t("messages.min_value_message") }}
           {{ $v.amount.$params.minValue.min }}
         </span>
       </div>
 
-      <label for="description">{{ "Description" | localizeFilter }}</label>
+      <label for="description">{{ $t("views.description") }}</label>
 
       <div class="input-field">
         <textarea
@@ -81,16 +88,16 @@
             invalid: $v.description.$dirty && !$v.description.required,
           }"
         />
-        <label
+        <span
           v-if="$v.description.$dirty && !$v.description.required"
           class="helper-text invalid"
         >
-          {{ "Description_required_message" | localizeFilter }}
-        </label>
+          {{ $t("messages.description_required_message") }}
+        </span>
       </div>
 
-      <button class="btn waves-effect waves-light create" type="submit">
-        {{ "Create" | localizeFilter }}
+      <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
+        {{ $t("common.create") }}
       </button>
     </form>
   </div>
@@ -98,15 +105,17 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+
 import { minValue, required } from "vuelidate/lib/validators";
-import localizeFilter from "@/filters/localize.filter";
+
+import constants from "@/utils/constants";
 
 export default {
   name: "Record",
 
   metaInfo() {
     return {
-      title: this.$title("New_record"),
+      title: this.$title("views.new_record"),
     };
   },
 
@@ -118,7 +127,8 @@ export default {
     type: "outcome",
     amount: 1,
     description: "",
-    isDroprownOpened: false,
+    isDropdownOpened: false,
+    constants: constants,
   }),
 
   validations: {
@@ -126,6 +136,7 @@ export default {
       required,
     },
     amount: {
+      required,
       minValue: minValue(1),
     },
   },
@@ -134,7 +145,7 @@ export default {
     ...mapState("info", ["info"]),
 
     canCreateRecord() {
-      if (this.type === "income") {
+      if (this.type === this.constants.TYPE_INCOME) {
         return true;
       }
       return this.info.bill >= this.amount;
@@ -163,21 +174,20 @@ export default {
           });
 
           const bill =
-            this.type === "income"
+            this.type === this.constants.TYPE_INCOME
               ? this.info.bill + this.amount
               : this.info.bill - this.amount;
 
           await this.updateInfo({ bill });
 
-          this.$message(localizeFilter("Record_created"));
+          this.$message(this.$t("messages.record_created"));
           this.clear();
         } catch (e) {
-          console.log(e);
           throw e;
         }
       } else {
         this.$message(
-          `${localizeFilter("No_money")} (${this.amount - this.info.bill})`
+          `${this.$t("messages.no_money")} (${this.amount - this.info.bill})`
         );
       }
     },
@@ -187,6 +197,17 @@ export default {
       this.description = "";
       this.amount = 1;
     },
+
+    async setupRecordData() {
+      await this.fetchCategories().then(categories => {
+        this.categories = categories;
+        this.loading = false;
+      });
+
+      if (this.categories.length) {
+        this.category = this.categories[0].id;
+      }
+    },
   },
 
   watch: {
@@ -194,19 +215,17 @@ export default {
       deep: true,
       handler: function (newValue) {
         if (newValue && newValue.dropdown) {
-          this.isDroprownOpened = newValue.dropdown.isOpen;
+          this.isDropdownOpened = newValue.dropdown.isOpen;
         }
       },
+    },
+    category: function () {
+      this.clear();
     },
   },
 
   async mounted() {
-    this.categories = await this.fetchCategories();
-    this.loading = false;
-
-    if (this.categories.length) {
-      this.category = this.categories[0].id;
-    }
+    await this.setupRecordData();
 
     setTimeout(() => {
       this.select = M.FormSelect.init(this.$refs.select);
@@ -223,7 +242,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/main";
+@import "../assets/scss/main.scss";
 
 .arrow-down::v-deep {
   .select-wrapper:after {

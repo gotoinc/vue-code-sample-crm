@@ -1,4 +1,5 @@
 import firebase from "firebase/app";
+import { i18n } from "@/plugins/i18n";
 
 const state = {
   info: {},
@@ -6,7 +7,10 @@ const state = {
 };
 
 const mutations = {
-  SET_INFO: (state, info) => (state.info = info),
+  SET_INFO: (state, info) => {
+    state.info = info;
+    i18n.locale = info.locale;
+  },
   CLEAR_INFO: state => (state.info = {}),
   SET_CURRENCY: (state, currency) => {
     const { EUR, USD, JPY } = currency.rates;
@@ -39,7 +43,6 @@ const actions = {
           commit("SET_CURRENCY", data);
         });
     } catch (e) {
-      console.log(e);
       throw e;
     }
   },

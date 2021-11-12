@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "ProfileTitle" | localizeFilter }}</h3>
+      <h3>{{ $t("profile.profileTitle") }}</h3>
     </div>
 
     <form class="form" @submit.prevent="submitHandler">
-      <label class="edit-label" for="description">{{
-        "Name" | localizeFilter
-      }}</label>
-      <div class="input-field create-title profile-user">
+      <label class="edit-label" for="description">
+        {{ $t("common.name") }}
+      </label>
+      <div class="input-field create-title">
         <input
           v-model="name"
-          class="profile-user"
+          id="name-inp"
           type="text"
           :class="{ invalid: $v.name.$dirty && !$v.name.required }"
         />
@@ -20,21 +20,21 @@
           v-if="$v.name.$dirty && !$v.name.required"
           class="helper-text invalid"
         >
-          {{ "Message_Enter_Name" | localizeFilter }}
+          {{ $t("common.message_Enter_Name") }}
         </small>
       </div>
 
       <div class="switch">
         <label class="edit-label">
-          English
+          {{ $t("profile.eng") }}
           <input v-model="isRuLocale" type="checkbox" />
           <span class="lever"></span>
-          Russian
+          {{ $t("profile.rus") }}
         </label>
       </div>
 
-      <button class="btn waves-effect waves-light create" type="submit">
-        {{ "Update" | localizeFilter }}
+      <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
+        {{ $t("common.update") }}
       </button>
     </form>
   </div>
@@ -42,15 +42,17 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+
 import { required } from "vuelidate/lib/validators";
-import localizeFilter from "@/filters/localize.filter";
+
+import constants from "@/utils/constants";
 
 export default {
   name: "Profile",
 
   metaInfo() {
     return {
-      title: this.$title("ProfileTitle"),
+      title: this.$title("profile.profileTitle"),
     };
   },
 
@@ -72,6 +74,11 @@ export default {
   methods: {
     ...mapActions("info", ["updateInfo"]),
 
+    setupProfileData() {
+      this.name = this.info.name;
+      this.isRuLocale = this.info.locale === constants.LOCALE_RU;
+    },
+
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -81,18 +88,16 @@ export default {
       try {
         await this.updateInfo({
           name: this.name,
-          locale: this.isRuLocale ? "ru-RU" : "en-EN",
+          locale: this.isRuLocale ? constants.LOCALE_RU : constants.LOCALE_EN,
         });
       } catch (e) {
-        console.log(e);
+        throw e;
       }
     },
   },
 
-  async mounted() {
-    await this.$nextTick();
-    this.name = this.info.name;
-    this.isRuLocale = this.info.locale === "ru-RU";
+  mounted() {
+    this.setupProfileData();
 
     setTimeout(() => {
       M.updateTextFields();

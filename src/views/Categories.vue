@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{ "Categories" | localizeFilter }}</h3>
+      <h3>{{ $t("views.categories") }}</h3>
     </div>
     <section>
       <Loader v-if="loading" />
@@ -17,7 +17,7 @@
         />
 
         <p v-else class="center">
-          {{ "Message_no_categories" | localizeFilter }}
+          {{ $t("messages.message_no_categories") }}
         </p>
       </div>
     </section>
@@ -35,7 +35,7 @@ export default {
 
   metaInfo() {
     return {
-      title: this.$title("Menu_Categories"),
+      title: this.$title("menu.menuCategories"),
     };
   },
 
@@ -59,7 +59,6 @@ export default {
 
     addNewCategory(category) {
       this.categories.push(category);
-      console.log(this.categories);
     },
 
     updateCategory(categoryData) {
@@ -71,8 +70,10 @@ export default {
   },
 
   async mounted() {
-    this.categories = await this.fetchCategories();
-    this.loading = false;
+    await this.fetchCategories().then(categories => {
+      this.categories = categories;
+      this.loading = false;
+    });
   },
 };
 </script>

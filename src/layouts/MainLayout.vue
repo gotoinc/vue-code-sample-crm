@@ -20,8 +20,8 @@
       <div class="fixed-action-btn">
         <router-link
           :key="locale"
-          v-tooltip.customClass="'Create_new_record_tooltip'"
-          class="btn-floating btn-large blue"
+          v-tooltip.customClass="'messages.create_new_record_tooltip'"
+          class="btn-floating btn-large btn-blue"
           to="/record"
         >
           <i class="large material-icons">add</i>

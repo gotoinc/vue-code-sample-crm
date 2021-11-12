@@ -1,11 +1,11 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">Home bookkeeping</span>
+      <span class="card-title">{{ $t("auth.App_name") }}</span>
       <label class="edit-label" for="email">Email</label>
       <div class="input-field">
         <input
-          id="email"
+          id="auth-input"
           v-model.trim="email"
           type="text"
           :class="{
@@ -19,20 +19,20 @@
           v-if="$v.email.$dirty && !$v.email.required"
           class="helper-text invalid"
         >
-          Email should not be empty
+          {{ $t("auth.Email_required_message") }}
         </small>
 
         <small
           v-if="$v.email.$dirty && !$v.email.email"
           class="helper-text invalid"
         >
-          Email should be valid
+          {{ $t("auth.Email_valid_message") }}
         </small>
       </div>
-      <label class="edit-label" for="password">Password</label>
+      <label class="edit-label" for="password">{{ $t("auth.Password") }}</label>
       <div class="input-field">
         <input
-          id="password"
+          id="auth-input"
           v-model="password"
           type="password"
           :class="{
@@ -46,32 +46,46 @@
           v-if="$v.password.$dirty && !$v.password.required"
           class="helper-text invalid"
         >
-          Enter password
+          {{ $t("auth.Password_required_message") }}
         </small>
 
         <small
           v-if="$v.password.$dirty && !$v.password.minLength"
           class="helper-text invalid"
         >
-          Password length should be minimum
-          {{ $v.password.$params.minLength.min }} characters, you have only
-          {{ password.length }}
+          {{
+            $t("auth.Password_length_message", {
+              minLength: $v.password.$params.minLength.min,
+              currLength: password.length,
+            })
+          }}
         </small>
       </div>
     </div>
     <div class="card-action">
       <div>
         <button
-          class="btn waves-effect waves-light auth-submit create login-btn"
+          class="btn waves-effect waves-light auth-submit btn-yellow btn-create btn-login"
           type="submit"
         >
-          Login
+          {{ $t("common.login") }}
         </button>
       </div>
 
       <p class="center">
-        Don't have an account?
-        <router-link class="sign-up-link" to="/signup">Sign up</router-link>
+        {{ $t("auth.No_account") }}?
+        <router-link id="sign-up-link" to="/signup">
+          {{ $t("auth.Sign_up") }}
+        </router-link>
+      </p>
+
+      <p class="center flag-wrapper">
+        <a @click="setLocale('en')">
+          <flag iso="us" />
+        </a>
+        <a @click="setLocale('ru')">
+          <flag iso="ru" />
+        </a>
       </p>
     </div>
   </form>
@@ -79,16 +93,17 @@
 
 <script>
 import { required, email, minLength } from "vuelidate/lib/validators";
+
 import messages from "@/utils/messages";
+
 import { mapActions } from "vuex";
-import localizeFilter from "@/filters/localize.filter";
 
 export default {
   name: "Login",
 
   metaInfo() {
     return {
-      title: this.$title("Login"),
+      title: this.$title("common.login"),
     };
   },
 
@@ -112,6 +127,10 @@ export default {
   methods: {
     ...mapActions("auth", ["login"]),
 
+    setLocale(locale) {
+      this.$i18n.locale = locale;
+    },
+
     async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -127,14 +146,14 @@ export default {
         await this.login(formData);
         this.$router.push("/");
       } catch (e) {
-        console.log(e);
+        throw e;
       }
     },
   },
 
   mounted() {
     if (messages[this.$route.query.message]) {
-      this.$message(localizeFilter(messages[this.$route.query.message]));
+      this.$message(this.$t(messages[this.$route.query.message]));
     }
   },
 };

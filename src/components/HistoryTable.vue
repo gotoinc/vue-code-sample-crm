@@ -3,11 +3,11 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>{{ "Sum" | localizeFilter }}</th>
-        <th>{{ "Date" | localizeFilter }}</th>
-        <th>{{ "Category" | localizeFilter }}</th>
-        <th>{{ "Type" | localizeFilter }}</th>
-        <th>{{ "Open" | localizeFilter }}</th>
+        <th>{{ $t("views.sum") }}</th>
+        <th>{{ $t("views.date") }}</th>
+        <th>{{ $t("views.category") }}</th>
+        <th>{{ $t("views.type") }}</th>
+        <th>{{ $t("views.open") }}</th>
       </tr>
     </thead>
     <tbody>
@@ -18,16 +18,16 @@
         <td>{{ record.categoryName }}</td>
         <td>
           <span class="white-text badge table-type" :class="record.typeClass">
-            {{ record.typeText | localizeFilter }}
+            {{ $t(record.typeText) }}
           </span>
         </td>
         <td>
           <button
-            v-tooltip="'Show_details'"
-            class="btn-small btn open-btn"
+            v-tooltip="'views.show_details'"
+            class="btn-small btn btn-open"
             @click="$router.push(`/detail/${record.id}`)"
           >
-            <p class="open-btn-text">{{ "Open" | localizeFilter }}</p>
+            <p class="btn-open-text">{{ $t("views.open") }}</p>
             <i class="material-icons">chevron_right</i>
           </button>
         </td>

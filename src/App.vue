@@ -9,7 +9,7 @@
 
 <script>
 import "materialize-css/dist/css/materialize.css";
-import "@/assets/main.scss";
+import "@/assets/scss/main.scss";
 
 import AuthLayout from "@/layouts/AuthLayout";
 import MainLayout from "@/layouts/MainLayout";

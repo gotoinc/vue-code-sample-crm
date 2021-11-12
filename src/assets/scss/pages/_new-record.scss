@@ -34,11 +34,11 @@ textarea {
   height: auto;
 }
 
-.income-outcome {
+.income-outcome-radio {
   color: $black;
   line-height: 24px;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 13px !important;
 }
 
 input#email,

@@ -1,0 +1,121 @@
+.btn {
+  text-transform: none;
+  color: $black;
+
+  &-yellow {
+    background-color: $yellow;
+  }
+
+  &-blue {
+    background-color: $light-blue;
+
+    &:hover {
+      background-color: $light-gray !important;
+    }
+  }
+
+  &-blue, &-yellow {
+    i {
+      color: $black;
+    }
+  }
+
+  &:hover {
+    background-color: $gray;
+    box-shadow: none;
+  }
+
+  &:focus {
+    background-color: $yellow;
+  }
+
+  &-reload {
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+
+    @media (max-width: $small-tablet) {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+
+    &:hover {
+      background-color: $light-gray !important;
+    }
+  }
+
+  &-create {
+    height: auto;
+    padding: 13px 76px;
+    border-radius: 14px;
+    box-shadow: none;
+    font-size: 13px;
+    line-height: 26px;
+    font-weight: 700;
+    margin-top: 25px;
+  }
+
+  &-open {
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    box-shadow: none;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+    padding-left: 0;
+    padding-right: 0;
+
+    &-text {
+      text-decoration: underline;
+    }
+
+    &:focus,
+    &:active,
+    &:hover {
+      background-color: $white;
+      box-shadow: none;
+    }
+  }
+
+  &-login {
+    margin-top:0;
+  }
+
+}
+
+.fixed-action-btn {
+  right: 53px;
+  z-index: 10;
+
+  .btn-floating {
+    border-radius: 14px;
+    box-shadow: none;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: $small-tablet) {
+    right: 23px;
+  }
+}
+
+#sign-up-link {
+  color: $blue;
+  margin-right: 0px;
+  font-weight: 700;
+
+  &:hover {
+    color: #ffd8a6;
+  }
+}
+
+.sidebar-btn span {
+    @media (max-width: $small-tablet) {
+      background: $black !important;
+    }
+  }

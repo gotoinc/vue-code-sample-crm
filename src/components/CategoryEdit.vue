@@ -2,12 +2,12 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>{{ "Edit" | localizeFilter }}</h4>
+        <h4>{{ $t("common.edit") }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
         <label class="edit-label">
-          {{ "Choose_category_label" | localizeFilter }}
+          {{ $t("views.choose_category_label") }}
         </label>
         <div
           class="input-field"
@@ -20,7 +20,7 @@
           </select>
         </div>
         <label class="edit-label" for="name">
-          {{ "Category_title" | localizeFilter }}
+          {{ $t("views.category_title") }}
         </label>
         <div class="input-field create-title">
           <input
@@ -34,31 +34,31 @@
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
           >
-            {{ "Enter_title_message" | localizeFilter }}
+            {{ $t("messages.enter_title_message") }}
           </span>
         </div>
-        <label class="edit-label" for="limit">{{
-          "Limit" | localizeFilter
-        }}</label>
+        <label class="edit-label" for="limit">
+          {{ $t("views.limit") }}
+        </label>
         <div class="input-field create-title">
           <input
             id="limit"
             v-model.number="limit"
             type="number"
-            :class="{ invalid: $v.limit.$dirty && !$v.limit.minValue }"
+            :class="{ invalid: $v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required) }"
           />
 
           <span
-            v-if="$v.limit.$dirty && !$v.limit.minValue"
+            v-if="$v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required)"
             class="helper-text invalid"
           >
-            {{ "Min_value_message" | localizeFilter }}
+            {{ $t("messages.min_value_message") }}
             {{ $v.limit.$params.minValue.min }}
           </span>
         </div>
 
-        <button class="btn waves-effect waves-light create" type="submit">
-          {{ "Update" | localizeFilter }}
+        <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
+          {{ $t("common.update") }}
         </button>
       </form>
     </div>
@@ -67,7 +67,7 @@
 
 <script>
 import { minValue, required } from "vuelidate/lib/validators";
-import localizeFilter from "@/filters/localize.filter";
+
 import { mapActions } from "vuex";
 
 export default {
@@ -94,6 +94,7 @@ export default {
     },
     limit: {
       minValue: minValue(100),
+      required,
     },
   },
 
@@ -113,9 +114,16 @@ export default {
       };
 
       await this.updateCategory(categoryData).then(() => {
-        this.$message(localizeFilter("Category_updated"));
+        this.$message(this.$t("messages.category_updated"));
         this.$emit("updated", categoryData);
       });
+    },
+
+    setInitCategoryData() {
+      const { title, limit, id } = this.categories[0];
+      this.current = id;
+      this.limit = limit;
+      this.title = title;
     },
   },
 
@@ -136,10 +144,7 @@ export default {
   },
 
   created() {
-    const { title, limit, id } = this.categories[0];
-    this.current = id;
-    this.limit = limit;
-    this.title = title;
+    this.setInitCategoryData();
   },
 
   mounted() {
@@ -156,7 +161,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/main";
+@import "../assets/scss/main.scss";
 
 .arrow-down::v-deep {
   .select-wrapper:after {
