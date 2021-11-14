@@ -11,12 +11,14 @@ localVue.use(VueRouter);
 
 describe("SignUp", () => {
   const router = new VueRouter({ routes });
+  const $t = () => {};
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(SignUp, {
       localVue,
       router,
-      stubs: ["router-link"],
+      mocks: { $t },
+      stubs: ["router-link", "flag"],
     });
   });
 

@@ -1,15 +1,17 @@
-import VueTestUtils from "@vue/test-utils";
-import localeEN from "./src/locales/en";
-import localeRU from "./src/locales/ru";
+import { config } from "@vue/test-utils";
+import { en } from "@/locales/en";
+import { ru } from "@/locales/ru";
 
 const locale = "en";
 // translations[locale][msg];
 
-VueTestUtils.config.mocks["$t"] = msg => {
-  switch (locale) {
-    case "en":
-      return localeEN[msg];
-    case "ru":
-      return localeRU[msg];
-  }
-};
+// VueTestUtils.config.mocks["$t"] = msg => {
+//   switch (locale) {
+//     case "en":
+//       return en[msg];
+//     case "ru":
+//       return ru[msg];
+//   }
+// };
+
+config.mocks["$t"] = msg => en.messages[msg];

@@ -77,7 +77,11 @@ export default {
       minValue: minValue(100),
     },
   },
-
+  computed: {
+    message() {
+      return this.$t("messages.created_category");
+    },
+  },
   methods: {
     ...mapActions("category", ["createCategory"]),
 
@@ -100,7 +104,10 @@ export default {
       this.title = "";
       this.limit = 100;
       this.$v.$reset();
-      this.$message(this.$t("messages.created_category"));
+      // this.$message(this.$t("messages.created_category"));
+      if (this.message) {
+        this.$message();
+      }
     },
   },
 

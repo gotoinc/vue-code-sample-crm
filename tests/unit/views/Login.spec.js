@@ -16,7 +16,7 @@ describe("Login", () => {
     wrapper = shallowMount(Login, {
       localVue,
       router,
-      stubs: ["router-link"],
+      stubs: ["router-link", "flag"],
     });
   });
 

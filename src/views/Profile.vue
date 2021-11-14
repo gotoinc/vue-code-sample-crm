@@ -78,8 +78,10 @@ export default {
     ...mapActions("info", ["updateInfo"]),
 
     setupProfileData() {
-      this.name = this.info.name;
-      this.isRuLocale = this.info.locale === constants.LOCALE_RU;
+      if (this.info) {
+        this.name = this.info.name;
+        this.isRuLocale = this.info.locale === constants.LOCALE_RU;
+      }
     },
 
     async submitHandler() {
