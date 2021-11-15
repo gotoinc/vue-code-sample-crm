@@ -104,6 +104,12 @@ export default {
     },
   },
 
+  computed: {
+    message() {
+      return this.$t("messages.category_updated");
+    },
+  },
+
   methods: {
     ...mapActions("category", ["updateCategory"]),
 
@@ -120,7 +126,9 @@ export default {
       };
 
       await this.updateCategory(categoryData).then(() => {
-        this.$message(this.$t("messages.category_updated"));
+        if (this.message) {
+          this.$message(this.message);
+        }
         this.$emit("updated", categoryData);
       });
     },
@@ -154,7 +162,11 @@ export default {
   },
 
   mounted() {
-    this.select = M.FormSelect.init(this.$refs.select);
+    this.$nextTick(function () {
+      if (this.select) {
+        this.select = M.FormSelect.init(this.$refs.select);
+      }
+    });
     M.updateTextFields();
   },
 
