@@ -207,7 +207,7 @@ export default {
         this.loading = false;
       });
 
-      if (this.categories.length) {
+      if (this.categories && this.categories.length) {
         this.category = this.categories[0].id;
       }
     },
@@ -230,10 +230,14 @@ export default {
   async mounted() {
     await this.setupRecordData();
 
-    setTimeout(() => {
+    this.$nextTick(function () {
       this.select = M.FormSelect.init(this.$refs.select);
       M.updateTextFields();
-    }, 0);
+    });
+    // setTimeout(() => {
+    //   this.select = M.FormSelect.init(this.$refs.select);
+    //   M.updateTextFields();
+    // }, 0);
   },
 
   destroyed() {
