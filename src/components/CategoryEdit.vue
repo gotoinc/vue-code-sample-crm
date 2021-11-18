@@ -164,8 +164,8 @@ export default {
   mounted() {
     this.$nextTick(function () {
       this.select = M.FormSelect.init(this.$refs.select);
-      M.updateTextFields();
     });
+    M.updateTextFields();
   },
 
   destroyed() {
