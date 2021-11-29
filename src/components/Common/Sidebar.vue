@@ -13,6 +13,7 @@
           @click="handler(navigate, $event)"
           @keypress.enter="navigate"
         >
+          <i class="material-icons">{{ link.icon }}</i>
           {{ link.title }}
         </a>
       </li>
@@ -33,22 +34,27 @@ export default {
           title: this.$t("menu.menuAccount"),
           url: "/",
           exact: true,
+          icon: "perm_identity",
         },
         {
           title: this.$t("menu.menuHistory"),
           url: "/history",
+          icon: "restore",
         },
         {
           title: this.$t("menu.menuPlanning"),
           url: "/planning",
+          icon: "event",
         },
         {
           title: this.$t("menu.menuNewRecord"),
           url: "/record",
+          icon: "add_circle_outline",
         },
         {
           title: this.$t("menu.menuCategories"),
           url: "/categories",
+          icon: "apps",
         },
       ],
     };

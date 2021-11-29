@@ -49,9 +49,6 @@
   }
 }
 
-.dropdown-trigger.white-text {
-  font-weight: 700;
-}
 
 .navbar {
   position: absolute;
@@ -65,8 +62,14 @@
   box-shadow: none;
 
   @media (max-width: $small-tablet) {
-    background-color: $white;
     padding: 0 20px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 30px;
   }
 }
 
@@ -75,13 +78,7 @@
 }
 
 .dropdown-trigger.white-text {
-  @media (max-width: $small-tablet) {
-    color: $black !important;
-
-    &:hover {
-      background-color: $white;
-    }
-  }
+  font-weight: 700;
 }
 
 .nav-wrapper,

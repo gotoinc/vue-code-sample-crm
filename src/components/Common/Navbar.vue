@@ -3,6 +3,9 @@
     <nav class="navbar">
       <div class="nav-wrapper">
         <div class="navbar-left">
+          <div class="nav-logo" @click="$router.push('/')">
+            <img src="../../assets/images/logo.svg" alt="gotoinc-logo" />
+          </div>
           <a href="#" @click.prevent="$emit('click')">
             <div class="sidebar-btn" :class="{ active: isNavbarOpened }">
               <span class="top"></span>
@@ -36,12 +39,14 @@
             >
               <li>
                 <router-link to="/profile" class="black-text">
+                  <i class="material-icons">perm_identity</i>
                   {{ $t("profile.profileTitle") }}
                 </router-link>
               </li>
 
               <li>
                 <a href="#" class="black-text" @click.prevent="logoutUser">
+                  <i class="material-icons">exit_to_app</i>
                   {{ $t("views.logout_title") }}
                 </a>
               </li>

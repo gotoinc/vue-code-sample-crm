@@ -52,12 +52,19 @@
         color: $black;
         margin-bottom: 10px;
         margin-top: 10px;
+
+        .material-icons {
+          display: none;
+        }
       }
     }
 
     &.router-link-exact-active.active {
       a {
         font-weight: 700;
+      }
+      .material-icons {
+        color: $black !important;
       }
     }
   }
