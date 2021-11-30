@@ -72,17 +72,10 @@
 <script>
 import { minValue, required } from "vuelidate/lib/validators";
 
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "CategoryEdit",
-
-  props: {
-    categories: {
-      type: Array,
-      required: true,
-    },
-  },
 
   data: () => ({
     select: null,
@@ -102,6 +95,10 @@ export default {
     },
   },
 
+  computed: {
+    ...mapState("category", ["categories"]),
+  },
+
   methods: {
     ...mapActions("category", ["updateCategory"]),
 
@@ -119,7 +116,6 @@ export default {
 
       await this.updateCategory(categoryData).then(() => {
         this.$message(this.$t("messages.category_updated"));
-        this.$emit("updated", categoryData);
       });
     },
 

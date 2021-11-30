@@ -55,7 +55,7 @@ import paginationMixin from "@/mixins/pagination.mixin";
 
 import constants from "@/utils/constants";
 
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "History",
@@ -80,14 +80,15 @@ export default {
 
   data: () => ({
     loading: true,
-    categories: [],
-    records: [],
     chartData: null,
     message: "test",
     constants,
   }),
 
   computed: {
+    ...mapState("category", ["categories"]),
+    ...mapState("record", ["records"]),
+
     getColors() {
       const initialColors = [
         "hsl(216, 100%, 63%)",
@@ -187,7 +188,9 @@ export default {
                 ? "income-green"
                 : "outcome-red",
             typeText:
-              record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome",
+              record.type === constants.TYPE_INCOME
+                ? "common.income"
+                : "common.outcome",
           };
         })
       );
@@ -202,8 +205,8 @@ export default {
     },
 
     async fetchHistoryData() {
-      this.records = await this.fetchRecords();
-      this.categories = await this.fetchCategories();
+      await this.fetchRecords();
+      await this.fetchCategories();
     },
   },
 

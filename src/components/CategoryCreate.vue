@@ -88,9 +88,8 @@ export default {
       await this.createCategory({
         title: this.title,
         limit: this.limit,
-      }).then(res => {
+      }).then(() => {
         this.clear();
-        this.$emit("created", res);
       });
     },
 

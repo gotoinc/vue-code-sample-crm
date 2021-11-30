@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/account",
     name: "Home",
     meta: {
       layout: "main",
@@ -49,7 +49,7 @@ const routes = [
     component: () => import("@/views/DetailRecord.vue"),
   },
   {
-    path: "/history",
+    path: "/",
     name: "History",
     meta: {
       layout: "main",

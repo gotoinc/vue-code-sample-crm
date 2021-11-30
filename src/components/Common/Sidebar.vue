@@ -31,15 +31,15 @@ export default {
     return {
       links: [
         {
-          title: this.$t("menu.menuAccount"),
+          title: this.$t("menu.menuHistory"),
           url: "/",
-          exact: true,
-          icon: "perm_identity",
+          icon: "restore",
         },
         {
-          title: this.$t("menu.menuHistory"),
-          url: "/history",
-          icon: "restore",
+          title: this.$t("menu.menuAccount"),
+          url: "/account",
+          exact: true,
+          icon: "perm_identity",
         },
         {
           title: this.$t("menu.menuPlanning"),

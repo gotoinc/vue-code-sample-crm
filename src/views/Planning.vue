@@ -10,13 +10,13 @@
 
     <Loader v-if="loading" />
 
-    <p v-else-if="!categories.length" class="center">
+    <p v-else-if="!displayCategories.length" class="center">
       You don't have any categories yet.
       <router-link to="/"> Add new category </router-link>
     </p>
 
     <section v-else>
-      <div v-for="cat in categories" :key="cat.id">
+      <div v-for="cat in displayCategories" :key="cat.id">
         <div class="categories-name">
           <p>
             <strong>{{ cat.title }}</strong>
@@ -55,7 +55,7 @@ export default {
 
   data: () => ({
     loading: true,
-    categories: [],
+    displayCategories: [],
   }),
 
   methods: {
@@ -63,11 +63,11 @@ export default {
     ...mapActions("category", ["fetchCategories"]),
 
     async setupCategoriesData() {
-      const records = await this.fetchRecords();
-      const categories = await this.fetchCategories();
+      await this.fetchRecords();
+      await this.fetchCategories();
 
-      this.categories = categories.map(cat => {
-        const spend = records
+      this.displayCategories = this.categories.map(cat => {
+        const spend = this.records
           .filter(r => r.categoryId === cat.id)
           .filter(r => r.type === constants.TYPE_OUTCOME)
           .reduce((acc, r) => {
@@ -82,7 +82,9 @@ export default {
 
         const toolTipValue = cat.limit - spend;
         const tooltip = `${
-          toolTipValue < 0 ? this.$t("messages.more_than") : this.$t("views.balance")
+          toolTipValue < 0
+            ? this.$t("messages.more_than")
+            : this.$t("views.balance")
         } ${currencyFilter(Math.abs(toolTipValue))}`;
 
         return {
@@ -98,6 +100,8 @@ export default {
 
   computed: {
     ...mapState("info", ["info"]),
+    ...mapState("category", ["categories"]),
+    ...mapState("record", ["records"]),
   },
 
   async mounted() {

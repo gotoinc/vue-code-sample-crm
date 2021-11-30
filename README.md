@@ -3,6 +3,9 @@
 ## Description
 Simple accounting system to track users’ personal income and expenses.
 The app helps user to plan a budget, distribute finances and keep records of financial transactions.
+
+Link to deployment: https://vue-crm-project-41954.web.app/.
+
 ### Credentials for the test account
 ```
 email: test.user@test.test
@@ -121,9 +124,6 @@ User can authenticate through [Firebase Authentication](https://firebase.google.
 
 All data is stored in [Firebase Realtime Database](https://firebase.google.com/docs/database).
 Project is deployed with [Firebase Hosting](https://firebase.google.com/docs/hosting).
-
-Link to deployment: https://vue-crm-project-41954.web.app/.
-
 
 
 

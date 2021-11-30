@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 import constants from "@/utils/constants";
 
@@ -72,20 +72,25 @@ export default {
 
     async getRecordData() {
       const id = this.$route.params.id;
-      const record = await this.fetchRecord(id);
-      const category = await this.fetchCategory(record.categoryId);
+      await this.fetchRecord(id);
+      await this.fetchCategory(this.currentRecord.categoryId);
 
       this.record = {
-        ...record,
-        categoryName: category.title,
+        ...this.currentRecord,
+        categoryName: this.currentCategory.title,
       };
       this.loading = false;
     },
   },
 
   computed: {
+    ...mapState("record", ["currentRecord"]),
+    ...mapState("category", ["currentCategory"]),
+
     getRecordType() {
-      return this.record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome";
+      return this.record.type === constants.TYPE_INCOME
+        ? "common.income"
+        : "common.outcome";
     },
   },
 

@@ -35,7 +35,9 @@
             type="radio"
             value="income"
           />
-          <span class="income-outcome-radio-label">{{ $t("common.income") }}</span>
+          <span class="income-outcome-radio-label">{{
+            $t("common.income")
+          }}</span>
         </label>
       </div>
 
@@ -48,7 +50,9 @@
             type="radio"
             value="outcome"
           />
-          <span class="income-outcome-radio-label">{{ $t("common.outcome") }}</span>
+          <span class="income-outcome-radio-label">{{
+            $t("common.outcome")
+          }}</span>
         </label>
       </div>
 
@@ -96,7 +100,10 @@
         </span>
       </div>
 
-      <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
+      <button
+        class="btn waves-effect waves-light btn-create btn-yellow"
+        type="submit"
+      >
         {{ $t("common.create") }}
       </button>
     </form>
@@ -122,7 +129,6 @@ export default {
   data: () => ({
     loading: true,
     select: null,
-    categories: [],
     category: null,
     type: "outcome",
     amount: 1,
@@ -143,6 +149,7 @@ export default {
 
   computed: {
     ...mapState("info", ["info"]),
+    ...mapState("category", ["categories"]),
 
     canCreateRecord() {
       if (this.type === this.constants.TYPE_INCOME) {
@@ -199,10 +206,7 @@ export default {
     },
 
     async setupRecordData() {
-      await this.fetchCategories().then(categories => {
-        this.categories = categories;
-        this.loading = false;
-      });
+      await this.fetchCategories().then(() => (this.loading = false));
 
       if (this.categories.length) {
         this.category = this.categories[0].id;

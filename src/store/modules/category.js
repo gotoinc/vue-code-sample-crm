@@ -1,14 +1,36 @@
 import firebase from "firebase/app";
 import CategoryService from "@/services/category.service";
 
+const state = {
+  categories: [],
+  currentCategory: null,
+  updateCount: 0,
+};
+
+const mutations = {
+  SET_CATEGORIES: (state, categories) => {
+    state.categories = Object.keys(categories).map(k => ({
+      ...categories[k],
+      id: k,
+    }));
+  },
+  SET_CURRENT_CATEGORY: (state, category) => (state.currentCategory = category),
+  UPDATE_CATEGORY: (state, category) => {
+    const idx = state.categories.findIndex(c => c.id === category.id);
+    state.categories[idx].title = category.title;
+    state.categories[idx].limit = category.limit;
+    state.updateCount++;
+  },
+  ADD_CATEGORY: (state, category) => state.categories.push(category),
+};
+
 const actions = {
   async fetchCategories({ commit, dispatch }) {
     try {
       const uuid = await dispatch("auth/getUserUuid", null, { root: true });
       const categories =
         (await CategoryService.fetchCategories({ uuid })).val() || {};
-
-      return Object.keys(categories).map(k => ({ ...categories[k], id: k }));
+      commit("SET_CATEGORIES", categories);
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
       throw e;
@@ -26,8 +48,7 @@ const actions = {
             .child(id)
             .once("value")
         ).val() || {};
-
-      return { ...category, id };
+      commit("SET_CURRENT_CATEGORY", { ...category, id });
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
       throw e;
@@ -41,11 +62,11 @@ const actions = {
         .database()
         .ref(`/users/${uid}/categories`)
         .push({ title, limit });
-      return {
+      commit("ADD_CATEGORY", {
         title,
         limit,
         id: category.key,
-      };
+      });
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
       throw e;
@@ -60,6 +81,7 @@ const actions = {
         .ref(`/users/${uid}/categories`)
         .child(id)
         .update({ title, limit });
+      commit("UPDATE_CATEGORY", { id, title, limit });
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
       throw e;
@@ -69,5 +91,7 @@ const actions = {
 
 export const category = {
   namespaced: true,
+  state,
+  mutations,
   actions,
 };

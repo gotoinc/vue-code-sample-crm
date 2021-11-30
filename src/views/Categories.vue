@@ -7,14 +7,12 @@
       <Loader v-if="loading" />
 
       <div v-else class="categories-row">
-        <CategoryCreate class="categories-col" @created="addNewCategory" />
+        <CategoryCreate class="categories-col" />
 
         <CategoryEdit
           v-if="categories.length"
           :key="categories.length + updateCount"
-          :categories="categories"
           class="categories-col"
-          @updated="updateCategory"
         />
 
         <p v-else class="center">
@@ -29,7 +27,7 @@
 import CategoryCreate from "@/components/CategoryCreate";
 import CategoryEdit from "@/components/CategoryEdit";
 
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Categories",
@@ -46,31 +44,19 @@ export default {
   },
 
   data: () => ({
-    categories: [],
     loading: true,
-    updateCount: 0,
   }),
+
+  computed: {
+    ...mapState("category", ["categories", "updateCount"]),
+  },
 
   methods: {
     ...mapActions("category", ["fetchCategories"]),
-
-    addNewCategory(category) {
-      this.categories.push(category);
-    },
-
-    updateCategory(categoryData) {
-      const idx = this.categories.findIndex(c => c.id === categoryData.id);
-      this.categories[idx].title = categoryData.title;
-      this.categories[idx].limit = categoryData.limit;
-      this.updateCount++;
-    },
   },
 
   async mounted() {
-    await this.fetchCategories().then(categories => {
-      this.categories = categories;
-      this.loading = false;
-    });
+    await this.fetchCategories().then(() => (this.loading = false));
   },
 };
 </script>
