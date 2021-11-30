@@ -1,16 +1,12 @@
 import firebase from "firebase/app";
+import CategoryService from "@/services/category.service";
 
 const actions = {
   async fetchCategories({ commit, dispatch }) {
     try {
-      const uid = await dispatch("auth/getUserUuid", null, { root: true });
+      const uuid = await dispatch("auth/getUserUuid", null, { root: true });
       const categories =
-        (
-          await firebase
-            .database()
-            .ref(`/users/${uid}/categories`)
-            .once("value")
-        ).val() || {};
+        (await CategoryService.fetchCategories({ uuid })).val() || {};
 
       return Object.keys(categories).map(k => ({ ...categories[k], id: k }));
     } catch (e) {

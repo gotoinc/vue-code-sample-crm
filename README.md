@@ -1,7 +1,7 @@
 # Vue code sample
 
 ## Description
-Simple accounting system to track users’s personal income and expenses.
+Simple accounting system to track users’ personal income and expenses.
 The app helps user to plan a budget, distribute finances and keep records of financial transactions.
 ### Credentials for the test account
 ```

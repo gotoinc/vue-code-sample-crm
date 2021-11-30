@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
 import { i18n } from "@/plugins/i18n";
+import InfoService from "@/services/info.service";
 
 const state = {
   info: {},
@@ -22,10 +22,8 @@ const mutations = {
 const actions = {
   async fetchInfo({ dispatch, commit }) {
     try {
-      const uid = await dispatch("auth/getUserUuid", null, { root: true });
-      const info = (
-        await firebase.database().ref(`users/${uid}/info`).once("value")
-      ).val();
+      const uuid = await dispatch("auth/getUserUuid", null, { root: true });
+      const info = (await InfoService.fetchUserInfo(uuid)).val();
       commit("SET_INFO", info);
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
@@ -35,7 +33,7 @@ const actions = {
 
   async fetchCurrency({ commit }) {
     try {
-      await fetch(` https://api.exchangerate-api.com/v4/latest/EUR`)
+      await InfoService.fetchCurrency()
         .then(function (response) {
           return response.json();
         })
@@ -49,12 +47,12 @@ const actions = {
 
   async updateInfo({ commit, dispatch, state }, payload) {
     try {
-      const uid = await dispatch("auth/getUserUuid", null, { root: true });
+      const uuid = await dispatch("auth/getUserUuid", null, { root: true });
       const updateData = {
         ...state.info,
         ...payload,
       };
-      await firebase.database().ref(`/users/${uid}/info`).update(updateData);
+      await InfoService.updateUserInfo({ uuid, updateData });
       commit("SET_INFO", updateData);
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
