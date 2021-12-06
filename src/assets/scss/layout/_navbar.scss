@@ -1,10 +1,6 @@
 @use "../helpers/vars";
 @import "../helpers/mixins.scss";
 
-.dropdown-content {
-  top: -50px;
-}
-
 .sidebar-btn {
   width: 25px;
   height: 25px;
@@ -108,12 +104,17 @@
 }
 
 .dropdown-content {
+  top: -50px;
   border-radius: 14px;
   box-shadow: none;
   filter: drop-shadow(2px 14px 34px rgba(41, 63, 141, 0.08));
 
   li:hover {
     background-color: #fafbfc;
+  }
+
+  &_mw-200 {
+    min-width: 200px;
   }
 }
 

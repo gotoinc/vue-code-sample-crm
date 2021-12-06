@@ -34,7 +34,7 @@
 
             <ul
               id="dropdown"
-              class="dropdown-content"
+              class="dropdown-content dropdown-content_mw-200"
               @click="$emit('choseFromMenu')"
             >
               <li>
