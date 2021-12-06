@@ -35,7 +35,9 @@
             type="radio"
             value="income"
           />
-          <span class="income-outcome-radio-label">{{ $t("common.income") }}</span>
+          <span class="income-outcome-radio-label">{{
+            $t("common.income")
+          }}</span>
         </label>
       </div>
 
@@ -48,32 +50,52 @@
             type="radio"
             value="outcome"
           />
-          <span class="income-outcome-radio-label">{{ $t("common.outcome") }}</span>
+          <span class="income-outcome-radio-label">{{
+            $t("common.outcome")
+          }}</span>
         </label>
       </div>
 
       <label for="amount">{{ $t("views.sum") }}</label>
 
-      <div class="input-field">
-        <input
-          id="amount"
-          v-model.number="amount"
-          type="number"
-          :class="{
-            invalid:
-              $v.amount.$dirty && (!$v.amount.minValue || !$v.amount.required),
-          }"
-        />
+      <div class="amount-inputs__wrapper">
+        <div class="input-field">
+          <input
+            id="amount"
+            v-model.number="amount"
+            type="number"
+            :class="{
+              invalid:
+                $v.amount.$dirty &&
+                (!$v.amount.minValue || !$v.amount.required),
+            }"
+          />
 
-        <span
-          v-if="
-            $v.amount.$dirty && (!$v.amount.minValue || !$v.amount.required)
-          "
-          class="helper-text invalid"
+          <span
+            v-if="
+              $v.amount.$dirty && (!$v.amount.minValue || !$v.amount.required)
+            "
+            class="helper-text invalid"
+          >
+            {{ $t("messages.min_value_message") }}
+            {{ $v.amount.$params.minValue.min }}
+          </span>
+        </div>
+
+        <div
+          class="input-field"
+          :class="isCurrencyDropdownOpened ? 'arrow-up' : 'arrow-down'"
         >
-          {{ $t("messages.min_value_message") }}
-          {{ $v.amount.$params.minValue.min }}
-        </span>
+          <select ref="currencySelect" v-model="sumCurrency">
+            <option
+              v-for="(curr, idx) in getCurrencyRates"
+              :key="idx"
+              :value="curr.rate"
+            >
+              {{ curr.currency }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <label for="description">{{ $t("views.description") }}</label>
@@ -96,7 +118,10 @@
         </span>
       </div>
 
-      <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
+      <button
+        class="btn waves-effect waves-light btn-create btn-yellow"
+        type="submit"
+      >
         {{ $t("common.create") }}
       </button>
     </form>
@@ -129,6 +154,9 @@ export default {
     description: "",
     isDropdownOpened: false,
     constants: constants,
+    sumCurrency: null,
+    currencySelect: null,
+    isCurrencyDropdownOpened: false,
   }),
 
   validations: {
@@ -142,7 +170,7 @@ export default {
   },
 
   computed: {
-    ...mapState("info", ["info"]),
+    ...mapState("info", ["info", "currency"]),
 
     canCreateRecord() {
       if (this.type === this.constants.TYPE_INCOME) {
@@ -150,11 +178,20 @@ export default {
       }
       return this.info.bill >= this.amount;
     },
+
+    getCurrencyRates() {
+      let currencyRates = [];
+      const currencyObject = this.currency.rates;
+      for (let p in currencyObject) {
+        currencyRates.push({ currency: p, rate: currencyObject[p] });
+      }
+      return currencyRates;
+    },
   },
 
   methods: {
     ...mapActions("category", ["fetchCategories"]),
-    ...mapActions("info", ["updateInfo"]),
+    ...mapActions("info", ["updateInfo", "fetchCurrency"]),
     ...mapActions("record", ["createRecord"]),
 
     async handleSubmit() {
@@ -164,10 +201,11 @@ export default {
       }
 
       if (this.canCreateRecord) {
+        const amountToEUR = this.amount / this.sumCurrency;
         try {
           await this.createRecord({
             categoryId: this.category,
-            amount: this.amount,
+            amount: amountToEUR,
             description: this.description,
             type: this.type,
             date: new Date().toJSON(),
@@ -201,12 +239,17 @@ export default {
     async setupRecordData() {
       await this.fetchCategories().then(categories => {
         this.categories = categories;
-        this.loading = false;
       });
 
       if (this.categories.length) {
         this.category = this.categories[0].id;
       }
+
+      if (!this.currency) {
+        await this.fetchCurrency();
+      }
+      this.sumCurrency = this.getCurrencyRates[0].rate;
+      this.loading = false;
     },
   },
 
@@ -222,6 +265,14 @@ export default {
     category: function () {
       this.clear();
     },
+    currencySelect: {
+      deep: true,
+      handler: function (newValue) {
+        if (newValue && newValue.dropdown) {
+          this.isCurrencyDropdownOpened = newValue.dropdown.isOpen;
+        }
+      },
+    }
   },
 
   async mounted() {
@@ -229,6 +280,7 @@ export default {
 
     setTimeout(() => {
       this.select = M.FormSelect.init(this.$refs.select);
+      this.currencySelect = M.FormSelect.init(this.$refs.currencySelect);
       M.updateTextFields();
     }, 0);
   },
@@ -236,6 +288,9 @@ export default {
   destroyed() {
     if (this.select && this.select.destroy) {
       this.select.destroy();
+    }
+    if(this.currencySelect && this.currencySelect.destroy) {
+      this.currencySelect.destroy();
     }
   },
 };
