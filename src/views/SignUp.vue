@@ -181,7 +181,7 @@ export default {
 
       try {
         await this.signUp(formData);
-        this.$router.push("/");
+        this.$router.push("/history");
       } catch (e) {
         throw e;
       }
