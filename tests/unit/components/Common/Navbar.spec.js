@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from "@vue/test-utils";
+import { createLocalVue, mount, shallowMount } from "@vue/test-utils";
 import Navbar from "@/components/Common/Navbar";
 import Vue from "vue";
 import { nextTick } from "vue";
@@ -38,7 +38,18 @@ describe("Navbar", () => {
       },
     });
 
-    wrapper = shallowMount(Navbar, {
+    // wrapper = shallowMount(Navbar, {
+    //   store,
+    //   localVue,
+    //   propsData: {
+    //     isNavbarOpened: false,
+    //   },
+    //   stubs: ["router-link"],
+    // });
+  });
+
+  it("check that component was rendered", async () => {
+    const wrapper = mount(Navbar, {
       store,
       localVue,
       propsData: {
@@ -46,11 +57,7 @@ describe("Navbar", () => {
       },
       stubs: ["router-link"],
     });
-  });
-
-  it("check that component was rendered", async () => {
     await nextTick();
-    M.AutoInit();
     expect(wrapper.exists()).toBe(true);
   });
 });

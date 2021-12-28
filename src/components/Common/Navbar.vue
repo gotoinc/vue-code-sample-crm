@@ -16,6 +16,7 @@
         <ul class="right">
           <li>
             <a
+              id="dropdownLink"
               ref="dropdown"
               class="dropdown-trigger white-text"
               href="#"
@@ -88,7 +89,8 @@ export default {
       }, 1000);
     },
     setInitialDropdown() {
-      this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
+      let el = document.getElementById("dropdownLink");
+      this.dropdown = M.Dropdown.init(el, {
         constrainWidth: true,
       });
     },
