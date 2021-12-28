@@ -12,16 +12,38 @@ localVue.use(VueRouter);
 const router = new VueRouter();
 
 describe("App", () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = mount(App, {
+  it("check that component was rendered", () => {
+    const wrapper = mount(App, {
       localVue,
       router,
       stubs: ["AuthLayout", "MainLayout"],
     });
-  });
-
-  it("check that component was rendered", () => {
     expect(wrapper.exists()).toBe(true);
+  });
+  it("check that MainLayout was rendered correctly", () => {
+    const wrapper = mount(App, {
+      localVue,
+      router,
+      stubs: ["AuthLayout", "MainLayout"],
+      computed: {
+        layout() {
+          return "main-layout";
+        },
+      },
+    });
+    expect(wrapper.contains(MainLayout)).toBe(true);
+  });
+  it("check that MainLayout was rendered correctly", () => {
+    const wrapper = mount(App, {
+      localVue,
+      router,
+      stubs: ["AuthLayout", "MainLayout"],
+      computed: {
+        layout() {
+          return "auth-layout";
+        },
+      },
+    });
+    expect(wrapper.contains(AuthLayout)).toBe(true);
   });
 });
