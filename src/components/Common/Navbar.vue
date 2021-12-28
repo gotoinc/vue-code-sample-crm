@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import M from "materialize-css";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -108,6 +109,7 @@ export default {
   },
 
   mounted() {
+    M.AutoInit();
     this.setTimeInterval();
     this.setInitialDropdown();
   },

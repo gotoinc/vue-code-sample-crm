@@ -8,4 +8,11 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
   },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "<rootDir>/src/components/**/*.vue",
+    "<rootDir>/src/views/**/*.vue",
+    "<rootDir>/src/layouts/**/*.vue",
+    "<rootDir>/src/App.vue",
+  ],
 };

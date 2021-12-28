@@ -1,6 +1,7 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
 import Navbar from "@/components/Common/Navbar";
 import Vue from "vue";
+import { nextTick } from "vue";
 import "materialize-css/dist/js/materialize.min.js";
 import dateFilter from "@/filters/date.filter";
 import Vuex from "vuex";
@@ -47,7 +48,9 @@ describe("Navbar", () => {
     });
   });
 
-  it("check that component was rendered", () => {
+  it("check that component was rendered", async () => {
+    await nextTick();
+    M.AutoInit();
     expect(wrapper.exists()).toBe(true);
   });
 });
