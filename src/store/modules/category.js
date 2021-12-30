@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 const actions = {
   async fetchCategories({ commit, dispatch }) {
     try {
+      console.log("categories/fetchCategories");
       const uid = await dispatch("auth/getUserUuid", null, { root: true });
       const categories =
         (

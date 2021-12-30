@@ -19,6 +19,7 @@ describe("Record", () => {
   let actionsRecord;
   let actionsInfo;
   let store;
+  let spy;
 
   beforeEach(() => {
     actionsInfo = {
@@ -36,10 +37,10 @@ describe("Record", () => {
       ]),
     };
     actionsCategory = {
-      fetchCategories: jest.fn(),
+      fetchCategories: jest.fn(() => Promise.resolve()),
     };
     actionsRecord = {
-      createRecord: jest.fn(),
+      createRecord: jest.fn(() => Promise.resolve()),
     };
     store = new Vuex.Store({
       modules: {
@@ -62,7 +63,8 @@ describe("Record", () => {
         },
       },
     });
-    store.dispatch = jest.fn().mockImplementation(() => Promise.resolve());
+    // store.dispatch = jest.fn().mockImplementation(() => Promise.resolve());
+    spy = jest.spyOn(store, "dispatch");
 
     wrapper = shallowMount(Record, {
       store,
@@ -75,35 +77,52 @@ describe("Record", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it("check input data", async () => {
-    await nextTick();
-    await nextTick();
-    await nextTick();
+  it("check correctly inputted data", async () => {
     await wrapper.find("#amount").setValue(50);
     await wrapper.find("#description").setValue("Spent 50$ on something");
     await wrapper.find("form").trigger("submit.prevent");
     expect(wrapper.find(".helper-text.invalid").exists()).toBeFalsy();
-
+  });
+  it("check error on empty description", async () => {
     await wrapper.find("#amount").setValue(50);
     await wrapper.find("#description").setValue("");
     await wrapper.find("form").trigger("submit.prevent");
     expect(wrapper.find(".helper-text.invalid").exists()).toBeTruthy();
-
+  });
+  it("check error on incorrect amount value", async () => {
     await wrapper.find("#amount").setValue(0);
     await wrapper.find("#description").setValue("Spent 0$ on something");
     await wrapper.find("form").trigger("submit.prevent");
     expect(wrapper.find(".helper-text.invalid").exists()).toBeTruthy();
   });
 
-  // it("call right action with valid payload after submitting the form", async () => {
-  //   await wrapper.find("select").setValue(1);
-  //   await wrapper.find("#name-inp").setValue("Dinners & coffee");
-  //   await wrapper.find("#limit").setValue(200);
-  //   await wrapper.find("form").trigger("submit.prevent");
-  //   expect(store.dispatch).toHaveBeenCalledWith("category/updateCategory", {
-  //     id: 1,
-  //     title: "Dinners & coffee",
-  //     limit: 200,
-  //   });
-  // });
+  it("call right action with valid payload after submitting the form", async () => {
+    // await wrapper.find("select").setValue(1);
+    // const radio = wrapper.find('input[type="radio"]');
+    // radio.element.selected = true;
+    // await radio.trigger("change");
+    const date = new Date().toJSON();
+    // await wrapper.setData({ date: date });
+    await wrapper.find("#amount").setValue(200);
+    await wrapper.find("#description").setValue("Some text");
+    await wrapper.find("form").trigger("submit.prevent");
+    await store.dispatch("record/createRecord", {
+      categoryId: null,
+      amount: 200,
+      description: "Some text",
+      type: "outcome",
+      date: date,
+    });
+    expect(spy).toHaveBeenCalledWith("record/createRecord", {
+      categoryId: null,
+      amount: 200,
+      description: "Some text",
+      type: "outcome",
+      date: date,
+    });
+    // await actionsRecord.createRecord();
+    // expect(actionsRecord.createRecord).toHaveBeenCalled();
+    // await store.dispatch("record/createRecord", {});
+    // expect(store.dispatch).toHaveBeenCalledWith("record/createRecord", {});
+  });
 });

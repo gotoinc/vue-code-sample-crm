@@ -3,6 +3,7 @@ import firebase from "firebase/app";
 const actions = {
   async createRecord({ commit, dispatch }, record) {
     try {
+      console.log("record/createRecord");
       const uid = await dispatch("auth/getUserUuid", null, { root: true });
       return await firebase
         .database()
