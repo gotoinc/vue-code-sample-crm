@@ -13,7 +13,7 @@
           class="input-field"
           :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
         >
-          <select ref="select" v-model="current">
+          <select id="categorySelect" ref="select" v-model="current">
             <option v-for="c in categories" :key="c.id" :value="c.id">
               {{ c.title }}
             </option>
@@ -162,9 +162,8 @@ export default {
   },
 
   mounted() {
-    this.$nextTick(function () {
-      this.select = M.FormSelect.init(this.$refs.select);
-    });
+    let el = document.getElementById("categorySelect");
+    this.select = M.FormSelect.init(el);
     M.updateTextFields();
   },
 

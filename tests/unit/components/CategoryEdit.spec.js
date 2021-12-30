@@ -60,21 +60,18 @@ describe("CategoryEdit", () => {
     await wrapper.find("#name-inp").setValue("Category name");
     await wrapper.find("#limit").setValue(500);
     await wrapper.find("form").trigger("submit.prevent");
-    await nextTick();
     expect(wrapper.find(".helper-text.invalid").exists()).toBeFalsy();
   });
   it("check error on empty name", async () => {
     await wrapper.find("#name-inp").setValue("");
     await wrapper.find("#limit").setValue(500);
     await wrapper.find("form").trigger("submit.prevent");
-    await nextTick();
     expect(wrapper.find(".helper-text.invalid").exists()).toBeTruthy();
   });
   it("check error on incorrect limit value", async () => {
     await wrapper.find("#name-inp").setValue("Category name");
     await wrapper.find("#limit").setValue(50);
     await wrapper.find("form").trigger("submit.prevent");
-    await nextTick();
     expect(wrapper.find(".helper-text.invalid").exists()).toBeTruthy();
   });
 
@@ -83,7 +80,6 @@ describe("CategoryEdit", () => {
     await wrapper.find("#name-inp").setValue("Dinners & coffee");
     await wrapper.find("#limit").setValue(200);
     await wrapper.find("form").trigger("submit.prevent");
-    await nextTick();
     expect(store.dispatch).toHaveBeenCalledWith("category/updateCategory", {
       id: 1,
       title: "Dinners & coffee",

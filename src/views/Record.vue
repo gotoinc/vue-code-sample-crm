@@ -6,7 +6,7 @@
 
     <Loader v-if="loading" />
 
-    <p v-else-if="!categories.length" class="center">
+    <p v-else-if="categories && !categories.length" class="center">
       {{ $t("messages.message_no_categories") }}
       <router-link to="/">
         {{ $t("messages.add_record_message") }}
@@ -19,7 +19,7 @@
         class="input-field"
         :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
       >
-        <select ref="select" v-model="category">
+        <select id="categorySelect" ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.title }}
           </option>
@@ -151,7 +151,7 @@ export default {
       if (this.type === this.constants.TYPE_INCOME) {
         return true;
       }
-      return this.info.bill >= this.amount;
+      return this.info && this.info.bill >= this.amount;
     },
   },
 
@@ -166,7 +166,7 @@ export default {
         return;
       }
 
-      if (this.canCreateRecord) {
+      if (this.canCreateRecord && this.info) {
         try {
           await this.createRecord({
             categoryId: this.category,
@@ -188,7 +188,7 @@ export default {
         } catch (e) {
           throw e;
         }
-      } else {
+      } else if (this.info) {
         this.$message(
           `${this.$t("messages.no_money")} (${this.amount - this.info.bill})`
         );
@@ -231,13 +231,10 @@ export default {
     await this.setupRecordData();
 
     this.$nextTick(function () {
-      this.select = M.FormSelect.init(this.$refs.select);
+      let el = document.getElementById("categorySelect");
+      this.select = M.FormSelect.init(el);
       M.updateTextFields();
     });
-    // setTimeout(() => {
-    //   this.select = M.FormSelect.init(this.$refs.select);
-    //   M.updateTextFields();
-    // }, 0);
   },
 
   destroyed() {
