@@ -29,26 +29,26 @@
           :class="{ invalid: $v.title.$dirty && !$v.title.required }"
         />
 
-          <span
-            v-if="$v.title.$dirty && !$v.title.required"
-            class="helper-text invalid"
-          >
-            {{ $t("messages.enter_title_message") }}
-          </span>
-        </div>
-        <label class="edit-label" for="limit">
-          {{ $t("views.limit") }}
-        </label>
-        <div class="input-field create-title">
-          <input
-            id="limit"
-            v-model.number="limit"
-            type="number"
-            :class="{
-              invalid:
-                $v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required),
-            }"
-          />
+        <span
+          v-if="$v.title.$dirty && !$v.title.required"
+          class="helper-text invalid"
+        >
+          {{ $t("messages.enter_title_message") }}
+        </span>
+      </div>
+      <label class="edit-label" for="limit">
+        {{ $t("views.limit") }}
+      </label>
+      <div class="input-field create-title">
+        <input
+          id="limit"
+          v-model.number="limit"
+          type="number"
+          :class="{
+            invalid:
+              $v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required),
+          }"
+        />
 
         <span
           v-if="$v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required)"
@@ -59,14 +59,13 @@
         </span>
       </div>
 
-        <button
-          class="btn waves-effect waves-light btn-create btn-yellow"
-          type="submit"
-        >
-          {{ $t("common.update") }}
-        </button>
-      </form>
-
+      <button
+        class="btn waves-effect waves-light btn-create btn-yellow"
+        type="submit"
+      >
+        {{ $t("common.update") }}
+      </button>
+    </form>
   </div>
 </template>
 

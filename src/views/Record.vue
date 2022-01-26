@@ -86,7 +86,11 @@
           class="input-field"
           :class="isCurrencyDropdownOpened ? 'arrow-up' : 'arrow-down'"
         >
-          <select id="currencySelect" ref="currencySelect" v-model="sumCurrency">
+          <select
+            id="currencySelect"
+            ref="currencySelect"
+            v-model="sumCurrency"
+          >
             <option
               v-for="(curr, idx) in getCurrencyRates"
               :key="idx"
@@ -272,7 +276,7 @@ export default {
           this.isCurrencyDropdownOpened = newValue.dropdown.isOpen;
         }
       },
-    }
+    },
   },
 
   async mounted() {
@@ -291,7 +295,7 @@ export default {
     if (this.select && this.select.destroy) {
       this.select.destroy();
     }
-    if(this.currencySelect && this.currencySelect.destroy) {
+    if (this.currencySelect && this.currencySelect.destroy) {
       this.currencySelect.destroy();
     }
   },
