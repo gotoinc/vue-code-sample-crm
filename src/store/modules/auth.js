@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import AuthService from "@/services/auth.service";
 
 const state = {
   isLogged: false,
@@ -11,7 +11,7 @@ const mutations = {
 const actions = {
   async login({ commit }, { email, password }) {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
+      await AuthService.login({ email, password });
       commit("SET_IS_AUTHORIZED", true);
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
@@ -21,7 +21,7 @@ const actions = {
 
   async logout({ commit }) {
     try {
-      await firebase.auth().signOut();
+      await AuthService.logout();
       commit("info/CLEAR_INFO", null, { root: true });
       commit("SET_IS_AUTHORIZED", false);
     } catch (e) {
@@ -31,20 +31,17 @@ const actions = {
 
   async signUp({ dispatch, commit }, { email, password, name }) {
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await AuthService.signUp({ email, password });
       const uuid = await dispatch("getUserUuid");
-      await firebase.database().ref(`/users/${uuid}/info`).set({
-        bill: 10000,
-        name,
-      });
+      await AuthService.setInitialUserData({ uuid, name });
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
       throw e;
     }
   },
 
-  getUserUuid() {
-    let user = firebase.auth().currentUser;
+  async getUserUuid() {
+    let user = await AuthService.getCurrentUser();
     return user ? user.uid : null;
   },
 };

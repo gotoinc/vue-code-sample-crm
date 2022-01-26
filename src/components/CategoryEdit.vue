@@ -1,34 +1,33 @@
 <template>
-  <div class="col s12 m6">
-    <div>
-      <div class="page-subtitle">
-        <h4>{{ $t("common.edit") }}</h4>
-      </div>
+  <div>
+    <div class="page-subtitle">
+      <h4>{{ $t("common.edit") }}</h4>
+    </div>
 
-      <form @submit.prevent="submitHandler">
-        <label class="edit-label">
-          {{ $t("views.choose_category_label") }}
-        </label>
-        <div
-          class="input-field"
-          :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
-        >
-          <select id="categorySelect" ref="select" v-model="current">
-            <option v-for="c in categories" :key="c.id" :value="c.id">
-              {{ c.title }}
-            </option>
-          </select>
-        </div>
-        <label class="edit-label" for="name">
-          {{ $t("views.category_title") }}
-        </label>
-        <div class="input-field create-title">
-          <input
-            id="name-inp"
-            v-model="title"
-            type="text"
-            :class="{ invalid: $v.title.$dirty && !$v.title.required }"
-          />
+    <form class="form" @submit.prevent="submitHandler">
+      <label class="edit-label">
+        {{ $t("views.choose_category_label") }}
+      </label>
+      <div
+        class="input-field"
+        :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
+      >
+        <select id="categorySelect" ref="select" v-model="current">
+          <option v-for="c in categories" :key="c.id" :value="c.id">
+            {{ c.title }}
+          </option>
+        </select>
+      </div>
+      <label class="edit-label" for="name">
+        {{ $t("views.category_title") }}
+      </label>
+      <div class="input-field create-title">
+        <input
+          id="name-inp"
+          v-model="title"
+          type="text"
+          :class="{ invalid: $v.title.$dirty && !$v.title.required }"
+        />
 
           <span
             v-if="$v.title.$dirty && !$v.title.required"
@@ -51,14 +50,14 @@
             }"
           />
 
-          <span
-            v-if="$v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required)"
-            class="helper-text invalid"
-          >
-            {{ $t("messages.min_value_message") }}
-            {{ $v.limit.$params.minValue.min }}
-          </span>
-        </div>
+        <span
+          v-if="$v.limit.$dirty && (!$v.limit.minValue || !$v.limit.required)"
+          class="helper-text invalid"
+        >
+          {{ $t("messages.min_value_message") }}
+          {{ $v.limit.$params.minValue.min }}
+        </span>
+      </div>
 
         <button
           class="btn waves-effect waves-light btn-create btn-yellow"
@@ -67,7 +66,7 @@
           {{ $t("common.update") }}
         </button>
       </form>
-    </div>
+
   </div>
 </template>
 

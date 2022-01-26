@@ -1,14 +1,10 @@
-import firebase from "firebase/app";
+import RecordService from "@/services/record.service";
 
 const actions = {
   async createRecord({ commit, dispatch }, record) {
     try {
-      console.log("record/createRecord");
-      const uid = await dispatch("auth/getUserUuid", null, { root: true });
-      return await firebase
-        .database()
-        .ref(`/users/${uid}/records`)
-        .push(record);
+      const uuid = await dispatch("auth/getUserUuid", null, { root: true });
+      return await RecordService.createRecord({ uuid, record });
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
       throw e;
@@ -17,12 +13,8 @@ const actions = {
 
   async fetchRecords({ commit, dispatch }) {
     try {
-      const uid = await dispatch("auth/getUserUuid", null, { root: true });
-      const records =
-        (
-          await firebase.database().ref(`/users/${uid}/records`).once("value")
-        ).val() || {};
-
+      const uuid = await dispatch("auth/getUserUuid", null, { root: true });
+      const records = (await RecordService.fetchRecords({ uuid })).val() || {};
       return Object.keys(records).map(k => ({ ...records[k], id: k }));
     } catch (e) {
       commit("errors/SET_ERROR", e, { root: true });
@@ -32,15 +24,9 @@ const actions = {
 
   async fetchRecord({ commit, dispatch }, id) {
     try {
-      const uid = await dispatch("auth/getUserUuid", null, { root: true });
+      const uuid = await dispatch("auth/getUserUuid", null, { root: true });
       const record =
-        (
-          await firebase
-            .database()
-            .ref(`/users/${uid}/records/`)
-            .child(id)
-            .once("value")
-        ).val() || {};
+        (await RecordService.fetchRecord({ uuid, id })).val() || {};
 
       return { ...record, id };
     } catch (e) {

@@ -1,5 +1,14 @@
 # Vue code sample
 
+## Description
+Simple accounting system to track users’ personal income and expenses.
+The app helps user to plan a budget, distribute finances and keep records of financial transactions.
+### Credentials for the test account
+```
+email: test.user@test.test
+password: Test12345
+```
+
 ## Technologies
 This project is build with such technologies as:
 * [Vue](https://vuejs.org/)
@@ -29,15 +38,6 @@ npm run serve
 npm run build
 
 firebase deploy
-```
-
-## Usage
-Simple accounting system to track users’s personal income and expenses. 
-The app helps user to plan a budget, distribute finances and keep records of financial transactions.
-### Credentials for the test account
-```
-email: test.user@test.test
-password: Test12345
 ```
 ## Project structure
 
