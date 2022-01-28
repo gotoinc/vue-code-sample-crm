@@ -1,8 +1,12 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
 import Record from "@/views/Record";
 import Vue from "vue";
-import { nextTick } from "vue";
 import Vuex from "vuex";
+import { auth } from "@/store/modules/auth";
+import { errors } from "@/store/modules/errors";
+import { info } from "@/store/modules/info";
+import { category } from "@/store/modules/category";
+import { record } from "@/store/modules/record";
 import "materialize-css/dist/js/materialize.min.js";
 import Vuelidate from "vuelidate";
 import messagePlugin from "@/utils/message.plugin";
@@ -35,6 +39,15 @@ describe("Record", () => {
           limit: 200,
         },
       ]),
+      fetchCurrency: jest.fn(() =>
+        Promise.resolve({
+          rates: {
+            EUR: 1,
+            USD: 1.12,
+            JPY: 128.64,
+          },
+        })
+      ),
     };
     actionsCategory = {
       fetchCategories: jest.fn(() => Promise.resolve()),
@@ -46,7 +59,20 @@ describe("Record", () => {
       modules: {
         info: {
           namespaced: true,
-          state: {
+          currency: {
+            provider: "https://www.exchangerate-api.com",
+            WARNING_UPGRADE_TO_V6: "https://www.exchangerate-api.com/docs/free",
+            terms: "https://www.exchangerate-api.com/terms",
+            base: "EUR",
+            date: "2022-01-28",
+            time_last_updated: 1643328002,
+            rates: {
+              EUR: 1,
+              USD: 1.12,
+              JPY: 128.64,
+            },
+          },
+          info: {
             bill: 700,
             locale: "en",
             name: "Alla",
@@ -73,23 +99,27 @@ describe("Record", () => {
     });
   });
 
-  it("check that component was rendered", () => {
+  it("check that component was rendered", async () => {
+    // await Vue.nextTick();
     expect(wrapper.exists()).toBe(true);
   });
 
   it("check correctly inputted data", async () => {
+    await Vue.nextTick();
     await wrapper.find("#amount").setValue(50);
     await wrapper.find("#description").setValue("Spent 50$ on something");
     await wrapper.find("form").trigger("submit.prevent");
     expect(wrapper.find(".helper-text.invalid").exists()).toBeFalsy();
   });
   it("check error on empty description", async () => {
+    await Vue.nextTick();
     await wrapper.find("#amount").setValue(50);
     await wrapper.find("#description").setValue("");
     await wrapper.find("form").trigger("submit.prevent");
     expect(wrapper.find(".helper-text.invalid").exists()).toBeTruthy();
   });
   it("check error on incorrect amount value", async () => {
+    await Vue.nextTick();
     await wrapper.find("#amount").setValue(0);
     await wrapper.find("#description").setValue("Spent 0$ on something");
     await wrapper.find("form").trigger("submit.prevent");
@@ -97,6 +127,7 @@ describe("Record", () => {
   });
 
   it("call right action with valid payload after submitting the form", async () => {
+    await Vue.nextTick();
     // await wrapper.find("select").setValue(1);
     // const radio = wrapper.find('input[type="radio"]');
     // radio.element.selected = true;

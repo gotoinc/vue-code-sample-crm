@@ -185,9 +185,11 @@ export default {
 
     getCurrencyRates() {
       let currencyRates = [];
-      const currencyObject = this.currency.rates;
-      for (let p in currencyObject) {
-        currencyRates.push({ currency: p, rate: currencyObject[p] });
+      if (this.currency) {
+        const currencyObject = this.currency.rates;
+        for (let p in currencyObject) {
+          currencyRates.push({ currency: p, rate: currencyObject[p] });
+        }
       }
       return currencyRates;
     },
@@ -252,7 +254,10 @@ export default {
       if (!this.currency) {
         await this.fetchCurrency();
       }
-      this.sumCurrency = this.getCurrencyRates[0].rate;
+      if (this.currency) {
+        console.log(this.getCurrencyRates);
+        this.sumCurrency = this.getCurrencyRates[0].rate;
+      }
       this.loading = false;
     },
   },
@@ -282,7 +287,7 @@ export default {
   async mounted() {
     await this.setupRecordData();
 
-    this.$nextTick(function () {
+    this.$nextTick(() => {
       let categorySelect = document.getElementById("categorySelect");
       let currencySelect = document.getElementById("currencySelect");
       this.select = M.FormSelect.init(categorySelect);
