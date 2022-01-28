@@ -180,7 +180,7 @@ export default {
       if (this.type === this.constants.TYPE_INCOME) {
         return true;
       }
-      return this.info.bill >= this.amount;
+      return this.info ? this.info.bill >= this.amount : false;
     },
 
     getCurrencyRates() {
