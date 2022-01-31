@@ -176,7 +176,7 @@ export default {
       if (this.type === this.constants.TYPE_INCOME) {
         return true;
       }
-      return this.info.bill >= this.amount;
+      return this.info.bill >= this.amountToEUR;
     },
 
     getCurrencyRates() {
@@ -187,6 +187,9 @@ export default {
       }
       return currencyRates;
     },
+    amountToEUR() {
+      return this.amount / this.sumCurrency;
+    }
   },
 
   methods: {
@@ -201,11 +204,10 @@ export default {
       }
 
       if (this.canCreateRecord) {
-        const amountToEUR = this.amount / this.sumCurrency;
         try {
           await this.createRecord({
             categoryId: this.category,
-            amount: amountToEUR,
+            amount: this.amountToEUR,
             description: this.description,
             type: this.type,
             date: new Date().toJSON(),
@@ -213,8 +215,8 @@ export default {
 
           const bill =
             this.type === this.constants.TYPE_INCOME
-              ? this.info.bill + this.amount
-              : this.info.bill - this.amount;
+              ? this.info.bill + this.amountToEUR
+              : this.info.bill - this.amountToEUR;
 
           await this.updateInfo({ bill });
 
@@ -272,7 +274,7 @@ export default {
           this.isCurrencyDropdownOpened = newValue.dropdown.isOpen;
         }
       },
-    }
+    },
   },
 
   async mounted() {
@@ -289,7 +291,7 @@ export default {
     if (this.select && this.select.destroy) {
       this.select.destroy();
     }
-    if(this.currencySelect && this.currencySelect.destroy) {
+    if (this.currencySelect && this.currencySelect.destroy) {
       this.currencySelect.destroy();
     }
   },
