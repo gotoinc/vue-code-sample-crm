@@ -11,7 +11,7 @@
       <div class="input-field create-title">
         <input
           id="name-inp"
-          v-model="title"
+          v-model.trim="title"
           type="text"
           :class="{ invalid: $v.title.$dirty && !$v.title.required }"
         />
