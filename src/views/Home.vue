@@ -50,10 +50,12 @@ export default {
   },
 
   methods: {
-    ...mapActions("info", ["fetchCurrency"]),
+    ...mapActions("info", ["fetchCurrency", "fetchInfo"]),
+
     async refresh() {
       this.loading = true;
       await this.fetchCurrency();
+      await this.fetchInfo();
       this.loading = false;
     },
   },

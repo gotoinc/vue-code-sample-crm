@@ -189,7 +189,7 @@ export default {
     },
     amountToEUR() {
       return this.amount / this.sumCurrency;
-    }
+    },
   },
 
   methods: {
