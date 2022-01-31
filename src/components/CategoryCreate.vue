@@ -73,6 +73,7 @@ export default {
     },
     limit: {
       minValue: minValue(100),
+      required,
     },
   },
 
