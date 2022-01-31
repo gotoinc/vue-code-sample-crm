@@ -20,7 +20,7 @@ export const en = {
     categories: "Categories",
     history: "History",
     description: "Description",
-    sum: "Sum",
+    sum: "Summary",
     category: "Category",
     record_history: "Record History",
     account: "Account",
