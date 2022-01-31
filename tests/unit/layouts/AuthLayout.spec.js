@@ -1,31 +1,33 @@
-import { createLocalVue, shallowMount } from "@vue/test-utils";
-import Categories from "@/views/Categories";
+import { createLocalVue, mount } from "@vue/test-utils";
+import AuthLayout from "@/layouts/AuthLayout";
 import Vuex from "vuex";
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-describe("Categories", () => {
+describe("AuthLayout", () => {
   let wrapper;
-  let actions;
+  let getters;
   let store;
   beforeEach(() => {
-    actions = {
-      fetchCategories: jest.fn(),
+    getters = {
+      GET_ERROR: jest.fn(),
     };
+
     store = new Vuex.Store({
       modules: {
-        category: {
+        errors: {
           namespaced: true,
-          actions,
+          getters,
         },
       },
     });
-    wrapper = shallowMount(Categories, {
+
+    wrapper = mount(AuthLayout, {
       store,
       localVue,
-      stubs: ["Loader"],
+      stubs: ["router-view"],
     });
   });
 

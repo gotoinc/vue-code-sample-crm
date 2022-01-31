@@ -18,7 +18,6 @@ import titlePlugin from "@/utils/title.plugin";
 
 import { i18n } from "@/plugins/i18n";
 
-
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";

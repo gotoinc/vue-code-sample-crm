@@ -12,7 +12,7 @@
         <CategoryEdit
           v-if="categories.length"
           :key="categories.length + updateCount"
-          :categories="categories"
+          :categories="categoriesList"
           class="categories-col"
           @updated="updateCategory"
         />
@@ -50,7 +50,11 @@ export default {
     loading: true,
     updateCount: 0,
   }),
-
+  computed: {
+    categoriesList() {
+      return this.categories ? this.categories : [];
+    },
+  },
   methods: {
     ...mapActions("category", ["fetchCategories"]),
 

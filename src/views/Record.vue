@@ -6,7 +6,7 @@
 
     <Loader v-if="loading" />
 
-    <p v-else-if="!categories.length" class="center">
+    <p v-else-if="categories && !categories.length" class="center">
       {{ $t("messages.message_no_categories") }}
       <router-link to="/">
         {{ $t("messages.add_record_message") }}
@@ -19,7 +19,7 @@
         class="input-field"
         :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
       >
-        <select ref="select" v-model="category">
+        <select id="categorySelect" ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.title }}
           </option>
@@ -86,7 +86,11 @@
           class="input-field"
           :class="isCurrencyDropdownOpened ? 'arrow-up' : 'arrow-down'"
         >
-          <select ref="currencySelect" v-model="sumCurrency">
+          <select
+            id="currencySelect"
+            ref="currencySelect"
+            v-model="sumCurrency"
+          >
             <option
               v-for="(curr, idx) in getCurrencyRates"
               :key="idx"
@@ -181,9 +185,11 @@ export default {
 
     getCurrencyRates() {
       let currencyRates = [];
-      const currencyObject = this.currency.rates;
-      for (let p in currencyObject) {
-        currencyRates.push({ currency: p, rate: currencyObject[p] });
+      if (this.currency) {
+        const currencyObject = this.currency.rates;
+        for (let p in currencyObject) {
+          currencyRates.push({ currency: p, rate: currencyObject[p] });
+        }
       }
       return currencyRates;
     },
@@ -225,7 +231,7 @@ export default {
         } catch (e) {
           throw e;
         }
-      } else {
+      } else if (this.info) {
         this.$message(
           `${this.$t("messages.no_money")} (${this.amount - this.info.bill})`
         );
@@ -243,14 +249,16 @@ export default {
         this.categories = categories;
       });
 
-      if (this.categories.length) {
+      if (this.categories && this.categories.length) {
         this.category = this.categories[0].id;
       }
 
       if (!this.currency) {
         await this.fetchCurrency();
       }
-      this.sumCurrency = this.getCurrencyRates[0].rate;
+      if (this.currency) {
+        this.sumCurrency = this.getCurrencyRates[0].rate;
+      }
       this.loading = false;
     },
   },
@@ -280,11 +288,13 @@ export default {
   async mounted() {
     await this.setupRecordData();
 
-    setTimeout(() => {
-      this.select = M.FormSelect.init(this.$refs.select);
-      this.currencySelect = M.FormSelect.init(this.$refs.currencySelect);
+    this.$nextTick(() => {
+      let categorySelect = document.getElementById("categorySelect");
+      let currencySelect = document.getElementById("currencySelect");
+      this.select = M.FormSelect.init(categorySelect);
+      this.currencySelect = M.FormSelect.init(currencySelect);
       M.updateTextFields();
-    }, 0);
+    });
   },
 
   destroyed() {

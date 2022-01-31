@@ -12,7 +12,7 @@
         class="input-field"
         :class="isDropdownOpened ? 'arrow-up' : 'arrow-down'"
       >
-        <select ref="select" v-model="current">
+        <select id="categorySelect" ref="select" v-model="current">
           <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.title }}
           </option>
@@ -102,6 +102,12 @@ export default {
     },
   },
 
+  computed: {
+    message() {
+      return this.$t("messages.category_updated");
+    },
+  },
+
   methods: {
     ...mapActions("category", ["updateCategory"]),
 
@@ -118,7 +124,9 @@ export default {
       };
 
       await this.updateCategory(categoryData).then(() => {
-        this.$message(this.$t("messages.category_updated"));
+        if (this.message) {
+          this.$message(this.message);
+        }
         this.$emit("updated", categoryData);
       });
     },
@@ -152,7 +160,8 @@ export default {
   },
 
   mounted() {
-    this.select = M.FormSelect.init(this.$refs.select);
+    let el = document.getElementById("categorySelect");
+    this.select = M.FormSelect.init(el);
     M.updateTextFields();
   },
 

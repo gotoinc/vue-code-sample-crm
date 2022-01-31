@@ -79,7 +79,7 @@
       </div>
       <div>
         <label>
-          <input v-model="agree" type="checkbox" id="terms-checkbox" />
+          <input id="terms-checkbox" v-model="agree" type="checkbox" />
           <span>{{ $t("auth.Agree_terms") }}</span>
         </label>
       </div>

@@ -10,8 +10,8 @@
       </label>
       <div class="input-field create-title">
         <input
-          v-model="name"
           id="name-inp"
+          v-model="name"
           type="text"
           :class="{ invalid: $v.name.$dirty && !$v.name.required }"
         />
@@ -33,7 +33,10 @@
         </label>
       </div>
 
-      <button class="btn waves-effect waves-light btn-create btn-yellow" type="submit">
+      <button
+        class="btn waves-effect waves-light btn-create btn-yellow"
+        type="submit"
+      >
         {{ $t("common.update") }}
       </button>
     </form>
@@ -75,8 +78,10 @@ export default {
     ...mapActions("info", ["updateInfo"]),
 
     setupProfileData() {
-      this.name = this.info.name;
-      this.isRuLocale = this.info.locale === constants.LOCALE_RU;
+      if (this.info) {
+        this.name = this.info.name;
+        this.isRuLocale = this.info.locale === constants.LOCALE_RU;
+      }
     },
 
     async submitHandler() {

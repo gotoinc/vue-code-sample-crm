@@ -1,31 +1,36 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
-import Categories from "@/views/Categories";
+import Profile from "@/views/Profile";
+import Vue from "vue";
 import Vuex from "vuex";
+import "materialize-css/dist/js/materialize.min.js";
+import Vuelidate from "vuelidate";
+import messagePlugin from "@/utils/message.plugin";
+Vue.use(Vuelidate);
+Vue.use(messagePlugin);
 
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-describe("Categories", () => {
+describe("Profile", () => {
   let wrapper;
   let actions;
   let store;
   beforeEach(() => {
     actions = {
-      fetchCategories: jest.fn(),
+      updateInfo: jest.fn(),
     };
     store = new Vuex.Store({
       modules: {
-        category: {
+        info: {
           namespaced: true,
           actions,
         },
       },
     });
-    wrapper = shallowMount(Categories, {
+    wrapper = shallowMount(Profile, {
       store,
       localVue,
-      stubs: ["Loader"],
     });
   });
 

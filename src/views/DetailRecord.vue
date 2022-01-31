@@ -73,19 +73,23 @@ export default {
     async getRecordData() {
       const id = this.$route.params.id;
       const record = await this.fetchRecord(id);
-      const category = await this.fetchCategory(record.categoryId);
+      if (record) {
+        const category = await this.fetchCategory(record.categoryId);
 
-      this.record = {
-        ...record,
-        categoryName: category.title,
-      };
-      this.loading = false;
+        this.record = {
+          ...record,
+          categoryName: category.title,
+        };
+        this.loading = false;
+      }
     },
   },
 
   computed: {
     getRecordType() {
-      return this.record.type === constants.TYPE_INCOME ? "common.income" : "common.outcome";
+      return this.record.type === constants.TYPE_INCOME
+        ? "common.income"
+        : "common.outcome";
     },
   },
 

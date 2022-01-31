@@ -19,6 +19,7 @@
         <ul class="right">
           <li>
             <a
+              id="dropdownLink"
               ref="dropdown"
               class="dropdown-trigger white-text"
               href="#"
@@ -59,6 +60,7 @@
 </template>
 
 <script>
+import M from "materialize-css";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -92,7 +94,8 @@ export default {
       }, 1000);
     },
     setInitialDropdown() {
-      this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
+      let el = document.getElementById("dropdownLink");
+      this.dropdown = M.Dropdown.init(el, {
         constrainWidth: true,
       });
     },
@@ -113,6 +116,7 @@ export default {
   },
 
   mounted() {
+    M.AutoInit();
     this.setTimeInterval();
     this.setInitialDropdown();
   },

@@ -65,7 +65,12 @@
     <div class="card-action">
       <div>
         <button
-          class="btn waves-effect waves-light auth-submit btn-yellow btn-create btn-login"
+          class="
+            btn
+            waves-effect waves-light
+            auth-submit
+            btn-yellow btn-create btn-login
+          "
           type="submit"
         >
           {{ $t("common.login") }}
